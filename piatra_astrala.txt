@@ -1,0 +1,216 @@
+Piatra Astrala:
+
+	Cu 10.000 de ani in urma, o civilizatie antica a trait pe taramurile unde se asterne astazi Romania.
+Acestia erau cunoscuti pentru maestria lor in diferite arii de mestesugiri, precum agricultura, arhitectura, religia, politica si multe altele.
+Ei duceau o viata linistita, insa exista un grup de oameni binecuvantati, numiti exploratori. Ei se nasteau doar in familii de inalta cultura si erau cunoscuti inca de mici. Ei aveau rolul de a descoperi taramuri noi,
+de a extinde cunostintele poporului lor dincolo de granitele acestora.
+O alta parte era reprezentata de luptatori. Ei erau cei mai vrejnici razboinici, care aparau taramurile cucerite si urmareau pacea si ordinea din imprejurimi.
+Alchemistii erau intelectuali foarte priceputi in arta potiunilor si a vrajilor. Ei sunt cei care ajutau atat luptatorii, exploratorii si agricultorii sa se vindece, sa obtina abilitati noi si sa le creasca puterea.
+
+
+Chemari:
+
+	- Agricultori
+	- Luptatori
+	- Exploratori
+	- Alchemisti
+
+Talente generale:
+
+	- Pathfinding ( + 100 m / punct )
+	- Crafting ( + 2% mai repede crafitng / punct)
+	- First Aid ( + 2% mai lungi potiunile de healing, + 2% mai rapid regenerare viata, + 20 HP)
+	- Farming ( + 2% mai rapida plantarea, + 2% mai rapid timpul de crestere a plantelor / animalelor, + 2% mai rapida cultivarea )
+	- Fishing ( + 2% mai multe sanse de prins peste )
+	- Surviving ( + 2% mai putina foame, + 2% mai putina oboseala )
+	- Magic ( + 2% casting mai rapid, + 20 Chakra Points )
+	- Religion ( + 2% mai rapida citirea cartilor, + 2% regenerare HP si Mana, + 2% mai rapida experienta)
+	
+Talente pe chemari:
+	Agricultori:
+		- Plante medicinale ( + 5% mai rapida plantarea, + 5 % mai rapid timpul de crestere a plantelor medicinale, + 5% mai rapida cultivarea)
+		- Plante hrana  ( + 5% mai rapida plantarea, + 5 % mai rapid timpul de crestere a plantelor hrana, + 5% mai rapida cultivarea)
+		- Animale (+ 5 % mai rapid timpul de crestere a animalelor, + 5% mai rapida mulgerea vacilor, + 5% mai rapida taierea animalelor)
+		 
+	Luptatori:
+		- Archery ( + 5% damage cu arcul, + 5% acuratete, + 5% penetrare cu arcul )
+		- Melee ( + 5% damage melee, +5% penetrare armura, +5% viteza atac )
+		- Shield ( + 5% sansa de rateu a adversarului, + 5% defense al armurii )
+		
+	Exploratori:
+		- Distance vision ( + 5% vizibilitate )
+		- Territory influence ( + 5% influenta )
+		- Clue detection ( + 5% mai putin timp intre clue-uri)
+		
+	Alchemisti:
+		- Healing potions (+ 5% viteza creare potiune viata)
+		- Buffing potions (+ 5% viteza creare potiuni buff)
+		- Strenth potions (+ 5% viteza creare potiuni strength)
+		 
+		
+		
+Echipa formata din:
+	- Luptatori
+	- Exploratori
+	- Alchemistii
+	- Agricultori
+
+
+Zei:
+	Agricultori: Raffaello, zeul plantelor si animalelor
+	Luptatori: Guffa, zeul focului si al puterii
+	Alchemistii: Sirrius, zeul licorilor si intelectului
+	Exploratorii: Offeu, zeul oceanelor si al padurilor
+	
+Resurse:
+	- Lemn
+	- Apa
+	- Plante
+		- Medicinale
+		- Hrana (legume / fructe)
+		- Pentru potiuni / crafting
+	- Animale (carne pentru hrana, parti pentru potiuni / iteme de crafting)
+	- Piatra
+	- Aur
+	- Argint
+	- Bronz
+
+Iteme:
+	- Rare, Artefacte sau Comune (de continuat).
+	- Cufere
+	- Rucsac (fiecare jucator porneste cu un rucsac cu 4 pozitii in care pune pana la 120 unitati diferite si / sau 4 iteme diferite)
+	- Sloturi iteme (casca, armura corp, armura maini, armura picioare, papuci, manusi, sabie + scut, sabie double weilded, sceptru, pelerina)
+	
+Statusuri:
+	- Viata
+	- Experienta
+	- Influenta
+	- Foame
+	- Oboseala
+		- Dupa fiecare actiune, creste oboseala
+	
+Puncte de interes:
+	- Arene PVP (echipe / singuri)
+		- Arenele PVP sunt locatii pe harta in care doi jucatori sau doua echipe pot programa o batalie, iar ceilalti jucatori pot paria pe echipe in programul stabilit.
+		- Bataliile se pot programa din 10 in 10 minute
+		- Fiecare echipa / jucator implicat poate pune o recompensa pentru a fi castigata de celalalt in cazul unui castig.
+		- Fiecare parior poate paria orice iteme / resurse pentru a egala ceilalti pariori
+		- Batalia este in functie de skilluri / talente / arme / armuri / enchanturi / status
+		- Pentru a putea incepe o batalie, toti jucatorii implicati trebuie sa se afle in locatia respectiva la momentul inceperii ei. Pariorii nu trebuie sa fie prezenti.
+		- In urma bataliei, castigatorul castiga toate itemele puse de tabara opusa, experienta si influenta.
+		- Se pot organiza concursuri pentru o anumita arena, sau pentru toate arenele, unde se pot inscrie echipele.
+		
+		
+	- Zone Friendly
+		- Niciun jucator / echipa nu poate ataca.
+		
+		
+	- Team HQ ( cu team chest )
+		- Fiecare echipa primeste gratuit un chest cu 20 de sloturi unde poate pune pana la 120 unitati de resurse si / sau 10 iteme diferite. 
+		- La infiintarea echipei, va trebui sa isi aleaga o locatie in care sa fie toti membri pentru a plasa cufarul.
+		- Cufarul nu este vizibil celorlalti jucatori.
+		- Cufarul poate fi accesat de orice membru al echipei cu conditia sa se afle in locatia respectiva.
+		
+		
+	- Clan HQ ( cu Clan chest si protejat de ziduri si turnuri )
+		- Fiecare clan primeste gratuit un cufar cu 100 de sloturi unde poate pune pana la 120 unitati de resurse si / sau 100 iteme diferite.
+		- La infiintarea clanului, va trebui sa isi aleaga o locatie in care sa fie toti membri pentru a plasa cufarul.
+		- Cufarul este vizibil tututror celorlalti jucatori.
+		- Cufarul este inconjurat de un zid si 2 turnuri (care pot fi evoluate / sau construi pana la 4).
+		- Pentru ca alt jucator / echipa sa fure elementele din cufar, va trebui sa sparga zidul si sa distruga turnurile.
+		- In momentul atacului, membrii clanului ce detine cufarul, pot ataca, la randul lor, pe cei care il ataca. Ei primesc o notificare cand este atacat.
+		
+		
+	- Zone de cultivat ( pentru agricultori ) plante / animalelor
+		- Zone individuale de unde se pot planta si, dupa un timp, culege diferite ierburi / fructe / legume / creste animale.
+		
+		
+	- Zone de dungeon ( trasee predefinite pentru echipe / singuri )
+		- Zone individuale unde echipele pot intra impreuna sau jucatorii pot intra singuri, lupta cu NPC si castiga un loot. 
+		
+	
+	- Zone de crafting ( pentru a crafta iteme  sau repara )
+		- Zone individuale unde jucatorii pot combina iteme si resurse pentru a obtine / imbunatati alte iteme.
+		
+		
+	- Zone de alchemy ( pentru alchemisti care prepara potiuni )
+		- Zone individuale unde jucatorii pot combina ierburi si alte potiuni pentru a obtine / imbunatati alte potiuni.
+		
+		
+	- Zone de invatare ( pentru cresterea talentelor )
+		- Zone unde se pot citi carti (iteme de tip carte) si creste talentul.
+		
+		
+	- Zone de negot ( pentru a crea un magazin )
+		- Zone unde jucatorii pot deschide un magazin.
+		- Pentru a deschide un magazin, un jucator va trebui sa puna la vanzare cel putin 2 iteme, si un pret in aur / argint / bronz
+		- Cat timp jucatorul va ramane in locatia respectiva, magazinul va functiona.
+		
+		
+	- Zone de explorat ( pentru exploratori )
+		- Zone unde toti jucatorii primesc ceva cand intra pentru prima data
+		
+		
+	- Zone de indicii ( pentru a fi descoperite de exploratori )
+		- Zone unde se gasesc indicii spre misiuni / locatia pietrei astrale.
+		
+		
+	- Zone de premii ( pentru a fi descoperite de exploratori )
+		- Zone unde se gasesc premii / rewarduri, la care se ajunge prin urmarea indiciilor.
+		
+		
+		
+
+		
+
+Flow:
+
+Inregistrare cont:
+	1. Inregistrare (buton)
+	2. Email + Parola de 2 ori + Data Nasterii + Oras + NumeCaracter + Numar telefon 
+	3. Chemari (Agricultor, Luptator, Alchemist, Explorator)
+		- Dupa ce da click pe una sa apara Lore, Talente, Ce pot sa faca
+		- Sa vada numarul de jucatori de acea chemare
+		- Buton de confirmare
+	4. Pus punct in talente ale chemarii (1 punct)
+		- Click pe fiecare pentru detalii
+	5. Pus puncte in talente generale (3 puncte)
+		- Click pe fiecare pentru detalii.
+	6. Invita in echipa
+	7. Start!
+	
+
+Meniu:	
+	- Profil
+	- Harta
+	- Echipa
+	- Clan
+	- Misiuni
+
+
+	Profil:	
+	
+Nume Caracter
+Nivel 
+Rasa 
+talente rasa
+talente generale
+Iteme   
+Prieteni
+
+
+Harta:
+	Harta Generala (Harta romaniei cu zone, POI, etc)
+	Radar (pentru interactiune).
+	
+	
+
+
+
+	
+		
+		
+		
+		
+		
+	

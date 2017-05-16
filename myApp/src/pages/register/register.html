@@ -7,26 +7,31 @@
     <ion-list>
         <ion-item>
             <ion-label stacked>Email</ion-label>
-            <ion-input type="email"></ion-input>
+            <ion-input style="color:black" type="email"  [(ngModel)]="user.email"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label stacked>Parola</ion-label>
-            <ion-input type="password"></ion-input>
+            <ion-input style="color:black" type="password" [(ngModel)]="user.password"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label stacked>Oras</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input style="color:black" type="text" [(ngModel)]="user.oras"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label stacked>Nume caracter</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input style="color:black" type="text" [(ngModel)]="user.numeCaracter"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label stacked>Numar telefon</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input style="color:black" type="text" [(ngModel)]="user.numarTelefon"></ion-input>
         </ion-item>
+        <ion-item>
+            <ion-label stacked>Data nasterii </ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MM/DD/YYYY" [(ngModel)]="user.dataNasterii"></ion-datetime>
+        </ion-item>
+        
     </ion-list>
     <div padding>
-        <button ion-button color="primary" block>Mai departe</button>
+        <button ion-button color="primary" block (click) = 'registerStep2();'>Mai departe</button>
     </div>
 </ion-content>

@@ -9,10 +9,13 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
+import { RegisterCallingPage } from '../pages/registerCalling/registerCalling';
+import { RegisterCallingCharacterPage } from '../pages/registerCallingCharacter/registerCallingCharacter';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Http, Headers, RequestOptions, HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -22,11 +25,14 @@ import { Geolocation } from '@ionic-native/geolocation';
     HomePage,
     TabsPage,
     LoginPage,
-      RegisterPage
+      RegisterPage,
+      RegisterCallingPage,
+      RegisterCallingCharacterPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -36,7 +42,9 @@ import { Geolocation } from '@ionic-native/geolocation';
     HomePage,
     TabsPage,
     LoginPage,
-      RegisterPage
+      RegisterPage,
+      RegisterCallingPage,
+      RegisterCallingCharacterPage
   ],
   providers: [
     StatusBar,

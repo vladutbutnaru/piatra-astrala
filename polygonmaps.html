@@ -33,23 +33,23 @@
         });
 
         // Define the LatLng coordinates for the polygon's path.
-        var triangleCoords = [
+        var friendlyIasiZone = [
           {lng: 27.564, lat: 47.189},
           {lng: 27.533, lat: 47.173},
           {lng: 27.573, lat: 47.134},
           {lng: 27.660, lat: 47.141},
-             {lng: 27.609, lat: 47.161},
-            {lng: 27.600, lat: 47.172}
+          {lng: 27.609, lat: 47.161},
+          {lng: 27.600, lat: 47.172}
         ];
 
         // Construct the polygon.
         var bermudaTriangle = new google.maps.Polygon({
-          paths: triangleCoords,
+          paths: friendlyIasiZone,
           strokeColor: '#526E37',
           strokeOpacity: 0.8,
           strokeWeight: 2,
           fillColor: '#92D9D2',
-          fillOpacity: 0.35
+          fillOpacity: 0.70
         });
         bermudaTriangle.setMap(map);
       }

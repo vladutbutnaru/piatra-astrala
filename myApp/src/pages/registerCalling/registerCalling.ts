@@ -33,4 +33,10 @@ showInfoAlchemist(){
     this.navCtrl.push(RegisterCallingCharacterPage, {user: this.user, chemare: 'luptator' });
     
 }
+    
+showInfoAgricultor(){
+    
+     this.navCtrl.push(RegisterCallingCharacterPage, {user: this.user, chemare: 'agricultor' });
+    
+}
 }

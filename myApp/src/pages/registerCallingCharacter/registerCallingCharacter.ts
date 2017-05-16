@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { TabsPage } from '../tabs/tabs';
 
 @Component({
   selector: 'page-register-calling-character',
@@ -61,14 +62,38 @@ if(this.chemare == 'alchemist'){
       image: "assets/img/sword.png",
     },
     {
-      title: "Vraji & Descantece",
-      description: "Ei se nasc cu mostenirea magicienilor, care le permite sa citeasca si sa inteleaga carti despre vraji si descantece. Aceasta aptitudine le permite sa <b>ajute</b> ceilalti jucatori si sa se afirme prin <b>puterea</b> lor magica.",
-      image: "assets/img/spellbook.png",
+      title: "Puterea echipei",
+      description: "Vei reprezenta <i>puterea</i> echipei tale. Vei purta razboaie impreuna cu coechipierii tai, vei proteja alchimistii, agricultorii si exploratorii, va trebui sa cresti influenta clanului tau si vei juca un rol important in drumul catre Piatra Astrala.",
+      image: "assets/img/shield.png",
     },
     {
-      title: "Stapanii noptii",
-      description: "Ritualurile lor <b>oculte</b>, care pot fi executate doar pe parcursul noptii, le permite sa obtina <i>abilitati noi</i>, sa <i>creasca puterea de vindecare</i> a coechipierilor si sa vrajeasca diverse iteme din joc pentru a le face mai puternice.",
-      image: "assets/img/moon.png",
+      title: "Gardianul cuferelor",
+      description: "Echipa ta va depinde de abilitatile tale de a pazi cuferele voastre. Va trebui sa fii mereu atent la cine le da tarcoale, la echipele rivale si vei fi nevoit sa fii pregatit de atac in orice clipa!",
+      image: "assets/img/chest.png",
+    }
+  ];
+    
+    
+    
+}
+      
+            
+      if(this.chemare == 'agricultor'){
+      this.slides = [
+    {
+      title: "Agricultorul, mereu ocupat",
+      description: "Agricultorii sunt mereu pe fuga. De la <i>cultivarea pamantului</i>, la organizarea chest-urilor, la <i>pescuit</i>, <i>crafting</i>, gatit, ei au un rol esential in sustinerea tuturor celorlalti coechipieri. ",
+      image: "assets/img/grass.png",
+    },
+    {
+      title: "Negot & Economie",
+      description: "Cu resursele si itemele pe care le detine echipa ta, vei putea deschide o taraba la care sa vinzi ceea ce au adunat sau produs coechipierii tai. In pietele mari din teritoriu vei gasi in fiecare zi cate ceva care sa aduca valoare clanului in care te afli.",
+      image: "assets/img/shop.png",
+    },
+    {
+      title: "Crafting",
+      description: "Cu ajutorul materialelor pe care le vei strange, vei putea construi iteme noi, sau imbunatati unele existente. Va trebui sa repari arme si armuri, sa produci sageti pentru arcuri, sa faci armuri, sabii, sceptre, undite si altele.",
+      image: "assets/img/hammer.png",
     }
   ];
     
@@ -92,9 +117,10 @@ finishRegistration(){
  
      var data = 'email=' + this.user.email + '&password=' + this.user.password + '&city=' + this.user.oras + '&characterName=' + this.user.numeCaracter + '&phoneNumber=' + this.user.numarTelefon;
     
-    this.http.post("http://192.168.2.203:8080/players/v1/create", data, options)
+    this.http.post("http://localhost:8080/players/v1/create", data, options)
       .subscribe(data => {
         console.log(data['_body']);
+            this.navCtrl.push(TabsPage, {email: this.user.email});
        }, error => {
         console.log(error);// Error getting the data
       });

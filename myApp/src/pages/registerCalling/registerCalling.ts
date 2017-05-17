@@ -39,4 +39,10 @@ showInfoAgricultor(){
      this.navCtrl.push(RegisterCallingCharacterPage, {user: this.user, chemare: 'agricultor' });
     
 }
+    showInfoExplorator(){
+    
+     this.navCtrl.push(RegisterCallingCharacterPage, {user: this.user, chemare: 'explorator' });
+    
+}
+    
 }

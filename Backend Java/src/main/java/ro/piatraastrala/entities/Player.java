@@ -14,6 +14,15 @@ public class Player {
     private String characterName;
     private String phoneNumber;
     private Timestamp birthDate;
+    private String calling;
+
+    public String getCalling() {
+        return calling;
+    }
+
+    public void setCalling(String calling) {
+        this.calling = calling;
+    }
 
     public int getId() {
         return id;

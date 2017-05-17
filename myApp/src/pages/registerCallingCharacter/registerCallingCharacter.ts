@@ -101,7 +101,29 @@ if(this.chemare == 'alchemist'){
     
 }
       
-      
+                
+      if(this.chemare == 'explorator'){
+      this.slides = [
+    {
+      title: "Exploratorul, calatorul neinfricat",
+      description: "Exploratorii sunt cunoscuti pentru dorinta lor de a cunoaste taramuri noi si a descoperi lumi si tinuturi stravechi. Ei joaca un rol esential in obiectivul principal al jocului, acela de a gasi <b>Piatra Astrala</b>. ",
+      image: "assets/img/compass.png",
+    },
+    {
+      title: "Descoperirea indiciilor",
+      description: "Vei descoperi indicii care te vor ghida spre cea mai de pret comoara din joc, si anume Piatra Astrala. Bazandu-te pe indiciile gasite, descifrandu-le, adunand bucati din harta straveche si luptand cu pericolele de pe drum, echipa ta va reusi sa castige.",
+      image: "assets/img/diamond.png",
+    },
+    {
+      title: "Calatorii si drumetii",
+      description: "Misiunile Chemarii tale te vor plimba prin intregul tinut, te vor pune in situatii dificile din care va trebui sa iesi invingator, cu ajutorul echipei tale. Negotul iti este in sange, pentru a ajunge la resursele rare, va trebui sa calatoresti si sa iti gasesti drumul inapoi spre casa.",
+      image: "assets/img/travel.png",
+    }
+  ];
+    
+    
+    
+}
   }
     
     
@@ -115,9 +137,9 @@ finishRegistration(){
     headers.append('Content-Type', 'application/x-www-form-urlencoded' );
     let options = new RequestOptions({ headers: headers });
  
-     var data = 'email=' + this.user.email + '&password=' + this.user.password + '&city=' + this.user.oras + '&characterName=' + this.user.numeCaracter + '&phoneNumber=' + this.user.numarTelefon;
+     var data = 'email=' + this.user.email + '&password=' + this.user.password + '&city=' + this.user.oras + '&characterName=' + this.user.numeCaracter + '&phoneNumber=' + this.user.numarTelefon + '&chemare=' + this.chemare;
     
-    this.http.post("http://localhost:8080/players/v1/create", data, options)
+    this.http.post("http://192.168.2.203:8080/players/v1/create", data, options)
       .subscribe(data => {
         console.log(data['_body']);
             this.navCtrl.push(TabsPage, {email: this.user.email});
@@ -126,8 +148,9 @@ finishRegistration(){
       });
     
     
-    
-    
-    
 }
+    
+    
+    
+    
 }

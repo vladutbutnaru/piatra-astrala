@@ -46,7 +46,8 @@ public class BackendApplication {
 										@RequestParam(value = "password", required = true) String password,
 										@RequestParam(value = "city", required = true) String city,
 									   @RequestParam(value = "characterName", required = true) String characterName,
-									   @RequestParam(value = "phoneNumber", required = true) String phoneNumber) {
+									   @RequestParam(value = "phoneNumber", required = true) String phoneNumber,
+                                       @RequestParam(value = "chemare", required = true) String calling) {
 
 			Player p = new Player();
 			p.setEmail(email);
@@ -54,6 +55,7 @@ public class BackendApplication {
 			p.setCity(city);
 			p.setCharacterName(characterName);
 			p.setPhoneNumber(phoneNumber);
+			p.setCalling(calling);
 
 		p.setId(PlayerController.createPlayer(p));
 			if (p.getId() > 0) {

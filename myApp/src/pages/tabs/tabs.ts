@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
+import { RadarPage } from '../radar/radar';
+
 import { NavController, NavParams} from 'ionic-angular';
 @Component({
   templateUrl: 'tabs.html'
@@ -19,7 +21,7 @@ constructor(public navCtrl: NavController, public params:NavParams) {
     console.log("Primit in tabs: " + this.emailParam);
     
 
-   this.tab2Root = AboutPage;
+   this.tab2Root = RadarPage;
    this.tab3Root = ContactPage;
   }
     

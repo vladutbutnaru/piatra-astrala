@@ -11,6 +11,7 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { RegisterCallingPage } from '../pages/registerCalling/registerCalling';
 import { RegisterCallingCharacterPage } from '../pages/registerCallingCharacter/registerCallingCharacter';
+import { RadarPage } from '../pages/radar/radar';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,7 +28,8 @@ import { Http, Headers, RequestOptions, HttpModule } from '@angular/http';
     LoginPage,
       RegisterPage,
       RegisterCallingPage,
-      RegisterCallingCharacterPage
+      RegisterCallingCharacterPage,
+      RadarPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { Http, Headers, RequestOptions, HttpModule } from '@angular/http';
     LoginPage,
       RegisterPage,
       RegisterCallingPage,
-      RegisterCallingCharacterPage
+      RegisterCallingCharacterPage,
+      RadarPage
   ],
   providers: [
     StatusBar,

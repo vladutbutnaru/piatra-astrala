@@ -22,13 +22,13 @@ public class PlayerController {
         int newId = -1;
         try {
 
-            stmt = conn.prepareStatement("INSERT INTO Players(Pass_Word,Email,City,Character_Name,Phone_Number) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            stmt = conn.prepareStatement("INSERT INTO Players(Pass_Word,Email,City,Character_Name,Phone_Number, Calling) VALUES(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
           stmt.setString(1,p.getPassword());
           stmt.setString(2,p.getEmail());
           stmt.setString(3,p.getCity());
           stmt.setString(4,p.getCharacterName());
           stmt.setString(5,p.getPhoneNumber());
-
+            stmt.setString(6,p.getCalling());
             stmt.executeUpdate();
             rs = stmt.getGeneratedKeys();
             rs.next();

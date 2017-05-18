@@ -47,5 +47,33 @@ public class PlayerController {
 
     }
 
+    public static int getIDByEmail(String email){
+        PreparedStatement stmt;
+        ResultSet rs;
+
+        try {
+            stmt = conn.prepareStatement("SELECT ID FROM Players WHERE Email = ?");
+            stmt.setString(1,email);
+
+            rs = stmt.executeQuery();
+
+            while(rs.next()){
+                return rs.getInt(1);
+
+
+            }
+
+        }
+        catch(Exception e){
+            logger.error(e.getMessage());
+
+
+        }
+        return 0;
+
+
+
+    }
+
 
 }

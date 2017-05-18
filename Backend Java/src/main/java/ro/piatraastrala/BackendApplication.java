@@ -8,8 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ro.piatraastrala.controllers.MissionController;
 import ro.piatraastrala.controllers.NonPlayerCharacterController;
 import ro.piatraastrala.controllers.PlayerController;
+import ro.piatraastrala.entities.Mission;
 import ro.piatraastrala.entities.NonPlayerCharacter;
 import ro.piatraastrala.entities.Player;
 
@@ -81,15 +83,57 @@ public class BackendApplication {
                                        @RequestParam(value = "meters", required = true) int meters
                                       ) {
 
-      ArrayList<NonPlayerCharacter> characters = NonPlayerCharacterController.getNPCsNeaby(lat,lng,meters);
 
 
 
-
-            return ResponseEntity.status(HttpStatus.OK).body(characters);
+            return ResponseEntity.status(HttpStatus.OK).body( NonPlayerCharacterController.getNPCsNeaby(lat,lng,meters));
 
 
 
 
     }
+
+
+
+    //Missions
+
+
+	@RequestMapping(value = "/missions/v1/getfornpc", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public ResponseEntity getMissionsForNpc(@RequestParam(value = "npc", required = true) int npc
+
+	) {
+
+		return ResponseEntity.status(HttpStatus.OK).body(MissionController.getMissionsForNpc(npc));
+
+	}
+
+	@RequestMapping(value = "/missions/v1/checkstatus", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public ResponseEntity checkMissionStatus(@RequestParam(value = "mission", required = true) int mission,
+											 @RequestParam(value = "player", required = true) String playerEmail
+
+	) {
+
+		return ResponseEntity.status(HttpStatus.OK).body(MissionController.getMissionStatus(mission, PlayerController.getIDByEmail(playerEmail)));
+
+	}
+
+	@RequestMapping(value = "/missions/v1/getforplayer", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public ResponseEntity getPlayerMissions(@RequestParam(value = "player", required = true) String playerEmail
+	) {
+
+		return ResponseEntity.status(HttpStatus.OK).body(MissionController.getUserMissions(PlayerController.getIDByEmail(playerEmail)));
+
+	}
+
+	@RequestMapping(value = "/missions/v1/acceptmission", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public ResponseEntity acceptMission(@RequestParam(value = "mission", required = true) int mission,
+										@RequestParam(value = "player", required = true) String playerEmail
+	) {
+		System.out.println(mission + " " + playerEmail);
+		MissionController.acceptMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
+		return ResponseEntity.status(HttpStatus.OK).body("OK");
+
+	}
+
+
 }

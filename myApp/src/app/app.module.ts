@@ -13,6 +13,9 @@ import { RegisterCallingPage } from '../pages/registerCalling/registerCalling';
 import { RegisterCallingCharacterPage } from '../pages/registerCallingCharacter/registerCallingCharacter';
 import { RadarPage } from '../pages/radar/radar';
 
+import { MissionsPage } from '../pages/missions/missions';
+
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -32,7 +35,8 @@ import { EscapeHtmlPipe } from '../pipes/keep-html.pipe';
       RegisterCallingPage,
       RegisterCallingCharacterPage,
       RadarPage,
-       EscapeHtmlPipe
+       EscapeHtmlPipe,
+      MissionsPage
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,8 @@ import { EscapeHtmlPipe } from '../pipes/keep-html.pipe';
       RegisterPage,
       RegisterCallingPage,
       RegisterCallingCharacterPage,
-      RadarPage
+      RadarPage,
+      MissionsPage
   ],
   providers: [
     StatusBar,

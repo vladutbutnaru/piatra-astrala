@@ -46,7 +46,7 @@
     width:25px;
     height:25px;
     border-radius:50%;
-    background-image: url('../../assets/img/npc_mission.png');
+   
     background-size:cover;
     border: 1px solid pink;
     margin-top:10%;
@@ -92,18 +92,35 @@
     
 }
 
-.npcMission{
+.npcMissionActive{
     text-align:center;
     margin-top:5px;
     border:1px solid #F2D170;
-     color:#F5F7F4;
+    color:#F5F7F4;
     
+}
+.npcMissionInactive{
+     text-align:center;
+    margin-top:5px;
+    border:1px solid gray;
+    color:#F5F7F4;
+    
+    
+    
+}
+
+.npcMissionCompleted{
+    
+      text-align:center;
+    margin-top:5px;
+    border:1px solid lightgreen;
+    color:#F5F7F4;
 }
 
 .npcImage{
     width:35px;
     height:35px;
     border-radius:50%;
-    background-image:url(../../assets/img/npc_mission.png);  
+    
     background-size:cover;
 }

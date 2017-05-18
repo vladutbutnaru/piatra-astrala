@@ -4,7 +4,7 @@ import { AboutPage } from '../about/about';
 import { ContactPage } from '../contact/contact';
 import { HomePage } from '../home/home';
 import { RadarPage } from '../radar/radar';
-
+import { MissionsPage } from '../missions/missions';
 import { NavController, NavParams} from 'ionic-angular';
 @Component({
   templateUrl: 'tabs.html'
@@ -22,7 +22,7 @@ constructor(public navCtrl: NavController, public params:NavParams) {
     
 
    this.tab2Root = RadarPage;
-   this.tab3Root = ContactPage;
+   this.tab3Root = MissionsPage;
   }
     
     

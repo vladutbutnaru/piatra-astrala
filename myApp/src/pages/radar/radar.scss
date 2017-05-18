@@ -3,7 +3,7 @@
     margin-left: -10%;
     margin-top: 100%;
     width: 120%;
-    height: 50%;
+    height: 30%;
     background: #fff;
     border-top: 1px solid green;
 
@@ -38,4 +38,72 @@
     font-size:18px;
     
     
+}
+
+.npc{
+    position:relative;
+    float:left;
+    width:25px;
+    height:25px;
+    border-radius:50%;
+    background-image: url('../../assets/img/npc_mission.png');
+    background-size:cover;
+    border: 1px solid pink;
+    margin-top:10%;
+    margin-left: 10px;
+    
+}
+.npcContainer{
+    margin-left:10%;
+    
+}
+.npcMissionPopover{
+    overflow:auto;
+    width:220px;
+    height:350px;
+    border:1px dashed black;
+    position:absolute;
+    margin-top:-90%;
+    background-color: #162216;
+    margin-left:20%;
+    opacity:0.8;
+}
+.npcName{
+    text-align:center;
+    font-size:20px;
+    color:#F2D170;
+    
+}
+.npcTitle{
+    text-align:center;
+    font-size:15px;
+    color:#87755D;
+}
+.npcBio{
+    text-align:center;
+    margin-top:10px;
+    color:#F5F7F4;
+    padding:5px;
+}
+
+.npcMissionList{
+    margin-top:20px;
+     color:#F5F7F4;
+    
+}
+
+.npcMission{
+    text-align:center;
+    margin-top:5px;
+    border:1px solid #F2D170;
+     color:#F5F7F4;
+    
+}
+
+.npcImage{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background-image:url(../../assets/img/npc_mission.png);  
+    background-size:cover;
 }

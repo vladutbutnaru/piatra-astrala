@@ -2,16 +2,31 @@
   <ion-navbar>
     <ion-title>Radar</ion-title>
   </ion-navbar>
+ 
 </ion-header>
 
 <ion-content padding>
     <div class="zone-type">Friendly</div>
  <div class="distanceCircle">
-        <div class="distanceCircleDistance">500m</div>
+        <div class="distanceCircleDistance" >500m</div>
     </div>
     
     <div class="closeCircle">
         <div class="closeCircleDistance">100m</div>
+        <div class="npcContainer" [innerHtml]="npcCloseFront | keepHtml"></div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <div class="npcMissionPopover" id = "npcMissionPopover" *ngIf="missionOpen"><div class="npcImage"></div><div class="npcName">{{npcInformation.name}}</div><div class="npcTitle">{{npcInformation.title}}</div><div class="npcBio">{{npcInformation.bio}} </div> <div class="npcMissionList"><div class="npcMission">Misiune 1</div><div class="npcMission">Misiune 2</div></div></div>
+        
+        
+        
     </div>
-    
+  
 </ion-content>

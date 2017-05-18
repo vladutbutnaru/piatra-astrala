@@ -8,8 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ro.piatraastrala.controllers.NonPlayerCharacterController;
 import ro.piatraastrala.controllers.PlayerController;
+import ro.piatraastrala.entities.NonPlayerCharacter;
 import ro.piatraastrala.entities.Player;
+
+import java.util.ArrayList;
 
 @SpringBootApplication
 @RestController
@@ -68,4 +72,24 @@ public class BackendApplication {
 
 	}
 
+	//NPCs
+
+
+    @RequestMapping(value = "/npc/v1/get", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity getNpcNearby(@RequestParam(value = "lat", required = true) double lat,
+                                       @RequestParam(value = "lng", required = true) double lng,
+                                       @RequestParam(value = "meters", required = true) int meters
+                                      ) {
+
+      ArrayList<NonPlayerCharacter> characters = NonPlayerCharacterController.getNPCsNeaby(lat,lng,meters);
+
+
+
+
+            return ResponseEntity.status(HttpStatus.OK).body(characters);
+
+
+
+
+    }
 }

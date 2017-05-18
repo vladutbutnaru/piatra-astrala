@@ -18,6 +18,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Http, Headers, RequestOptions, HttpModule } from '@angular/http';
 
+import { EscapeHtmlPipe } from '../pipes/keep-html.pipe';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -29,7 +31,8 @@ import { Http, Headers, RequestOptions, HttpModule } from '@angular/http';
       RegisterPage,
       RegisterCallingPage,
       RegisterCallingCharacterPage,
-      RadarPage
+      RadarPage,
+       EscapeHtmlPipe
   ],
   imports: [
     BrowserModule,

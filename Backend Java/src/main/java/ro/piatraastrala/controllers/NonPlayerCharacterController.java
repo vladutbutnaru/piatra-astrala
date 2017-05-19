@@ -87,4 +87,59 @@ public class NonPlayerCharacterController {
     private static double rad2deg(double rad) {
         return (rad * 180.0 / Math.PI);
     }
+
+
+    public static  NonPlayerCharacter getById(int id){
+        NonPlayerCharacter npc = new NonPlayerCharacter();
+
+        PreparedStatement stmt;
+        ResultSet rs;
+
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM NonPlayerCharacters WHERE ID = ?");
+            stmt.setInt(1,id);
+            rs = stmt.executeQuery();
+
+            while(rs.next()){
+
+
+                    npc.setId(rs.getInt(1));
+                    npc.setName(rs.getString(2));
+                    npc.setIcon(rs.getString(3));
+                    npc.setDescription(rs.getString(4));
+                    npc.setLat(rs.getDouble(5));
+                    npc.setLng(rs.getDouble(6));
+                    npc.setTitle(rs.getString(7));
+
+
+
+
+
+            }
+
+        }
+        catch(Exception e){
+            logger.error(e.getMessage());
+
+
+        }
+
+
+        return npc;
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

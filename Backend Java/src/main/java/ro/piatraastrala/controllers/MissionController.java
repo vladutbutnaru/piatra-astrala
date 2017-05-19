@@ -3,6 +3,7 @@ package ro.piatraastrala.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ro.piatraastrala.entities.Mission;
+import ro.piatraastrala.entities.MissionWithStatus;
 import ro.piatraastrala.entities.NonPlayerCharacter;
 import ro.piatraastrala.utils.DBConnection;
 
@@ -39,7 +40,7 @@ public class MissionController {
                    m.setNpcToComplete(rs.getInt(4));
                    m.setTitle(rs.getString(5));
                    m.setDescription(rs.getString(6));
-
+                  m.setNpcGiverObject(NonPlayerCharacterController.getById(m.getNpcGiver()));
 
 
 
@@ -90,8 +91,8 @@ ArrayList<Mission> missions = new ArrayList<Mission>();
             return missions;
     }
 
-    public static ArrayList<Mission> getUserMissions(int playerId){
-        ArrayList<Mission> missions = new ArrayList<Mission>();
+    public static ArrayList<MissionWithStatus> getUserMissions(int playerId){
+        ArrayList<MissionWithStatus> missions = new ArrayList<MissionWithStatus>();
 
         PreparedStatement stmt;
         ResultSet rs;
@@ -103,9 +104,11 @@ ArrayList<Mission> missions = new ArrayList<Mission>();
 
             while(rs.next()){
              Mission m = getById(rs.getInt(2));
-             missions.add(m);
+                MissionWithStatus ms = new MissionWithStatus();
+                ms.setMission(m);
+                ms.setMissionStatus(rs.getInt(4));
 
-
+             missions.add(ms);
 
             }
 

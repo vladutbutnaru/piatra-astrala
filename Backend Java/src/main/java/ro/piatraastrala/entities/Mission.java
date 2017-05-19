@@ -10,6 +10,15 @@ public class Mission {
     private int npcToComplete;
     private String title;
     private String description;
+    private NonPlayerCharacter npcGiverObject;
+
+    public NonPlayerCharacter getNpcGiverObject() {
+        return npcGiverObject;
+    }
+
+    public void setNpcGiverObject(NonPlayerCharacter npcGiverObject) {
+        this.npcGiverObject = npcGiverObject;
+    }
 
     public int getId() {
         return id;

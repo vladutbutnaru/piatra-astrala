@@ -99,11 +99,13 @@ public class BackendApplication {
 
 
 	@RequestMapping(value = "/missions/v1/getfornpc", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public ResponseEntity getMissionsForNpc(@RequestParam(value = "npc", required = true) int npc
+	public ResponseEntity getMissionsForNpc(@RequestParam(value = "npc", required = true) int npc,
+                                            @RequestParam(value = "player", required = true) String playerEmail
+
 
 	) {
 
-		return ResponseEntity.status(HttpStatus.OK).body(MissionController.getMissionsForNpc(npc));
+		return ResponseEntity.status(HttpStatus.OK).body(MissionController.getMissionsForNpc(npc, PlayerController.getIDByEmail(playerEmail)));
 
 	}
 

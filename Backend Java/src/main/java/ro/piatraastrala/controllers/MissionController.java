@@ -56,7 +56,7 @@ return m;
 
 
     }
-    public static ArrayList<Mission> getMissionsForNpc(int npcId){
+    public static ArrayList<Mission> getMissionsForNpc(int npcId, int playerID){
 ArrayList<Mission> missions = new ArrayList<Mission>();
 
         PreparedStatement stmt;
@@ -70,11 +70,13 @@ ArrayList<Mission> missions = new ArrayList<Mission>();
             while(rs.next()){
                 Mission m = new Mission();
                 m.setId(rs.getInt(1));
+
                 m.setMissionType(rs.getInt(2));
                 m.setNpcGiver(rs.getInt(3));
                 m.setNpcToComplete(rs.getInt(4));
                 m.setTitle(rs.getString(5));
                 m.setDescription(rs.getString(6));
+                if(getMissionStatus(m.getId(), playerID) == 0 || m.getNpcToComplete() == npcId)
                 missions.add(m);
 
 

@@ -115,7 +115,7 @@ getMissionsForNpc(npcID:any){
     headers.append('Content-Type', 'application/x-www-form-urlencoded' );
     let options = new RequestOptions({ headers: headers });
  
-     var data = 'npc=' +npcID;
+     var data = 'npc=' +npcID + '&player='+this.user.email;
        this.missionListFront = "";
     this.http.post("http://localhost:8080/missions/v1/getfornpc", data, options)
       .subscribe(data => {

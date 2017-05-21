@@ -125,9 +125,14 @@ getMissionsForNpc(npcID:any){
       
 
     for(let i = 0; i<this.missionList.length; i++){
-        
+        if(this.missionList[i].status == 0 || this.missionList[i].status == null){
         this.missionListFront += '<div class="npcMissionActive" id="mission_'+this.missionList[i].id+'">'+this.missionList[i].title+'</div>';
-              
+}
+else{
+    
+     this.missionListFront += '<div class="npcMissionCompleted" id="missionToComplete_'+this.missionList[i].id+'">'+this.missionList[i].title+'</div>';
+    
+}
     }
 
 if(this.isNpcMissionOpen == 0){
@@ -141,8 +146,7 @@ this.showNPCMissionPopup();
 
 }
 showNPCMissionPopup(){
-    document.querySelector('body').addEventListener('click', (event)=> {
-    console.log(event.target['id']);    
+    document.querySelector('body').addEventListener('click', (event)=> { 
 if(event.target['id'].split('_')[0] == 'npc'){
     for(let i = 0; i<this.npcList.length; i++){
         //clicked on an NPC
@@ -162,13 +166,14 @@ else{
         //accept mission
         this.acceptMission(event.target['id'].split('_')[1] );
         
-        
-        
-        
-        
-        
     }
 else{
+     //clicked on a mission to be completed
+     if(event.target['id'].split('_')[0] == 'missionToComplete'){
+           //finish mission
+        this.finishMission(event.target['id'].split('_')[1] );
+         
+     }
     this.missionOpen = false;
 }
     
@@ -193,6 +198,34 @@ acceptMission(missionID:any){
     let alert = this.alertController.create({
       title: 'Misiune acceptata!',
       subTitle: 'Felicitari, ai acceptat misiunea! O vei gasi in meniul "Misiuni".',
+      buttons: ['OK']
+    });
+    alert.present();
+  
+ 
+    
+       }, error => {
+        console.log(error);// Error getting the data
+      });
+
+    
+    
+}
+
+finishMission(missionID:any){
+         var headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded' );
+    let options = new RequestOptions({ headers: headers });
+ 
+     var data = 'mission=' +missionID + '&player=' + this.user.email;
+       this.missionListFront = "";
+    this.http.post("http://localhost:8080/missions/v1/finishmission", data, options)
+      .subscribe(data => {
+       
+    let alert = this.alertController.create({
+      title: 'Misiune finalizata!',
+      subTitle: 'Felicitari, ai finalizat misiunea! O vei gasi in meniul "Misiuni Terminate".',
       buttons: ['OK']
     });
     alert.present();

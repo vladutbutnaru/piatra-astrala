@@ -1,0 +1,66 @@
+.info-misiune{
+    
+    text-align:center;
+    width:100%;
+
+    position:absolute;
+    background-color:#3A4F4A;
+}
+
+.titlu-misiune{
+    color:#F2D170;
+    font-size:20px;
+    width:100%;
+      padding:5px;
+    
+}
+.npc-misiune{
+    color:#87755D;
+    font-size:15px;
+    width:100%;
+      padding:5px;
+    
+}
+
+.descriere-misiune{
+    color:#F5F7F4;
+    width:100%;
+    padding:5px;
+    
+}
+.rewarduri-misiune{
+    padding-top:10px;
+    text-align:left;
+    padding-left:20px;
+    padding-bottom:5px;
+    
+    
+}
+
+.reward{
+    padding:4px;
+    color:#F2D170
+    
+    
+}
+
+.icon-reward{
+    background-image:url("../../assets/img/eustache.jpg");
+    width:40px;
+    height:40px;
+    border-radius:10px;
+     display:inline-block;
+    
+}
+.nume-reward{
+    display:inline-block;
+    padding-left:10px;
+    
+    
+}
+
+.cantitate-reward{
+    display:inline-block;
+    padding-left:20px;
+    
+}

@@ -75,13 +75,36 @@ ArrayList<Mission> missions = new ArrayList<Mission>();
                 m.setNpcGiver(rs.getInt(3));
                 m.setNpcToComplete(rs.getInt(4));
                 m.setTitle(rs.getString(5));
+                m.setStatus(getMissionStatus(m.getId(),playerID));
                 m.setDescription(rs.getString(6));
-                if(getMissionStatus(m.getId(), playerID) == 0 || m.getNpcToComplete() == npcId)
+                if(getMissionStatus(m.getId(), playerID) == 0)
                 missions.add(m);
 
 
 
             }
+
+            stmt = conn.prepareStatement("SELECT * FROM Missions WHERE Npc_To_Complete_Id = ?");
+            stmt.setInt(1,npcId);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                Mission m = new Mission();
+                m.setId(rs.getInt(1));
+
+                m.setMissionType(rs.getInt(2));
+                m.setNpcGiver(rs.getInt(3));
+                m.setNpcToComplete(rs.getInt(4));
+                m.setTitle(rs.getString(5));
+                m.setDescription(rs.getString(6));
+                m.setStatus(getMissionStatus(m.getId(),playerID));
+                System.out.println("Avem misiunea cu statusul : "  + m.getStatus());
+                if(m.getStatus() ==1 && m.getNpcToComplete() == npcId)
+                    missions.add(m);
+
+
+
+            }
+
 
         }
         catch(Exception e){
@@ -158,7 +181,7 @@ ArrayList<Mission> missions = new ArrayList<Mission>();
 
 
     public static void acceptMissionForPlayer(int missionId, int playerId){
-        System.out.println(playerId);
+
         PreparedStatement stmt;
 
 
@@ -177,7 +200,28 @@ ArrayList<Mission> missions = new ArrayList<Mission>();
 
         }
 
+    }
+    public static void finishMissionForPlayer(int missionId, int playerId){
 
+        PreparedStatement stmt;
+
+
+        try {
+            stmt = conn.prepareStatement("UPDATE Player_Missions SET Status = 2 WHERE ID_Mission = ? AND ID_Player = ?");
+            stmt.setInt(2,playerId);
+            stmt.setInt(1,missionId);
+
+            stmt.executeUpdate();
+
+
+        }
+        catch(Exception e){
+            logger.error(e.getMessage());
+
+
+        }
 
     }
+
+
 }

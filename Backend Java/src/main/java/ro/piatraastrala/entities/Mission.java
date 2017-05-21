@@ -11,6 +11,15 @@ public class Mission {
     private String title;
     private String description;
     private NonPlayerCharacter npcGiverObject;
+    private int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public NonPlayerCharacter getNpcGiverObject() {
         return npcGiverObject;

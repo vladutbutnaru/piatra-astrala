@@ -131,11 +131,21 @@ public class BackendApplication {
 	public ResponseEntity acceptMission(@RequestParam(value = "mission", required = true) int mission,
 										@RequestParam(value = "player", required = true) String playerEmail
 	) {
-		System.out.println(mission + " " + playerEmail);
+
 		MissionController.acceptMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
 		return ResponseEntity.status(HttpStatus.OK).body("OK");
 
 	}
 
+
+	@RequestMapping(value = "/missions/v1/finishmission", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public ResponseEntity finishMission(@RequestParam(value = "mission", required = true) int mission,
+										@RequestParam(value = "player", required = true) String playerEmail
+	) {
+
+		MissionController.finishMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
+		return ResponseEntity.status(HttpStatus.OK).body("OK");
+
+	}
 
 }

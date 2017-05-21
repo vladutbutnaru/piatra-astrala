@@ -5,122 +5,96 @@
     width: 120%;
     height: 30%;
     background: #fff;
-    border-top: 1px solid green;
-
-    
-    
-    
-    
+    border-top: 1px solid #F2D170;
 }
-.closeCircleDistance{
+.closeCircleDistance {
     margin: 0 auto;
-    text-align:center;
+    text-align: center;
 }
-
-.distanceCircle{
-    position:absolute;
-      border-radius: 50%;
+.distanceCircle {
+    position: absolute;
+    border-radius: 50%;
     margin-left: -13%;
-    margin-top:50%;
+    margin-top: 50%;
     width: 120%;
     height: 50%;
     background: transparent;
-    border-top: 1px dashed blue;
-    
+    border-top: 1px dashed #87755D;
 }
-.distanceCircleDistance{
+.distanceCircleDistance {
     margin: 0 auto;
-    text-align:center;
-    
+    text-align: center;
 }
-.zone-type{
-    color:green;
-    font-size:18px;
-    
-    
+.zone-type {
+    color: #3A4F4A;
+    font-size: 18px;
 }
-
-.npc{
-    position:relative;
-    float:left;
-    width:25px;
-    height:25px;
-    border-radius:50%;
-   
-    background-size:cover;
-    border: 1px solid pink;
-    margin-top:10%;
+.npc {
+    position: relative;
+    float: left;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-size: cover;
+    border: 1px solid #87755D;
+    margin-top: 10%;
     margin-left: 10px;
-    
 }
-.npcContainer{
-    margin-left:10%;
-    
+.npcContainer {
+    margin-left: 10%;
 }
-.npcMissionPopover{
-    overflow:auto;
-    width:220px;
-    height:350px;
-    border:1px dashed black;
-    position:absolute;
-    margin-top:-90%;
+.npcMissionPopover {
+    overflow: auto;
+    width: 220px;
+    height: 350px;
+    border: 1px dashed black;
+    position: absolute;
+    margin-top: -90%;
     background-color: #162216;
-    margin-left:20%;
-    opacity:0.8;
+    margin-left: 20%;
+    opacity: 0.8;
 }
-.npcName{
-    text-align:center;
-    font-size:20px;
-    color:#F2D170;
-    
+.npcName {
+    text-align: center;
+    font-size: 20px;
+    color: #F2D170;
 }
-.npcTitle{
-    text-align:center;
-    font-size:15px;
-    color:#87755D;
+.npcTitle {
+    text-align: center;
+    font-size: 15px;
+    color: #87755D;
 }
-.npcBio{
-    text-align:center;
-    margin-top:10px;
-    color:#F5F7F4;
-    padding:5px;
+.npcBio {
+    text-align: center;
+    margin-top: 10px;
+    color: #F5F7F4;
+    padding: 5px;
 }
-
-.npcMissionList{
-    margin-top:20px;
-     color:#F5F7F4;
-    
+.npcMissionList {
+    margin-top: 20px;
+    color: #F5F7F4;
 }
-
-.npcMissionActive{
-    text-align:center;
-    margin-top:5px;
-    border:1px solid #F2D170;
-    color:#F5F7F4;
-    
+.npcMissionActive {
+    text-align: center;
+    margin-top: 5px;
+    border: 1px solid #F2D170;
+    color: #F5F7F4;
 }
-.npcMissionInactive{
-     text-align:center;
-    margin-top:5px;
-    border:1px solid gray;
-    color:#F5F7F4;
-    
-    
-    
+.npcMissionInactive {
+    text-align: center;
+    margin-top: 5px;
+    border: 1px solid gray;
+    color: #F5F7F4;
 }
-
-.npcMissionCompleted{
-    
-      text-align:center;
-    margin-top:5px;
-    border:1px solid lightgreen;
-    color:#F5F7F4;
+.npcMissionCompleted {
+    text-align: center;
+    margin-top: 5px;
+    border: 1px solid lightgreen;
+    color: #F5F7F4;
 }
-
-.npcImage{
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    
-    background-size:cover;
+.npcImage {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-size: cover;
 }

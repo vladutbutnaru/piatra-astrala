@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Http, Headers, RequestOptions } from '@angular/http';
-
+import {SingleMissionPage} from '../singleMission/singlemission';
 @Component({
   selector: 'page-missions',
   templateUrl: 'missions.html'
@@ -29,7 +29,7 @@ public status = -1;
   constructor(public navCtrl: NavController,  public params:NavParams,   public http: Http) {
       this.email = params.data;
    
-if(params.data == 'undefined'){
+if(params.data == null){
     this.email = params.data.data;
     
 }
@@ -39,7 +39,8 @@ else{
 }
      
     this.getMissionsForUser();
-      setInterval(this.getMissionsForUser(), 5000 * 5);
+
+   
   }
     
 
@@ -65,10 +66,10 @@ getMissionsForUser(){
         
    
 if( this.allMissions[i].missionStatus == 1){
-        this.unfinishedMissions += '<ion-item class="item item-block item-ios" id="'+this.allMissions[i].mission.id+'"><ion-avatar item-start=""> <img src="assets/img/grass.png"> </ion-avatar><div class="item-inner"><div class="input-wrapper"><!--bindings={ "ng-reflect-ng-if": "true" }--><ion-label class="label label-ios"> <h2>'+this.allMissions[i].mission.npcGiverObject.name+'</h2> <h3>'+this.allMissions[i].mission.title+'</h3> <p>'+this.allMissions[i].mission.description+'</p> </ion-label></div><!--bindings={ "ng-reflect-ng-if": "false" }--></div><div class="button-effect"></div></ion-item>';
+        this.unfinishedMissions += '<ion-item class="item item-block item-ios" ><ion-avatar item-start="" id="missionList_'+this.allMissions[i].mission.id+'"> <img src="assets/img/mission.jpg"> </ion-avatar><div class="item-inner"><div class="input-wrapper"><!--bindings={ "ng-reflect-ng-if": "true" }--><ion-label class="label label-ios"> <h2 id="missionList_'+this.allMissions[i].mission.id+'" >'+this.allMissions[i].mission.npcGiverObject.name+'</h2> <h3 id="missionList_'+this.allMissions[i].mission.id+'">'+this.allMissions[i].mission.title+'</h3> <p>'+this.allMissions[i].mission.description+'</p> </ion-label></div><!--bindings={ "ng-reflect-ng-if": "false" }--></div><div class="button-effect"></div></ion-item>';
 }
 else{
-    this.finishedMissions += '<ion-item class="item item-block item-ios" id="'+this.allMissions[i].mission.id+'"><ion-avatar item-start=""> <img src="assets/img/grass.png"> </ion-avatar><div class="item-inner"><div class="input-wrapper"><!--bindings={ "ng-reflect-ng-if": "true" }--><ion-label class="label label-ios"> <h2>'+this.allMissions[i].mission.npcGiverObject.name+'</h2> <h3>'+this.allMissions[i].mission.title+'</h3> <p>'+this.allMissions[i].mission.description+'</p> </ion-label></div><!--bindings={ "ng-reflect-ng-if": "false" }--></div><div class="button-effect"></div></ion-item>';
+    this.finishedMissions +='<ion-item class="item item-block item-ios" ><ion-avatar item-start="" id="missionList_'+this.allMissions[i].mission.id+'"> <img src="assets/img/mission.jpg"> </ion-avatar><div class="item-inner"><div class="input-wrapper"><!--bindings={ "ng-reflect-ng-if": "true" }--><ion-label class="label label-ios"> <h2 id="missionList_'+this.allMissions[i].mission.id+'" >'+this.allMissions[i].mission.npcGiverObject.name+'</h2> <h3 id="missionList_'+this.allMissions[i].mission.id+'">'+this.allMissions[i].mission.title+'</h3> <p>'+this.allMissions[i].mission.description+'</p> </ion-label></div><!--bindings={ "ng-reflect-ng-if": "false" }--></div><div class="button-effect"></div></ion-item>';
     
 }
         
@@ -80,7 +81,7 @@ else{
               
     }
 
-         
+         setInterval(this.getMissionsForUser(), 1000 * 10);
 
     
     
@@ -90,6 +91,26 @@ else{
 
 
 }
+  ionViewDidLoad() {
+       this.addSelectorHandler();
+  }
+addSelectorHandler(){
+        document.querySelector('#listaMisiuni').addEventListener('click', (event)=> { 
+   
 
+    //clicked on a mission
+    if(event.target['id'].split('_')[0] == 'missionList'){
+        
+  
+       
+        this.user.missionID = event.target['id'].split('_')[1];
+          this.navCtrl.push(SingleMissionPage, {user: this.user});
+    }
 
+    
+    
+});
+    
+    
+}
 }

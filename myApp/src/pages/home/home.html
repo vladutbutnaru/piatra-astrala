@@ -8,7 +8,7 @@
         <div class="player-name">{{userInfo.name}}</div>
         <div class="player-level">Nivel {{userInfo.level}} - {{userInfo.calling}}</div>
     </div>
-    <div class="player-calling-image"></div>
+    <div class="player-calling-image" id="player-image"></div>
     <div class="player-items">
         <div class="player-helmet"></div>
         <div class="player-necklace"></div>
@@ -41,7 +41,7 @@
         <div class="stat-text">Oboseala</div>
         <div class="stat-value">{{userInfo.fatigue}}</div>
         <div class="stat-value-bonus">+20</div>
-        <div class="stat-bar"><div id="fatigue-progress"><div></div></div></div>
+        <div class="stat-bar"><div id="fatigue-progress"><div id="fatigue-bar"></div></div></div>
     </div>
     <div class="stat">
         <div class="stat-text">Spirit</div>
@@ -52,13 +52,13 @@
         <div class="stat-text">Viata</div>
         <div class="stat-value">{{userInfo.health}}</div>
         <div class="stat-value-bonus">+20</div>
-         <div class="stat-bar"><div id="health-progress"><div></div></div></div>
+         <div class="stat-bar"><div id="health-progress"><div id="health-bar"></div></div></div>
     </div>
     <div class="stat">
         <div class="stat-text">Chakra</div>
         <div class="stat-value">{{userInfo.chakra}}</div>
         <div class="stat-value-bonus">+20</div>
-          <div class="stat-bar"><div id="chakra-progress"><div></div></div></div>
+          <div class="stat-bar"><div id="chakra-progress"><div id="chakra-bar"></div></div></div>
     </div>
     <div class="stat">
         <div class="stat-text">Influenta</div>

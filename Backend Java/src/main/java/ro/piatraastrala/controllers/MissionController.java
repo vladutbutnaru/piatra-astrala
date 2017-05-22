@@ -94,7 +94,6 @@ public class MissionController {
                 m.setTitle(rs.getString(5));
                 m.setDescription(rs.getString(6));
                 m.setStatus(getMissionStatus(m.getId(), playerID));
-                System.out.println("Avem misiunea cu statusul : " + m.getStatus());
                 if (m.getStatus() == 1 && m.getNpcToComplete() == npcId)
                     missions.add(m);
 

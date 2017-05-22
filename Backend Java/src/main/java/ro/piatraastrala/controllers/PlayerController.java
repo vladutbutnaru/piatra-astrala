@@ -110,6 +110,34 @@ public class PlayerController {
 
     }
 
+    public static Player getById(int id){
+        PreparedStatement stmt;
+        ResultSet rs;
+        Player p = new Player();
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM Players WHERE ID = ?");
+            stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                p.setId(rs.getInt(1));
+                p.setCalling(rs.getString(7));
+                p.setCharacterName(rs.getString(5));
+
+
+            }
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+
+
+        }
+        return p;
+
+
+    }
+
     public static int verifyLogin(String email, String password) {
         PreparedStatement stmt;
         ResultSet rs;
@@ -169,8 +197,12 @@ public class PlayerController {
               ps.setHunger(rs.getInt(17));
               ps.setHungerRegen(rs.getInt(18));
               ps.setInfluence(rs.getInt(19));
+
               ps.setFatigueUpdateDate(rs.getTimestamp(20));
 
+              Player p = getById(playerId);
+              ps.setCalling(p.getCalling());
+              ps.setCharacterName(p.getCharacterName());
             }
 
         } catch (Exception e) {

@@ -27,6 +27,24 @@ public class PlayerStats {
     private int hungerRegen;
     private int influence;
     private Timestamp fatigueUpdateDate;
+    private String characterName;
+    private String calling;
+
+    public String getCharacterName() {
+        return characterName;
+    }
+
+    public void setCharacterName(String characterName) {
+        this.characterName = characterName;
+    }
+
+    public String getCalling() {
+        return calling;
+    }
+
+    public void setCalling(String calling) {
+        this.calling = calling;
+    }
 
     public int getId() {
         return id;

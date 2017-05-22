@@ -10,28 +10,28 @@ import { RegisterCallingPage } from '../registerCalling/registerCalling';
 })
 export class RegisterPage {
 
-public user = {
+  public user = {
     email: "dada",
     password: "dada",
     oras: "dada",
     numeCaracter: "dada",
     numarTelefon: "dada",
     dataNasterii: "dada"
-    
-    
-}
-    
-constructor(public navCtrl: NavController) {
+
 
   }
 
-    
-registerStep2(){
-     this.navCtrl.push(RegisterCallingPage, {user: this.user});
-    
-}
-    
+  constructor(public navCtrl: NavController) {
 
-    
-    
+  }
+
+
+  registerStep2() {
+    this.navCtrl.push(RegisterCallingPage, { user: this.user });
+
+  }
+
+
+
+
 }

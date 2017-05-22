@@ -17,7 +17,7 @@ public class NonPlayerCharacterController {
     public static Logger logger = LoggerFactory.getLogger(PlayerController.class);
     public static Connection conn = (Connection) DBConnection.getConnection();
 
-    public static ArrayList<NonPlayerCharacter> getNPCsNeaby(double lat, double lng, int metersClose){
+    public static ArrayList<NonPlayerCharacter> getNPCsNeaby(double lat, double lng, int metersClose) {
         ArrayList<NonPlayerCharacter> characters = new ArrayList<NonPlayerCharacter>();
 
         PreparedStatement stmt;
@@ -27,8 +27,8 @@ public class NonPlayerCharacterController {
             stmt = conn.prepareStatement("SELECT * FROM NonPlayerCharacters");
             rs = stmt.executeQuery();
 
-            while(rs.next()){
-                if(distance(rs.getDouble(5), rs.getDouble(6), lat, lng, 'K' ) < metersClose/1000.0){
+            while (rs.next()) {
+                if (distance(rs.getDouble(5), rs.getDouble(6), lat, lng, 'K') < metersClose / 1000.0) {
                     NonPlayerCharacter npc = new NonPlayerCharacter();
                     npc.setId(rs.getInt(1));
                     npc.setName(rs.getString(2));
@@ -44,8 +44,7 @@ public class NonPlayerCharacterController {
 
             }
 
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             logger.error(e.getMessage());
 
 
@@ -89,7 +88,7 @@ public class NonPlayerCharacterController {
     }
 
 
-    public static  NonPlayerCharacter getById(int id){
+    public static NonPlayerCharacter getById(int id) {
         NonPlayerCharacter npc = new NonPlayerCharacter();
 
         PreparedStatement stmt;
@@ -97,28 +96,24 @@ public class NonPlayerCharacterController {
 
         try {
             stmt = conn.prepareStatement("SELECT * FROM NonPlayerCharacters WHERE ID = ?");
-            stmt.setInt(1,id);
+            stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
 
 
-                    npc.setId(rs.getInt(1));
-                    npc.setName(rs.getString(2));
-                    npc.setIcon(rs.getString(3));
-                    npc.setDescription(rs.getString(4));
-                    npc.setLat(rs.getDouble(5));
-                    npc.setLng(rs.getDouble(6));
-                    npc.setTitle(rs.getString(7));
-
-
-
+                npc.setId(rs.getInt(1));
+                npc.setName(rs.getString(2));
+                npc.setIcon(rs.getString(3));
+                npc.setDescription(rs.getString(4));
+                npc.setLat(rs.getDouble(5));
+                npc.setLng(rs.getDouble(6));
+                npc.setTitle(rs.getString(7));
 
 
             }
 
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             logger.error(e.getMessage());
 
 
@@ -129,17 +124,6 @@ public class NonPlayerCharacterController {
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

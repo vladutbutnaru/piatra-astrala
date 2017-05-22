@@ -1,3 +1,197 @@
-page-home {
+.profile-page {
+    background-color: #3A4F4A;
+}
+
+.player-basic-info {
+    text-align: center;
+}
+
+.player-name {
+    color: #F2D170;
+    font-size: 15px;
+}
+
+.player-level {
+    color: #F5F7F4;
+    padding: 5px;
+}
+
+.player-calling-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-image: url(../../assets/img/farmer.jpg);
+    background-size: cover;
+    border: 1px solid #F2D170;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.player-items {
+    margin-top: 40px;
+}
+
+.player-helmet {
+    width: 40px;
+    height: 40px;
+    border: 1px solid white;
+    margin: 0 auto;
+    border-radius: 20px;
 
 }
+
+.player-necklace {
+    width: 40px;
+    height: 40px;
+    border: 1px solid white;
+    margin: 0 auto;
+    border-radius: 20px;
+    margin-top: 5%;
+
+}
+
+.player-weapon-left {
+    width: 40px;
+    height: 40px;
+    border: 1px solid white;
+    margin-top: 5%;
+    border-radius: 20px;
+    display: inline-block;
+
+}
+
+.player-bracelet-left {
+    width: 40px;
+    height: 40px;
+    border: 1px solid white;
+    margin-top: 5%;
+    margin-left: 8%;
+    border-radius: 20px;
+    display: inline-block;
+   
+}
+
+.player-body-armor {
+    width: 40px;
+    height: 40px;
+    border: 1px solid white;
+    border-radius: 20px;
+    margin: 0 auto;
+    margin-top: -45px;
+ 
+}
+
+.player-bracelet-right {
+    width: 40px;
+    height: 40px;
+    border: 1px solid white;
+    margin-top: -40px;
+    border-radius: 20px;
+    margin-left: 70%;
+
+}
+
+.player-weapon-right {
+    width: 40px;
+    height: 40px;
+    border: 1px solid white;
+    margin-top: -40px;
+    margin-left: 90%;
+    border-radius: 20px;
+
+}
+
+.player-pants {
+    width: 40px;
+    height: 40px;
+    border: 1px solid white;
+    margin: 0 auto;
+    margin-top: 5%;
+
+    border-radius: 20px;
+}
+
+.player-boots {
+    width: 40px;
+    height: 40px;
+    border: 1px solid white;
+    margin: 0 auto;
+    border-radius: 20px;
+    margin-top: 5%;
+   
+}
+.player-backpack {
+    width: 40px;
+    height: 40px;
+    margin-left: 10%;
+    margin-top: -40px;
+    background-image: url(../../assets/img/backpack.jpg);
+    background-size: cover;
+    border-radius: 20px;
+    border: 1px solid white;
+}
+.player-stats {
+    margin-top: 20px;
+    color: #F2D170;
+    padding: 5px;
+    font-size: 17px;
+}
+
+.stat {
+    color: #F5F7F4;
+}
+
+.stat-text {
+    display: inline-block;
+    padding: 5px;
+}
+
+.stat-value {
+    display: inline-block;
+    padding: 5px;
+    color: #F2D170;
+}
+
+.stat-value-bonus {
+    display: inline-block;
+    padding: 5px;
+    color: #87755D;
+    font-size: 12px;
+}
+
+.stat-bar {
+    display: inline-block;
+    padding: 5px;
+}
+
+#fatigue-progress,
+#health-progress,
+#chakra-progress {
+    background-color: grey;
+    border-radius: 13px;
+    height: 10px;
+    width: 100px;
+    display: inline-block;
+}
+
+#fatigue-progress > div {
+    background-color: #F2D170;
+    border-radius: 10px;
+    width: 50%;
+    height: 10px;
+}
+
+#health-progress > div {
+    background-color: #F2D170;
+    border-radius: 10px;
+    width: 50%;
+    height: 10px;
+}
+
+#chakra-progress > div {
+    background-color: #F2D170;
+    border-radius: 10px;
+    width: 50%;
+    height: 10px;
+}
+

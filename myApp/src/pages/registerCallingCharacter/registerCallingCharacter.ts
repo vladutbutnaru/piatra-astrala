@@ -139,7 +139,7 @@ finishRegistration(){
  
      var data = 'email=' + this.user.email + '&password=' + this.user.password + '&city=' + this.user.oras + '&characterName=' + this.user.numeCaracter + '&phoneNumber=' + this.user.numarTelefon + '&chemare=' + this.chemare;
     
-    this.http.post("http://192.168.1.172:8080/players/v1/create", data, options)
+    this.http.post("http://localhost:8080/players/v1/create", data, options)
       .subscribe(data => {
         console.log(data['_body']);
             this.navCtrl.push(TabsPage, {email: this.user.email});

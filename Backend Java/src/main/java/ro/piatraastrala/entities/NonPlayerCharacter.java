@@ -11,6 +11,7 @@ public class NonPlayerCharacter {
     private String description;
     private double lat;
     private String title;
+    private double lng;
 
     public String getTitle() {
         return title;
@@ -27,8 +28,6 @@ public class NonPlayerCharacter {
     public void setLng(double lng) {
         this.lng = lng;
     }
-
-    private double lng;
 
     public int getId() {
         return id;

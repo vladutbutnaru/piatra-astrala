@@ -1,17 +1,68 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Profil jucator {{email}}</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Profil jucator</ion-title>
+    </ion-navbar>
 </ion-header>
-
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content padding class="profile-page">
+    <div class="player-basic-info">
+        <div class="player-name">{{userInfo.name}}</div>
+        <div class="player-level">Nivel {{userInfo.level}} - {{userInfo.calling}}</div>
+    </div>
+    <div class="player-calling-image"></div>
+    <div class="player-items">
+        <div class="player-helmet"></div>
+        <div class="player-necklace"></div>
+        <div class="player-weapon-left"></div>
+        <div class="player-bracelet-left"></div>
+        <div class="player-body-armor"></div>
+        <div class="player-bracelet-right"></div>
+        <div class="player-weapon-right"></div>
+        <div class="player-pants"></div>
+        <div class="player-boots"></div>
+        <div class="player-backpack"></div>
+    </div>
+    <div class="player-stats">Statusuri</div>
+    <div class="stat">
+        <div class="stat-text">Putere</div>
+        <div class="stat-value">{{userInfo.strength}}</div>
+        <div class="stat-value-bonus">+20</div>
+    </div>
+    <div class="stat">
+        <div class="stat-text">Inteligenta</div>
+        <div class="stat-value">{{userInfo.intelligence}}</div>
+        <div class="stat-value-bonus">+20</div>
+    </div>
+    <div class="stat">
+        <div class="stat-text">Agilitate</div>
+        <div class="stat-value">{{userInfo.agility}}</div>
+        <div class="stat-value-bonus">+20</div>
+    </div>
+    <div class="stat">
+        <div class="stat-text">Oboseala</div>
+        <div class="stat-value">{{userInfo.fatigue}}</div>
+        <div class="stat-value-bonus">+20</div>
+        <div class="stat-bar"><div id="fatigue-progress"><div></div></div></div>
+    </div>
+    <div class="stat">
+        <div class="stat-text">Spirit</div>
+        <div class="stat-value">{{userInfo.spirit}}</div>
+        <div class="stat-value-bonus">+20</div>
+    </div>
+    <div class="stat">
+        <div class="stat-text">Viata</div>
+        <div class="stat-value">{{userInfo.health}}</div>
+        <div class="stat-value-bonus">+20</div>
+         <div class="stat-bar"><div id="health-progress"><div></div></div></div>
+    </div>
+    <div class="stat">
+        <div class="stat-text">Chakra</div>
+        <div class="stat-value">{{userInfo.chakra}}</div>
+        <div class="stat-value-bonus">+20</div>
+          <div class="stat-bar"><div id="chakra-progress"><div></div></div></div>
+    </div>
+    <div class="stat">
+        <div class="stat-text">Influenta</div>
+        <div class="stat-value">{{userInfo.influence}}</div>
+        <div class="stat-value-bonus">+20</div>
+    </div>
 </ion-content>

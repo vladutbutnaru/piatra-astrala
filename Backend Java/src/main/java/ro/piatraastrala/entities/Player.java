@@ -21,8 +21,42 @@ public class Player {
     private ArrayList<HandAccessory> handAccessories = new ArrayList<>();
     private Helmet helmet;
     private NeckAccessory neck;
+    private ChestArmor chest;
+    private FeetArmor feet;
+    private PantsArmor pants;
+    private Shield shield;
 
-    
+    public Shield getShield() {
+        return shield;
+    }
+
+    public void setShield(Shield shield) {
+        this.shield = shield;
+    }
+
+    public PantsArmor getPants() {
+        return pants;
+    }
+
+    public void setPants(PantsArmor pants) {
+        this.pants = pants;
+    }
+
+    public FeetArmor getFeet() {
+        return feet;
+    }
+
+    public void setFeet(FeetArmor feet) {
+        this.feet = feet;
+    }
+
+    public ChestArmor getChest() {
+        return chest;
+    }
+
+    public void setChest(ChestArmor chest) {
+        this.chest = chest;
+    }
 
     public NeckAccessory getNeck() {
         return neck;

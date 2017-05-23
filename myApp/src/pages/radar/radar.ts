@@ -83,7 +83,7 @@ export class RadarPage {
 
     var data = 'lat=' + this.coordinates.lat + '&lng=' + this.coordinates.lng + '&meters=10000';
 
-    this.http.post("http://localhost:8080/npc/v1/get", data, options)
+    this.http.post("http://192.168.1.172:8080/npc/v1/get", data, options)
       .subscribe(data => {
         this.npcList = data['_body'];
         this.npcList = JSON.parse(this.npcList);
@@ -117,7 +117,7 @@ export class RadarPage {
 
     var data = 'npc=' + npcID + '&player=' + this.user.email;
     this.missionListFront = "";
-    this.http.post("http://localhost:8080/missions/v1/getfornpc", data, options)
+    this.http.post("http://192.168.1.172:8080/missions/v1/getfornpc", data, options)
       .subscribe(data => {
 
         this.missionList = data['_body'];
@@ -193,7 +193,7 @@ export class RadarPage {
 
     var data = 'mission=' + missionID + '&player=' + this.user.email;
     this.missionListFront = "";
-    this.http.post("http://localhost:8080/missions/v1/acceptmission", data, options)
+    this.http.post("http://192.168.1.172:8080/missions/v1/acceptmission", data, options)
       .subscribe(data => {
 
         let alert = this.alertController.create({
@@ -221,7 +221,7 @@ export class RadarPage {
 
     var data = 'mission=' + missionID + '&player=' + this.user.email;
     this.missionListFront = "";
-    this.http.post("http://localhost:8080/missions/v1/finishmission", data, options)
+    this.http.post("http://192.168.1.172:8080/missions/v1/finishmission", data, options)
       .subscribe(data => {
 
         let alert = this.alertController.create({

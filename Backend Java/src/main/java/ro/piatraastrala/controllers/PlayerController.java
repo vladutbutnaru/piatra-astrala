@@ -252,6 +252,42 @@ public class PlayerController {
 
                 }
 
+                //feet
+                if(rs.getInt(4)==5){
+                    FeetArmor feetArmor = FeetArmorController.getById(rs.getInt(3));
+
+                    feetArmor.setDiamonds(rs.getString(6));
+                    ps.getPlayer().setFeet(feetArmor);
+
+                }
+
+                //chest
+                if(rs.getInt(4)==6){
+                    ChestArmor chestArmor = ChestArmorController.getById(rs.getInt(3));
+
+                    chestArmor.setDiamonds(rs.getString(6));
+                    ps.getPlayer().setChest(chestArmor);
+
+                }
+
+                //pants
+                if(rs.getInt(4)==7){
+                    PantsArmor pantsArmor = PantsArmorController.getById(rs.getInt(3));
+
+                    pantsArmor.setDiamonds(rs.getString(6));
+                    ps.getPlayer().setPants(pantsArmor);
+
+                }
+
+                //shield
+                if(rs.getInt(4)==8){
+                    Shield shield = ShieldController.getById(rs.getInt(3));
+
+                    shield.setDiamonds(rs.getString(6));
+                    ps.getPlayer().setShield(shield);
+
+                }
+
             }
 
 

@@ -198,3 +198,123 @@
     height: 10px;
 }
 
+.itemPopover {
+ 
+    width: 220px;
+    height: 400px;
+  position: absolute;
+margin-left: auto;
+margin-right: auto;
+left: 0;
+right: 0;
+    background-color: #162216;
+
+    opacity: 0.9;
+    border: 2px dashed #87755D;
+    overflow:auto;
+}
+
+#item_icon{
+    margin-top:10px;
+    width: 40px;
+    height: 40px;
+    margin-left:10px;
+
+    background-image: url(../../assets/img/backpack.jpg);
+    background-size: cover;
+   
+    border: 2px solid white;
+
+
+}
+
+#item_name{
+    color:#F2D170;
+    margin-left:70px;
+    z-index:2;
+    margin-top:-35px;
+
+}
+#item_rarity{
+    color:#cb72d8;
+    margin-left:110px;
+    z-index:2;
+    font-size:13px;
+}
+
+#item_level{
+color:#F2D170;
+float:right;
+padding:10px;
+ font-size:13px;
+
+}
+#item_class{
+color:#F2D170;
+ font-size:13px;
+ padding:10px;
+
+}
+
+#item_description{
+color:#F2D170;
+padding:10px;
+font-size:13px;
+
+
+
+}
+
+#item_attributes{
+color: #cb72d8;
+padding:15px;
+font-size:13px;
+text-align:center;
+margin:0 auto;
+
+}
+.item_attribute_name{
+display:inline-block;
+
+}
+.item_attribute_value{
+display:inline-block;
+
+}
+
+
+#gems_text{
+color:#F2D170;
+padding:10px;
+
+
+}
+.gem{
+    padding:10px;
+
+}
+.gem_icon{
+    border:2px solid white;
+    width:40px;
+    height:40px;
+    padding:10px;
+    background-color:grey;
+}
+.gem_name{
+ color:#F2D170;
+ margin-left:50px;
+  z-index:2;
+    margin-top:-45px;
+    font-size:13px;
+
+}
+.gem_effect{
+color:#F2D170;
+  font-size:10px;
+margin-left:50px;
+}
+
+
+
+
+

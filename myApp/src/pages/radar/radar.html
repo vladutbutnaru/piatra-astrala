@@ -8,11 +8,11 @@
 <ion-content padding class="radar-page">
     <div class="zone-type">Friendly</div>
     <div class="distanceCircle">
-        <div class="distanceCircleDistance">500m</div>
+        <div class="distanceCircleDistance slideInSmooth">500m</div>
     </div>
 
     <div class="closeCircle">
-        <div class="closeCircleDistance">100m</div>
+        <div class="closeCircleDistance slideInSmooth">100m</div>
         <div class="npcContainer" [innerHtml]="npcCloseFront | keepHtml"></div>
 
 
@@ -23,7 +23,7 @@
 
 
 
-        <div class="npcMissionPopover" id="npcMissionPopover" *ngIf="missionOpen">
+        <div class="npcMissionPopover slideInSmooth" id="npcMissionPopover" *ngIf="missionOpen">
             <div class="npcImage" style="assets/img/npc_mission.png"></div>
             <div class="npcName">{{npcInformation.name}}</div>
             <div class="npcTitle">{{npcInformation.title}}</div>

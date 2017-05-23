@@ -1,3 +1,4 @@
+
 .radar-page{
      background-color: #3A4F4A;
     
@@ -53,12 +54,13 @@
     overflow: auto;
     width: 220px;
     height: 350px;
-    border: 1px dashed black;
+
     position: absolute;
     margin-top: -90%;
     background-color: #162216;
     margin-left: 20%;
     opacity: 0.8;
+    border: 2px dashed #87755D;
 }
 .npcName {
     text-align: center;
@@ -104,3 +106,45 @@
     border-radius: 50%;
     background-size: cover;
 }
+
+
+
+
+
+@-webkit-keyframes slideIn {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@-webkit-keyframes slideInSmooth {
+  0% {
+    -webkit-transform: translate3d(-100%,0,0);
+  }
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+
+
+.slide-in{
+   -webkit-animation: slideInSmooth ease-in 1; 
+  animation: slideInSmooth ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 750ms;
+  animation-duration: 750ms;
+}
+
+
+
+
+
+
+
+
+
+

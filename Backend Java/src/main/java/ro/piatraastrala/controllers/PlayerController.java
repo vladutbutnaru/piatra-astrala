@@ -2,8 +2,7 @@ package ro.piatraastrala.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ro.piatraastrala.entities.Player;
-import ro.piatraastrala.entities.PlayerStats;
+import ro.piatraastrala.entities.*;
 import ro.piatraastrala.utils.DBConnection;
 import ro.piatraastrala.utils.PlayerStatsFactory;
 
@@ -203,7 +202,61 @@ public class PlayerController {
               Player p = getById(playerId);
               ps.setCalling(p.getCalling());
               ps.setCharacterName(p.getCharacterName());
+              ps.setPlayer(p);
+
+
+
             }
+            stmt = conn.prepareStatement("SELECT * FROM Player_Equipped WHERE ID_Player = ?");
+            stmt.setInt(1, playerId);
+
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()){
+                //weapon
+            if(rs.getInt(4)==1){
+                Weapon weaponEquipped = WeaponController.getById(rs.getInt(3));
+                weaponEquipped.setCurrentDurability(rs.getInt(5));
+                weaponEquipped.setDiamonds(rs.getString(6));
+                ps.getPlayer().setWeapon(weaponEquipped);
+
+            }
+            //hand accessory
+
+                if(rs.getInt(4)==2){
+                    HandAccessory handAccessoryEquipped = HandAccessoryController.getById(rs.getInt(3));
+
+                    handAccessoryEquipped.setDiamonds(rs.getString(6));
+                    ps.getPlayer().getHandAccessories().add(handAccessoryEquipped);
+
+                }
+
+                //helmet
+
+                if(rs.getInt(4)==3){
+                    Helmet helmetEquipped = HelmetController.getById(rs.getInt(3));
+
+                    helmetEquipped.setDiamonds(rs.getString(6));
+                    ps.getPlayer().setHelmet(helmetEquipped);
+
+                }
+
+                //neck
+
+                if(rs.getInt(4)==4){
+                    NeckAccessory neckEquipped = NeckAccessoryController.getById(rs.getInt(3));
+
+                    neckEquipped.setDiamonds(rs.getString(6));
+                    ps.getPlayer().setNeck(neckEquipped);
+
+                }
+
+            }
+
+
+
+
 
         } catch (Exception e) {
             logger.error(e.getMessage());

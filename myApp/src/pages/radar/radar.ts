@@ -94,7 +94,7 @@ export class RadarPage {
           var marginTop = Math.floor(Math.random() * 3) + 1;
           var marginLeft = Math.floor(Math.random() * 12) + 6;
 
-          this.npcCloseFront += '<div id="npc_' + this.npcList[i].id + '" class="npc" style="margin-top:' + marginTop + '%; margin-left:' + marginLeft + 'px;background-image:url(assets/img/npc_mission.png);"></div>';
+          this.npcCloseFront += '<div id="npc_' + this.npcList[i].id + '" class="npc bounceInDown" style="margin-top:' + marginTop + '%; margin-left:' + marginLeft + 'px;background-image:url(assets/img/npc_mission.png);"></div>';
 
         }
 

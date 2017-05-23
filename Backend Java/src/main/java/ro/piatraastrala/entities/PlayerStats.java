@@ -29,6 +29,15 @@ public class PlayerStats {
     private Timestamp fatigueUpdateDate;
     private String characterName;
     private String calling;
+    private Player player;
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player p) {
+        this.player = p;
+    }
 
     public String getCharacterName() {
         return characterName;

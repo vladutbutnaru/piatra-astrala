@@ -290,6 +290,8 @@ public class PlayerController {
 
             }
 
+           ps.getPlayer().setBackpack(BackpackController.getPlayerBackpack(ps.getPlayer().getId()));
+
 
 
 

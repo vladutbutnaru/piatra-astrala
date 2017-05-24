@@ -55,7 +55,7 @@ export class MissionsPage {
         var data = 'player=' + this.email;
 
 
-        this.http.post("http://192.168.1.172:8080/missions/v1/getforplayer", data, options)
+        this.http.post("http://localhost:8080/missions/v1/getforplayer", data, options)
             .subscribe(data => {
 
                 this.allMissions = data['_body'];

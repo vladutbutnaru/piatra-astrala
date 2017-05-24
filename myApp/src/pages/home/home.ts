@@ -186,7 +186,7 @@ export class HomePage {
   };
 
   itemAttributes: string;
-
+  inventoryItems: string;
   constructor(public navCtrl: NavController, public params: NavParams, private geolocation: Geolocation, public http: Http) {
     this.email = this.params.data;
     console.log("Primit in Home: " + this.email);
@@ -203,7 +203,7 @@ export class HomePage {
 
     var data = 'email=' + this.email;
 
-    this.http.post("http://192.168.1.172:8080/players/v1/getstats", data, options)
+    this.http.post("http://localhost:8080/players/v1/getstats", data, options)
       .subscribe(data => {
 
         var response = JSON.parse(data['_body']);
@@ -247,6 +247,9 @@ export class HomePage {
 
         //shield
         this.userInfo.shield = response.player.shield;
+
+        //backpack
+        document.getElementById("player-backpack").style.backgroundImage = "url(assets/img/" + response.player.backpack.icon + ")";
 
         document.getElementById("fatigue-bar").style.width = response.fatigue + "%";
         var healthP = 100 * (response.currentHealth / response.maxHealth);
@@ -675,6 +678,20 @@ export class HomePage {
         }
 
 
+
+
+
+
+        //get inventory items
+        this.inventoryItems = '<div class="inventory_row">';
+        for(let a = 0 ; a<response.player.backpack.weapons.length; a++){
+          if(a%4==0 && a>0){
+            this.inventoryItems +='</div><div class="inventory_row">'
+          }
+          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/'+response.player.backpack.weapons[a].icon+')"></div>';
+
+        }
+
       }, error => {
         console.log(error);// Error getting the data
       });
@@ -685,6 +702,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     document.getElementById('itemPopover').style.visibility = 'hidden';
+     document.getElementById('inventoryPopover').style.visibility = 'hidden';
     this.addSelectorHandler();
   }
   addSelectorHandler() {
@@ -731,9 +749,13 @@ export class HomePage {
           this.showItemInfoPopover(9);
           break;
 
+        case 'player-backpack':
 
+          this.showInventory();
+          break;
         default:
           document.getElementById('itemPopover').style.visibility = 'hidden';
+           document.getElementById('inventoryPopover').style.visibility = 'hidden';
 
       }
 
@@ -750,7 +772,7 @@ export class HomePage {
   showItemInfoPopover(item: number) {
     var icon = "";
     var rarity = 0;
-    if (item == 1) {
+    if (item == 1 && this.userInfo.helmet != null) {
       document.getElementById('item_name').innerHTML = this.userInfo.helmet.name;
       icon = this.userInfo.helmet.icon;
       rarity = this.userInfo.helmet.rarity;
@@ -764,9 +786,9 @@ export class HomePage {
       document.getElementById('weight_value').innerHTML = "" + this.userInfo.helmet.weight;
       document.getElementById('melee_defence_value').innerHTML = "+ " + this.userInfo.helmet.meleeDefense;
       document.getElementById('spell_defence_value').innerHTML = "+ " + this.userInfo.helmet.spellDefense;
-
+      document.getElementById('itemPopover').style.visibility = '';
     }
-        if (item == 2) {
+    if (item == 2 && this.userInfo.neck != null) {
       document.getElementById('item_name').innerHTML = this.userInfo.neck.name;
       icon = this.userInfo.neck.icon;
       rarity = this.userInfo.neck.rarity;
@@ -780,9 +802,134 @@ export class HomePage {
       document.getElementById('weight_value').innerHTML = "" + this.userInfo.neck.weight;
       document.getElementById('melee_defence_value').innerHTML = "+ " + this.userInfo.neck.meleeDefense;
       document.getElementById('spell_defence_value').innerHTML = "+ " + this.userInfo.neck.spellDefense;
-
+      document.getElementById('itemPopover').style.visibility = '';
     }
-    document.getElementById('itemPopover').style.visibility = '';
+
+    if (item == 3 && this.userInfo.weapon != null) {
+      document.getElementById('item_name').innerHTML = this.userInfo.weapon.name;
+      icon = this.userInfo.weapon.icon;
+      rarity = this.userInfo.weapon.rarity;
+      document.getElementById('item_level').innerHTML = "Nivel " + this.userInfo.weapon.level;
+      document.getElementById('item_description').innerHTML = this.userInfo.weapon.description;
+      document.getElementById('item_class').innerHTML = this.userInfo.weapon.calling;
+      document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.weapon.strength;
+      document.getElementById('attack_speed_value').innerHTML = "+ " + this.userInfo.weapon.attackSpeed;
+      document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.weapon.spirit;
+      document.getElementById('durability_value').innerHTML = "+ " + this.userInfo.weapon.currentDurability;
+      document.getElementById('weight_value').innerHTML = "" + this.userInfo.weapon.weight;
+      document.getElementById('melee_defence_value').innerHTML = "0";
+      document.getElementById('spell_defence_value').innerHTML = "0";
+      document.getElementById('itemPopover').style.visibility = '';
+    }
+
+    if (item == 4 && this.userInfo.shield != null) {
+      document.getElementById('item_name').innerHTML = this.userInfo.shield.name;
+      icon = this.userInfo.shield.icon;
+      rarity = this.userInfo.shield.rarity;
+      document.getElementById('item_level').innerHTML = "Nivel " + this.userInfo.shield.level;
+      document.getElementById('item_description').innerHTML = this.userInfo.shield.description;
+      document.getElementById('item_class').innerHTML = this.userInfo.shield.calling;
+      document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.shield.strength;
+      document.getElementById('attack_speed_value').innerHTML = "+ 0";
+      document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.shield.spirit;
+      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('weight_value').innerHTML = "" + this.userInfo.shield.weight;
+      document.getElementById('melee_defence_value').innerHTML = "+ " + this.userInfo.shield.meleeDefense;
+      document.getElementById('spell_defence_value').innerHTML = "+ " + this.userInfo.shield.spellDefense;
+      document.getElementById('itemPopover').style.visibility = '';
+    }
+
+    if (item == 5 && this.userInfo.handAccessoriesOne != null) {
+      document.getElementById('item_name').innerHTML = this.userInfo.handAccessoriesOne.name;
+      icon = this.userInfo.handAccessoriesOne.icon;
+      rarity = this.userInfo.handAccessoriesOne.rarity;
+      document.getElementById('item_level').innerHTML = "Nivel " + this.userInfo.handAccessoriesOne.level;
+      document.getElementById('item_description').innerHTML = this.userInfo.handAccessoriesOne.description;
+      document.getElementById('item_class').innerHTML = this.userInfo.handAccessoriesOne.calling;
+      document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.handAccessoriesOne.strength;
+      document.getElementById('attack_speed_value').innerHTML = "+ 0";
+      document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.handAccessoriesOne.spirit;
+      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('weight_value').innerHTML = "" + this.userInfo.handAccessoriesOne.weight;
+      document.getElementById('melee_defence_value').innerHTML = "0";
+      document.getElementById('spell_defence_value').innerHTML = "0";
+      document.getElementById('itemPopover').style.visibility = '';
+    }
+
+    if (item == 6 && this.userInfo.handAccessoriesTwo != null) {
+      document.getElementById('item_name').innerHTML = this.userInfo.handAccessoriesTwo.name;
+      icon = this.userInfo.handAccessoriesTwo.icon;
+      rarity = this.userInfo.handAccessoriesTwo.rarity;
+      document.getElementById('item_level').innerHTML = "Nivel " + this.userInfo.handAccessoriesTwo.level;
+      document.getElementById('item_description').innerHTML = this.userInfo.handAccessoriesTwo.description;
+      document.getElementById('item_class').innerHTML = this.userInfo.handAccessoriesTwo.calling;
+      document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.handAccessoriesTwo.strength;
+      document.getElementById('attack_speed_value').innerHTML = "+ 0";
+      document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.handAccessoriesTwo.spirit;
+      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('weight_value').innerHTML = "" + this.userInfo.handAccessoriesTwo.weight;
+      document.getElementById('melee_defence_value').innerHTML = "0";
+      document.getElementById('spell_defence_value').innerHTML = "0";
+      document.getElementById('itemPopover').style.visibility = '';
+    }
+
+    if (item == 7 && this.userInfo.chest != null) {
+      document.getElementById('item_name').innerHTML = this.userInfo.chest.name;
+      icon = this.userInfo.chest.icon;
+      rarity = this.userInfo.chest.rarity;
+      document.getElementById('item_level').innerHTML = "Nivel " + this.userInfo.chest.level;
+      document.getElementById('item_description').innerHTML = this.userInfo.chest.description;
+      document.getElementById('item_class').innerHTML = this.userInfo.chest.calling;
+      document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.chest.strength;
+      document.getElementById('attack_speed_value').innerHTML = "+ 0";
+      document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.chest.spirit;
+      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('weight_value').innerHTML = "" + this.userInfo.chest.weight;
+      document.getElementById('melee_defence_value').innerHTML = "0";
+      document.getElementById('spell_defence_value').innerHTML = "0";
+      document.getElementById('melee_defence_value').innerHTML = "+ " + this.userInfo.chest.meleeDefense;
+      document.getElementById('spell_defence_value').innerHTML = "+ " + this.userInfo.chest.spellDefense;
+      document.getElementById('itemPopover').style.visibility = '';
+    }
+
+    if (item == 8 && this.userInfo.pants != null) {
+      document.getElementById('item_name').innerHTML = this.userInfo.pants.name;
+      icon = this.userInfo.pants.icon;
+      rarity = this.userInfo.pants.rarity;
+      document.getElementById('item_level').innerHTML = "Nivel " + this.userInfo.pants.level;
+      document.getElementById('item_description').innerHTML = this.userInfo.pants.description;
+      document.getElementById('item_class').innerHTML = this.userInfo.pants.calling;
+      document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.pants.strength;
+      document.getElementById('attack_speed_value').innerHTML = "+ 0";
+      document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.pants.spirit;
+      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('weight_value').innerHTML = "" + this.userInfo.pants.weight;
+      document.getElementById('melee_defence_value').innerHTML = "0";
+      document.getElementById('spell_defence_value').innerHTML = "0";
+      document.getElementById('melee_defence_value').innerHTML = "+ " + this.userInfo.pants.meleeDefense;
+      document.getElementById('spell_defence_value').innerHTML = "+ " + this.userInfo.pants.spellDefense;
+      document.getElementById('itemPopover').style.visibility = '';
+    }
+
+    if (item == 9 && this.userInfo.feet != null) {
+      document.getElementById('item_name').innerHTML = this.userInfo.feet.name;
+      icon = this.userInfo.feet.icon;
+      rarity = this.userInfo.feet.rarity;
+      document.getElementById('item_level').innerHTML = "Nivel " + this.userInfo.feet.level;
+      document.getElementById('item_description').innerHTML = this.userInfo.feet.description;
+      document.getElementById('item_class').innerHTML = this.userInfo.feet.calling;
+      document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.feet.strength;
+      document.getElementById('attack_speed_value').innerHTML = "+ 0";
+      document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.feet.spirit;
+      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('weight_value').innerHTML = "" + this.userInfo.feet.weight;
+      document.getElementById('melee_defence_value').innerHTML = "0";
+      document.getElementById('spell_defence_value').innerHTML = "0";
+      document.getElementById('melee_defence_value').innerHTML = "+ " + this.userInfo.feet.meleeDefense;
+      document.getElementById('spell_defence_value').innerHTML = "+ " + this.userInfo.feet.spellDefense;
+      document.getElementById('itemPopover').style.visibility = '';
+    }
+
     document.getElementById('item_icon').style.backgroundImage = "url(assets/img/" + icon + ")";
 
     //rarity check
@@ -830,7 +977,11 @@ export class HomePage {
 
   }
 
+showInventory(){
 
+  document.getElementById('inventoryPopover').style.visibility = '';
+
+}
 
 
 

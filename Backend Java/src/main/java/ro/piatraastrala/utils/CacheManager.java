@@ -15,7 +15,10 @@ public class CacheManager {
     private static ArrayList<Mission> allMissions;
     private static ArrayList<Backpack> allBackpacks;
     private static ArrayList<Item> allItems;
-    private static ArrayList<Player> players;
+    private static ArrayList<Player> allPlayers;
+
+
+
 
     public static void refreshData(){
 
@@ -67,11 +70,11 @@ public class CacheManager {
         CacheManager.allItems = allItems;
     }
 
-    public static ArrayList<Player> getPlayers() {
-        return players;
+    public static ArrayList<Player> getAllPlayers() {
+        return allPlayers;
     }
 
-    public static void setPlayers(ArrayList<Player> players) {
-        CacheManager.players = players;
+    public static void setAllPlayers(ArrayList<Player> players) {
+        CacheManager.allPlayers = players;
     }
 }

@@ -26,9 +26,21 @@ public class Item {
     private int currentDurability;
     private int chakraRegen;
     private int healthRegen;
+    private int fatigueRegen;
+
+
     private int extraHealth;
     private int extraChakra;
 
+
+
+    public int getFatigueRegen() {
+        return fatigueRegen;
+    }
+
+    public void setFatigueRegen(int fatigueRegen) {
+        this.fatigueRegen = fatigueRegen;
+    }
 
     public int getId() {
         return id;

@@ -684,13 +684,73 @@ export class HomePage {
 
         //get inventory items
         this.inventoryItems = '<div class="inventory_row">';
-        for(let a = 0 ; a<response.player.backpack.weapons.length; a++){
-          if(a%4==0 && a>0){
-            this.inventoryItems +='</div><div class="inventory_row">'
+        var x = 0;
+        for (let a = 0; a < response.player.backpack.weapons.length; a++) {
+          if (x % 4 == 0 && x > 0) {
+            this.inventoryItems += '</div><div class="inventory_row">'
           }
-          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/'+response.player.backpack.weapons[a].icon+')"></div>';
-
+          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.weapons[a].icon + ')"></div>';
+          x++;
         }
+
+        for (let a = 0; a < response.player.backpack.chestArmors.length; a++) {
+          if (x % 4 == 0 && x > 0) {
+            this.inventoryItems += '</div><div class="inventory_row">'
+          }
+          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.chestArmors[a].icon + ')"></div>';
+          x++;
+        }
+
+        for (let a = 0; a < response.player.backpack.feetArmors.length; a++) {
+          if (x % 4 == 0 && x > 0) {
+            this.inventoryItems += '</div><div class="inventory_row">'
+          }
+          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.feetArmors[a].icon + ')"></div>';
+          x++;
+        }
+
+        for (let a = 0; a < response.player.backpack.helmets.length; a++) {
+          if (x % 4 == 0 && x > 0) {
+            this.inventoryItems += '</div><div class="inventory_row">'
+          }
+          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.helmets[a].icon + ')"></div>';
+          x++;
+        }
+
+        for (let a = 0; a < response.player.backpack.neckAccessories.length; a++) {
+          if (x % 4 == 0 && x > 0) {
+            this.inventoryItems += '</div><div class="inventory_row">'
+          }
+          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.neckAccessories[a].icon + ')"></div>';
+          x++;
+        }
+
+        for (let a = 0; a < response.player.backpack.pantsArmors.length; a++) {
+          if (x % 4 == 0 && x > 0) {
+            this.inventoryItems += '</div><div class="inventory_row">'
+          }
+          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.pantsArmors[a].icon + ')"></div>';
+          x++;
+        }
+
+
+        for (let a = 0; a < response.player.backpack.shields.length; a++) {
+          if (x % 4 == 0 && x > 0) {
+            this.inventoryItems += '</div><div class="inventory_row">'
+          }
+          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.shields[a].icon + ')"></div>';
+          x++;
+        }
+
+for (let a = 0; a < response.player.backpack.handAccessories.length; a++) {
+          if (x % 4 == 0 && x > 0) {
+            this.inventoryItems += '</div><div class="inventory_row">'
+          }
+          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.handAccessories[a].icon + ')"></div>';
+          x++;
+        }
+  
+
 
       }, error => {
         console.log(error);// Error getting the data
@@ -702,7 +762,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     document.getElementById('itemPopover').style.visibility = 'hidden';
-     document.getElementById('inventoryPopover').style.visibility = 'hidden';
+    document.getElementById('inventoryPopover').style.visibility = 'hidden';
     this.addSelectorHandler();
   }
   addSelectorHandler() {
@@ -755,7 +815,7 @@ export class HomePage {
           break;
         default:
           document.getElementById('itemPopover').style.visibility = 'hidden';
-           document.getElementById('inventoryPopover').style.visibility = 'hidden';
+          document.getElementById('inventoryPopover').style.visibility = 'hidden';
 
       }
 
@@ -977,11 +1037,11 @@ export class HomePage {
 
   }
 
-showInventory(){
+  showInventory() {
 
-  document.getElementById('inventoryPopover').style.visibility = '';
+    document.getElementById('inventoryPopover').style.visibility = '';
 
-}
+  }
 
 
 

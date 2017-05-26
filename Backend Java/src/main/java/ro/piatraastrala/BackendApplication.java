@@ -1,5 +1,7 @@
 package ro.piatraastrala;
 
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
@@ -7,17 +9,22 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.piatraastrala.controllers.MissionController;
-import ro.piatraastrala.controllers.NonPlayerCharacterController;
 import ro.piatraastrala.controllers.PlayerController;
 import ro.piatraastrala.entities.Player;
+import ro.piatraastrala.utils.CacheManager;
+import ro.piatraastrala.utils.DBSyncJob;
 
 @SpringBootApplication
 @RestController
 @CrossOrigin
 public class BackendApplication {
-
+    public static boolean jobStarted = false;
     public static void main(String[] args) {
+        //Create instance of factory
+
         SpringApplication.run(BackendApplication.class, args);
+
+
     }
 
 
@@ -26,6 +33,38 @@ public class BackendApplication {
 
 
         return "Piatra Astrala Back End 0.1 is UP! ";
+
+
+    }
+
+    @RequestMapping("/startDBSync")
+    public String startDBSync(){
+        if(jobStarted){
+            return "Job Already Started";
+
+        }
+        else {
+            try {
+                Trigger trigger = TriggerBuilder
+                        .newTrigger()
+                        .withIdentity("DB Sync Trigger", "Sync Group 1")
+                        .withSchedule(
+                                SimpleScheduleBuilder.simpleSchedule()
+                                        .withIntervalInSeconds(10).repeatForever())
+                        .build();
+                JobDetail job = JobBuilder.newJob(DBSyncJob.class)
+                        .withIdentity("DB Sync Job", "Sync Group 1").build();
+                Scheduler scheduler = new StdSchedulerFactory().getScheduler();
+                scheduler.start();
+                scheduler.scheduleJob(job, trigger);
+
+            } catch (Exception e) {
+                System.out.println("Error starting CRON JOB Refresh Data");
+
+            }
+            jobStarted = true;
+        return "DB Sync Started";
+        }
 
 
     }
@@ -69,7 +108,7 @@ public class BackendApplication {
 
     @RequestMapping(value = "/players/v1/login", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ResponseEntity loginPlayer(@RequestParam(value = "email", required = true) String email,
-                                       @RequestParam(value = "password", required = true) String password
+                                      @RequestParam(value = "password", required = true) String password
     ) {
 
         int id = PlayerController.verifyLogin(email, password);
@@ -89,13 +128,10 @@ public class BackendApplication {
 
     ) {
 
-       int userId = PlayerController.getIDByEmail(email);
+        int userId = PlayerController.getIDByEmail(email);
 
 
-
-            return ResponseEntity.status(HttpStatus.OK).body(PlayerController.getPlayerStats(userId));
-
-
+        return ResponseEntity.status(HttpStatus.OK).body(PlayerController.getPlayerStats(userId));
 
 
     }
@@ -109,7 +145,7 @@ public class BackendApplication {
     ) {
 
 
-        return ResponseEntity.status(HttpStatus.OK).body(NonPlayerCharacterController.getNPCsNeaby(lat, lng, meters));
+        return ResponseEntity.status(HttpStatus.OK).body(CacheManager.getNPCsNeaby(lat, lng, meters));
 
 
     }

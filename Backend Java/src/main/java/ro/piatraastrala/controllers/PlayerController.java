@@ -7,6 +7,7 @@ import ro.piatraastrala.utils.DBConnection;
 import ro.piatraastrala.utils.PlayerStatsFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Created by Vlad Butnaru on 5/16/2017.
@@ -15,6 +16,44 @@ public class PlayerController {
     public static Logger logger = LoggerFactory.getLogger(PlayerController.class);
     public static Connection conn = (Connection) DBConnection.getConnection();
 
+
+    public static ArrayList<Player> getAllPlayers(){
+        ArrayList<Player> players = new ArrayList<Player>();
+
+
+        PreparedStatement stmt;
+        ResultSet rs;
+
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM Players");
+
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Player p = new Player();
+                p.setId(rs.getInt(1));
+                p.setCalling(rs.getString(7));
+                p.setCharacterName(rs.getString(5));
+                p.setMissions(MissionController.getUserMissions(p.getId()));
+
+                players.add(p);
+
+            }
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+
+
+        }
+
+
+
+        return players;
+
+
+
+    }
 
     public static int createPlayer(Player p) {
 
@@ -159,6 +198,31 @@ public class PlayerController {
 
         }
         return 0;
+
+
+    }
+
+    public static ArrayList<PlayerStats> getAllPlayerStats(){
+        ArrayList<PlayerStats> stats =new ArrayList<>();
+        for(Player p : getAllPlayers()){
+            PlayerStats ps = getPlayerStats(p.getId());
+            stats.add(ps);
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        return stats;
+
 
 
     }

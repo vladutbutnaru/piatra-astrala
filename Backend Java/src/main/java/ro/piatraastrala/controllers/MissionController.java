@@ -54,6 +54,8 @@ public class MissionController {
 
     }
 
+
+
     public static ArrayList<Mission> getMissionsForNpc(int npcId, int playerID) {
         ArrayList<Mission> missions = new ArrayList<Mission>();
 

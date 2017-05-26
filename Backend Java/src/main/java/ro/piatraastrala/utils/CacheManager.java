@@ -1,10 +1,9 @@
 package ro.piatraastrala.utils;
 
+import ro.piatraastrala.controllers.ItemController;
+import ro.piatraastrala.controllers.NonPlayerCharacterController;
 import ro.piatraastrala.controllers.PlayerController;
-import ro.piatraastrala.entities.Backpack;
-import ro.piatraastrala.entities.Item;
-import ro.piatraastrala.entities.Mission;
-import ro.piatraastrala.entities.Player;
+import ro.piatraastrala.entities.*;
 
 import java.util.ArrayList;
 
@@ -16,35 +15,29 @@ public class CacheManager {
     private static ArrayList<Backpack> allBackpacks;
     private static ArrayList<Item> allItems;
     private static ArrayList<Player> allPlayers;
-
-
+    private static ArrayList<PlayerStats> allPlayerStats;
+    private static ArrayList<NonPlayerCharacter> allNPC;
 
 
     public static void refreshData(){
-
-
-
-
-
-
-
+        allPlayers = PlayerController.getAllPlayers();
+       allPlayerStats = PlayerController.getAllPlayerStats();
+       allItems = ItemController.getAllItems();
+        allNPC = NonPlayerCharacterController.getAll();
 
 
     }
 
+    public static ArrayList<NonPlayerCharacter> getNPCsNeaby(double lat, double lng, int metersClose) {
+        ArrayList<NonPlayerCharacter> nearby = new ArrayList<>();
+        for (NonPlayerCharacter npc : allNPC) {
+            if (NonPlayerCharacterController.distance(npc.getLat(), npc.getLng(), lat, lng, 'K') < metersClose / 1000.0) {
+                nearby.add(npc);
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+        return nearby;
+    }
 
     public static ArrayList<Mission> getAllMissions() {
         return allMissions;

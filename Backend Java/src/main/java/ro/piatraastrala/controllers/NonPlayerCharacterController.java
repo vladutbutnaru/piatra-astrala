@@ -3,7 +3,10 @@ package ro.piatraastrala.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ro.piatraastrala.entities.NonPlayerCharacter;
+import ro.piatraastrala.entities.Player;
+import ro.piatraastrala.utils.CacheManager;
 import ro.piatraastrala.utils.DBConnection;
+import sun.misc.Cache;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +19,11 @@ import java.util.ArrayList;
 public class NonPlayerCharacterController {
     public static Logger logger = LoggerFactory.getLogger(PlayerController.class);
     public static Connection conn = (Connection) DBConnection.getConnection();
+
+
+
+
+
 
     public static ArrayList<NonPlayerCharacter> getNPCsNeaby(double lat, double lng, int metersClose) {
         ArrayList<NonPlayerCharacter> characters = new ArrayList<NonPlayerCharacter>();
@@ -57,7 +65,7 @@ public class NonPlayerCharacterController {
     }
 
 
-    private static double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
+    public static double distance(double lat1, double lon1, double lat2, double lon2, char unit) {
         double theta = lon1 - lon2;
         double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
         dist = Math.acos(dist);
@@ -121,6 +129,53 @@ public class NonPlayerCharacterController {
 
 
         return npc;
+
+
+    }
+
+
+
+
+    public static ArrayList<NonPlayerCharacter> getAll(){
+        ArrayList<NonPlayerCharacter> npcList = new ArrayList<NonPlayerCharacter>();
+
+
+
+        PreparedStatement stmt;
+        ResultSet rs;
+
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM NonPlayerCharacters");
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                NonPlayerCharacter npc = new NonPlayerCharacter();
+                npc.setId(rs.getInt(1));
+                npc.setName(rs.getString(2));
+                npc.setIcon(rs.getString(3));
+                npc.setDescription(rs.getString(4));
+                npc.setLat(rs.getDouble(5));
+                npc.setLng(rs.getDouble(6));
+                npc.setTitle(rs.getString(7));
+                for(Player p : CacheManager.getAllPlayers())
+                  npc.setMissions(MissionController.getMissionsForNpc(npc.getId(), p.getId()));
+
+                npcList.add(npc);
+
+            }
+
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+
+
+        }
+
+
+
+
+        return npcList;
 
 
     }

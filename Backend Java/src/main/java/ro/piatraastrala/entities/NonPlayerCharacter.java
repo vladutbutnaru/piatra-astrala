@@ -1,5 +1,7 @@
 package ro.piatraastrala.entities;
 
+import java.util.ArrayList;
+
 /**
  * Created by Vlad Butnaru on 5/17/2017.
  */
@@ -12,6 +14,17 @@ public class NonPlayerCharacter {
     private double lat;
     private String title;
     private double lng;
+
+    private ArrayList<Mission> missions;
+
+
+    public ArrayList<Mission> getMissions() {
+        return missions;
+    }
+
+    public void setMissions(ArrayList<Mission> missions) {
+        this.missions = missions;
+    }
 
     public String getTitle() {
         return title;

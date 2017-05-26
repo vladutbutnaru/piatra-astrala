@@ -25,6 +25,15 @@ public class Player {
     private FeetArmor feet;
     private PantsArmor pants;
     private Shield shield;
+    private ArrayList<MissionWithStatus> missions;
+
+    public ArrayList<MissionWithStatus> getMissions() {
+        return missions;
+    }
+
+    public void setMissions(ArrayList<MissionWithStatus> missions) {
+        this.missions = missions;
+    }
 
     public Shield getShield() {
         return shield;

@@ -36,8 +36,14 @@ public class PlayerController {
                 p.setCalling(rs.getString(7));
                 p.setCharacterName(rs.getString(5));
                 p.setMissions(MissionController.getUserMissions(p.getId()));
+                p.setEmail(rs.getString(3));
+                p.setPassword(rs.getString(2));
+                p.setPlayerStats(getPlayerStats(p.getId()));
+                p = getPlayerEquippedItems(p);
+                p.setMissions(MissionController.getUserMissions(p.getId()));
 
                 players.add(p);
+
 
             }
 
@@ -52,6 +58,104 @@ public class PlayerController {
         return players;
 
 
+
+    }
+
+    public static Player getPlayerEquippedItems(Player player){
+        try {
+            PreparedStatement stmt;
+            ResultSet rs;
+            stmt = conn.prepareStatement("SELECT * FROM Player_Equipped WHERE ID_Player = ?");
+            stmt.setInt(1, player.getId());
+
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                //weapon
+                if (rs.getInt(4) == 1) {
+                    Item weaponEquipped = ItemController.getById(rs.getInt(3));
+                    weaponEquipped.setCurrentDurability(rs.getInt(5));
+                    weaponEquipped.setDiamonds(rs.getString(6));
+                  player.setWeapon(weaponEquipped);
+
+                }
+                //hand accessory
+
+                if (rs.getInt(4) == 2) {
+                    Item handAccessoryEquipped = ItemController.getById(rs.getInt(3));
+
+                    handAccessoryEquipped.setDiamonds(rs.getString(6));
+                    player.getHandAccessories().add(handAccessoryEquipped);
+
+                }
+
+                //helmet
+
+                if (rs.getInt(4) == 3) {
+                    Item helmetEquipped = ItemController.getById(rs.getInt(3));
+
+                    helmetEquipped.setDiamonds(rs.getString(6));
+                    player.setHelmet(helmetEquipped);
+
+                }
+
+                //neck
+
+                if (rs.getInt(4) == 4) {
+                    Item neckEquipped = ItemController.getById(rs.getInt(3));
+
+                    neckEquipped.setDiamonds(rs.getString(6));
+                    player.setNeck(neckEquipped);
+
+                }
+
+                //feet
+                if (rs.getInt(4) == 5) {
+                    Item feetArmor = ItemController.getById(rs.getInt(3));
+
+                    feetArmor.setDiamonds(rs.getString(6));
+                    player.setFeet(feetArmor);
+
+                }
+
+                //chest
+                if (rs.getInt(4) == 6) {
+                    Item chestArmor = ItemController.getById(rs.getInt(3));
+
+                    chestArmor.setDiamonds(rs.getString(6));
+                    player.setChest(chestArmor);
+
+                }
+
+                //pants
+                if (rs.getInt(4) == 7) {
+                    Item pantsArmor = ItemController.getById(rs.getInt(3));
+
+                    pantsArmor.setDiamonds(rs.getString(6));
+                    player.setPants(pantsArmor);
+
+                }
+
+                //shield
+                if (rs.getInt(4) == 8) {
+                    Item shield = ItemController.getById(rs.getInt(3));
+
+                    shield.setDiamonds(rs.getString(6));
+                    player.setShield(shield);
+
+                }
+
+            }
+
+            player.setBackpack(BackpackController.getPlayerBackpack(player.getId()));
+        }
+        catch(Exception e){
+            logger.error(e.getMessage());
+
+        }
+
+return player;
 
     }
 
@@ -122,31 +226,6 @@ public class PlayerController {
 
     }
 
-    public static int getIDByEmail(String email) {
-        PreparedStatement stmt;
-        ResultSet rs;
-
-        try {
-            stmt = conn.prepareStatement("SELECT ID FROM Players WHERE Email = ?");
-            stmt.setString(1, email);
-
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                return rs.getInt(1);
-
-
-            }
-
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-
-
-        }
-        return 0;
-
-
-    }
 
     public static Player getById(int id){
         PreparedStatement stmt;
@@ -162,8 +241,12 @@ public class PlayerController {
                 p.setId(rs.getInt(1));
                 p.setCalling(rs.getString(7));
                 p.setCharacterName(rs.getString(5));
-
-
+                p.setMissions(MissionController.getUserMissions(p.getId()));
+                p.setEmail(rs.getString(3));
+                p.setPassword(rs.getString(2));
+                p.setPlayerStats(getPlayerStats(p.getId()));
+                p = getPlayerEquippedItems(p);
+                p.setMissions(MissionController.getUserMissions(p.getId()));
             }
 
         } catch (Exception e) {
@@ -176,56 +259,7 @@ public class PlayerController {
 
     }
 
-    public static int verifyLogin(String email, String password) {
-        PreparedStatement stmt;
-        ResultSet rs;
 
-        try {
-            stmt = conn.prepareStatement("SELECT ID FROM Players WHERE Email = ? AND Pass_Word = ?");
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-
-            rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return rs.getInt(1);
-
-            }
-
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-
-
-        }
-        return 0;
-
-
-    }
-
-    public static ArrayList<PlayerStats> getAllPlayerStats(){
-        ArrayList<PlayerStats> stats =new ArrayList<>();
-        for(Player p : getAllPlayers()){
-            PlayerStats ps = getPlayerStats(p.getId());
-            stats.add(ps);
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-        return stats;
-
-
-
-    }
 
     public static PlayerStats getPlayerStats(int playerId){
         PlayerStats ps = new PlayerStats();
@@ -263,99 +297,7 @@ public class PlayerController {
 
               ps.setFatigueUpdateDate(rs.getTimestamp(20));
 
-              Player p = getById(playerId);
-              ps.setCalling(p.getCalling());
-              ps.setCharacterName(p.getCharacterName());
-              ps.setPlayer(p);
-
-
-
             }
-            stmt = conn.prepareStatement("SELECT * FROM Player_Equipped WHERE ID_Player = ?");
-            stmt.setInt(1, playerId);
-
-
-            rs = stmt.executeQuery();
-
-            while (rs.next()){
-                //weapon
-            if(rs.getInt(4)==1){
-                Weapon weaponEquipped = WeaponController.getById(rs.getInt(3));
-                weaponEquipped.setCurrentDurability(rs.getInt(5));
-                weaponEquipped.setDiamonds(rs.getString(6));
-                ps.getPlayer().setWeapon(weaponEquipped);
-
-            }
-            //hand accessory
-
-                if(rs.getInt(4)==2){
-                    HandAccessory handAccessoryEquipped = HandAccessoryController.getById(rs.getInt(3));
-
-                    handAccessoryEquipped.setDiamonds(rs.getString(6));
-                    ps.getPlayer().getHandAccessories().add(handAccessoryEquipped);
-
-                }
-
-                //helmet
-
-                if(rs.getInt(4)==3){
-                    Helmet helmetEquipped = HelmetController.getById(rs.getInt(3));
-
-                    helmetEquipped.setDiamonds(rs.getString(6));
-                    ps.getPlayer().setHelmet(helmetEquipped);
-
-                }
-
-                //neck
-
-                if(rs.getInt(4)==4){
-                    NeckAccessory neckEquipped = NeckAccessoryController.getById(rs.getInt(3));
-
-                    neckEquipped.setDiamonds(rs.getString(6));
-                    ps.getPlayer().setNeck(neckEquipped);
-
-                }
-
-                //feet
-                if(rs.getInt(4)==5){
-                    FeetArmor feetArmor = FeetArmorController.getById(rs.getInt(3));
-
-                    feetArmor.setDiamonds(rs.getString(6));
-                    ps.getPlayer().setFeet(feetArmor);
-
-                }
-
-                //chest
-                if(rs.getInt(4)==6){
-                    ChestArmor chestArmor = ChestArmorController.getById(rs.getInt(3));
-
-                    chestArmor.setDiamonds(rs.getString(6));
-                    ps.getPlayer().setChest(chestArmor);
-
-                }
-
-                //pants
-                if(rs.getInt(4)==7){
-                    PantsArmor pantsArmor = PantsArmorController.getById(rs.getInt(3));
-
-                    pantsArmor.setDiamonds(rs.getString(6));
-                    ps.getPlayer().setPants(pantsArmor);
-
-                }
-
-                //shield
-                if(rs.getInt(4)==8){
-                    Shield shield = ShieldController.getById(rs.getInt(3));
-
-                    shield.setDiamonds(rs.getString(6));
-                    ps.getPlayer().setShield(shield);
-
-                }
-
-            }
-
-           ps.getPlayer().setBackpack(BackpackController.getPlayerBackpack(ps.getPlayer().getId()));
-
 
 
 

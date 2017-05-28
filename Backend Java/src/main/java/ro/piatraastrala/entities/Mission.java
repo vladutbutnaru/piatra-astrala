@@ -11,7 +11,43 @@ public class Mission {
     private String title;
     private String description;
     private NonPlayerCharacter npcGiverObject;
+    private NonPlayerCharacter npcToCompleteObject;
     private int status;
+    private int playerId;
+    private int minLevel;
+private String classSpecific;
+
+    public String getClassSpecific() {
+        return classSpecific;
+    }
+
+    public void setClassSpecific(String classSpecific) {
+        this.classSpecific = classSpecific;
+    }
+
+    public int getMinLevel() {
+        return minLevel;
+    }
+
+    public void setMinLevel(int minLevel) {
+        this.minLevel = minLevel;
+    }
+
+    public NonPlayerCharacter getNpcToCompleteObject() {
+        return npcToCompleteObject;
+    }
+
+    public void setNpcToCompleteObject(NonPlayerCharacter npcToCompleteObject) {
+        this.npcToCompleteObject = npcToCompleteObject;
+    }
+
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
+    }
 
     public int getStatus() {
         return status;

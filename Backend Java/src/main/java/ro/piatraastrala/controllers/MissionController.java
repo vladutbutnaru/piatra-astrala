@@ -3,7 +3,6 @@ package ro.piatraastrala.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ro.piatraastrala.entities.Mission;
-import ro.piatraastrala.entities.MissionWithStatus;
 import ro.piatraastrala.utils.DBConnection;
 
 import java.sql.Connection;
@@ -41,7 +40,6 @@ public class MissionController {
                 m.setDescription(rs.getString(6));
                 m.setNpcGiverObject(NonPlayerCharacterController.getById(m.getNpcGiver()));
 
-
             }
 
         } catch (Exception e) {
@@ -77,8 +75,11 @@ public class MissionController {
                 m.setTitle(rs.getString(5));
                 m.setStatus(getMissionStatus(m.getId(), playerID));
                 m.setDescription(rs.getString(6));
-                if (getMissionStatus(m.getId(), playerID) == 0)
+                m.setPlayerId(playerID);
+                if (getMissionStatus(m.getId(), playerID) == 0) {
                     missions.add(m);
+
+                }
 
 
             }
@@ -96,8 +97,12 @@ public class MissionController {
                 m.setTitle(rs.getString(5));
                 m.setDescription(rs.getString(6));
                 m.setStatus(getMissionStatus(m.getId(), playerID));
-                if (m.getStatus() == 1 && m.getNpcToComplete() == npcId)
+                m.setPlayerId(playerID);
+                if (m.getStatus() == 1 && m.getNpcToComplete() == npcId) {
                     missions.add(m);
+
+                }
+
 
 
             }
@@ -112,8 +117,8 @@ public class MissionController {
         return missions;
     }
 
-    public static ArrayList<MissionWithStatus> getUserMissions(int playerId) {
-        ArrayList<MissionWithStatus> missions = new ArrayList<MissionWithStatus>();
+    public static ArrayList<Mission> getUserMissions(int playerId) {
+        ArrayList<Mission> missions = new ArrayList<>();
 
         PreparedStatement stmt;
         ResultSet rs;
@@ -125,11 +130,12 @@ public class MissionController {
 
             while (rs.next()) {
                 Mission m = getById(rs.getInt(2));
-                MissionWithStatus ms = new MissionWithStatus();
-                ms.setMission(m);
-                ms.setMissionStatus(rs.getInt(4));
 
-                missions.add(ms);
+                m.setPlayerId(playerId);
+
+                m.setStatus(rs.getInt(4));
+
+                missions.add(m);
 
             }
 

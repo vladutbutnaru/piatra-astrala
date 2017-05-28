@@ -1,6 +1,7 @@
 package ro.piatraastrala.utils;
 
 import ro.piatraastrala.controllers.ItemController;
+import ro.piatraastrala.controllers.MissionController;
 import ro.piatraastrala.controllers.NonPlayerCharacterController;
 import ro.piatraastrala.controllers.PlayerController;
 import ro.piatraastrala.entities.*;
@@ -19,12 +20,12 @@ public class CacheManager {
     private static ArrayList<NonPlayerCharacter> allNPC;
 
 
+
     public static void refreshData(){
         allPlayers = PlayerController.getAllPlayers();
-       allPlayerStats = PlayerController.getAllPlayerStats();
-       allItems = ItemController.getAllItems();
-        allNPC = NonPlayerCharacterController.getAll();
 
+
+        allNPC = NonPlayerCharacterController.getAll();
 
     }
 
@@ -70,4 +71,25 @@ public class CacheManager {
     public static void setAllPlayers(ArrayList<Player> players) {
         CacheManager.allPlayers = players;
     }
+
+
+    public static Player verifyLogin(String email, String password){
+
+        for(Player p : allPlayers){
+            if(p.getEmail().equals(email) && p.getPassword().equals(password))
+                return p;
+
+
+        }
+        return null;
+
+    }
+
+
+
+
+
+
 }
+
+

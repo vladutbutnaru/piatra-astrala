@@ -159,9 +159,11 @@ public class NonPlayerCharacterController {
                 npc.setLat(rs.getDouble(5));
                 npc.setLng(rs.getDouble(6));
                 npc.setTitle(rs.getString(7));
-                for(Player p : CacheManager.getAllPlayers())
-                  npc.setMissions(MissionController.getMissionsForNpc(npc.getId(), p.getId()));
+                for(Player p : CacheManager.getAllPlayers()) {
+                    System.out.println("Getting missions for NPC with id " + npc.getId() + " for player with id " + p.getId());
+                    npc.setMissions(MissionController.getMissionsForNpc(npc.getId(), p.getId()));
 
+                }
                 npcList.add(npc);
 
             }

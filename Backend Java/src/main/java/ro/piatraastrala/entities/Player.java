@@ -17,85 +17,94 @@ public class Player {
     private Timestamp birthDate;
     private String calling;
     private Backpack backpack;
-    private Weapon weapon;
-    private ArrayList<HandAccessory> handAccessories = new ArrayList<>();
-    private Helmet helmet;
-    private NeckAccessory neck;
-    private ChestArmor chest;
-    private FeetArmor feet;
-    private PantsArmor pants;
-    private Shield shield;
-    private ArrayList<MissionWithStatus> missions;
+    private Item weapon;
+    private ArrayList<Item> handAccessories = new ArrayList<>();
+    private Item helmet;
+    private Item neck;
+    private Item chest;
+    private Item feet;
+    private Item pants;
+    private Item shield;
+    private ArrayList<Mission> missions;
+    private PlayerStats playerStats;
 
-    public ArrayList<MissionWithStatus> getMissions() {
+    public PlayerStats getPlayerStats() {
+        return playerStats;
+    }
+
+    public void setPlayerStats(PlayerStats playerStats) {
+        this.playerStats = playerStats;
+    }
+
+    public ArrayList<Mission> getMissions() {
         return missions;
     }
 
-    public void setMissions(ArrayList<MissionWithStatus> missions) {
+    public void setMissions(ArrayList<Mission> missions) {
         this.missions = missions;
     }
 
-    public Shield getShield() {
+    public Item getShield() {
         return shield;
     }
 
-    public void setShield(Shield shield) {
+    public void setShield(Item shield) {
         this.shield = shield;
     }
 
-    public PantsArmor getPants() {
+    public Item getPants() {
         return pants;
     }
 
-    public void setPants(PantsArmor pants) {
+    public void setPants(Item pants) {
         this.pants = pants;
     }
 
-    public FeetArmor getFeet() {
+    public Item getFeet() {
         return feet;
     }
 
-    public void setFeet(FeetArmor feet) {
+    public void setFeet(Item feet) {
         this.feet = feet;
     }
 
-    public ChestArmor getChest() {
+    public Item getChest() {
         return chest;
     }
 
-    public void setChest(ChestArmor chest) {
+    public void setChest(Item chest) {
         this.chest = chest;
     }
 
-    public NeckAccessory getNeck() {
+    public Item getNeck() {
         return neck;
     }
 
-    public void setNeck(NeckAccessory neck) {
+    public void setNeck(Item neck) {
         this.neck = neck;
     }
 
-    public Helmet getHelmet() {
+    public Item getHelmet() {
         return helmet;
     }
 
-    public void setHelmet(Helmet helmet) {
+    public void setHelmet(Item helmet) {
         this.helmet = helmet;
     }
 
-    public ArrayList<HandAccessory> getHandAccessories() {
+    public ArrayList<Item> getHandAccessories() {
         return handAccessories;
     }
 
-    public void setHandAccessories(ArrayList<HandAccessory> handAccessories) {
+    public void setHandAccessories(ArrayList<Item> handAccessories) {
         this.handAccessories = handAccessories;
     }
 
-    public Weapon getWeapon() {
+    public Item getWeapon() {
         return weapon;
     }
 
-    public void setWeapon(Weapon weapon) {
+    public void setWeapon(Item weapon) {
         this.weapon = weapon;
     }
 

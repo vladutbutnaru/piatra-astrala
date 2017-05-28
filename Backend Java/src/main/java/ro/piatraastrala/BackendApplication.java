@@ -13,6 +13,7 @@ import ro.piatraastrala.controllers.PlayerController;
 import ro.piatraastrala.entities.Player;
 import ro.piatraastrala.utils.CacheManager;
 import ro.piatraastrala.utils.DBSyncJob;
+import sun.misc.Cache;
 
 @SpringBootApplication
 @RestController
@@ -50,7 +51,7 @@ public class BackendApplication {
                         .withIdentity("DB Sync Trigger", "Sync Group 1")
                         .withSchedule(
                                 SimpleScheduleBuilder.simpleSchedule()
-                                        .withIntervalInSeconds(10).repeatForever())
+                                        .withIntervalInSeconds(60*60*12).repeatForever())
                         .build();
                 JobDetail job = JobBuilder.newJob(DBSyncJob.class)
                         .withIdentity("DB Sync Job", "Sync Group 1").build();
@@ -75,6 +76,12 @@ public class BackendApplication {
         return "Still surviving.";
     }
 
+    @RequestMapping("/mod/forcesync")
+    public String forcesync() {
+        // Message body required though ignored
+        CacheManager.refreshData();
+        return "DB Sync Forced.";
+    }
 
     //PLAYERS
 
@@ -95,6 +102,7 @@ public class BackendApplication {
         p.setCalling(calling);
 
         p.setId(PlayerController.createPlayer(p));
+        CacheManager.refreshData();
         if (p.getId() > 0) {
 
             return ResponseEntity.status(HttpStatus.CREATED).body(p);
@@ -111,10 +119,11 @@ public class BackendApplication {
                                       @RequestParam(value = "password", required = true) String password
     ) {
 
-        int id = PlayerController.verifyLogin(email, password);
-        if (id > 0) {
+       // int id = PlayerController.verifyLogin(email, password);
+        Player p =  CacheManager.verifyLogin(email,password);
+        if (p.getId() > 0) {
 
-            return ResponseEntity.status(HttpStatus.OK).body(id);
+            return ResponseEntity.status(HttpStatus.OK).body(p);
 
         } else
             return ResponseEntity.status(HttpStatus.OK).body(0);
@@ -123,18 +132,7 @@ public class BackendApplication {
     }
 
 
-    @RequestMapping(value = "/players/v1/getstats", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity getPlayerInfo(@RequestParam(value = "email", required = true) String email
 
-    ) {
-
-        int userId = PlayerController.getIDByEmail(email);
-
-
-        return ResponseEntity.status(HttpStatus.OK).body(PlayerController.getPlayerStats(userId));
-
-
-    }
     //NPCs
 
 
@@ -154,41 +152,17 @@ public class BackendApplication {
     //Missions
 
 
-    @RequestMapping(value = "/missions/v1/getfornpc", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity getMissionsForNpc(@RequestParam(value = "npc", required = true) int npc,
-                                            @RequestParam(value = "player", required = true) String playerEmail
 
 
-    ) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(MissionController.getMissionsForNpc(npc, PlayerController.getIDByEmail(playerEmail)));
 
-    }
-
-    @RequestMapping(value = "/missions/v1/checkstatus", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity checkMissionStatus(@RequestParam(value = "mission", required = true) int mission,
-                                             @RequestParam(value = "player", required = true) String playerEmail
-
-    ) {
-
-        return ResponseEntity.status(HttpStatus.OK).body(MissionController.getMissionStatus(mission, PlayerController.getIDByEmail(playerEmail)));
-
-    }
-
-    @RequestMapping(value = "/missions/v1/getforplayer", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity getPlayerMissions(@RequestParam(value = "player", required = true) String playerEmail
-    ) {
-
-        return ResponseEntity.status(HttpStatus.OK).body(MissionController.getUserMissions(PlayerController.getIDByEmail(playerEmail)));
-
-    }
 
     @RequestMapping(value = "/missions/v1/acceptmission", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ResponseEntity acceptMission(@RequestParam(value = "mission", required = true) int mission,
                                         @RequestParam(value = "player", required = true) String playerEmail
     ) {
 
-        MissionController.acceptMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
+      //  MissionController.acceptMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
         return ResponseEntity.status(HttpStatus.OK).body("OK");
 
     }
@@ -199,7 +173,7 @@ public class BackendApplication {
                                         @RequestParam(value = "player", required = true) String playerEmail
     ) {
 
-        MissionController.finishMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
+       // MissionController.finishMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
         return ResponseEntity.status(HttpStatus.OK).body("OK");
 
     }

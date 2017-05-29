@@ -17,8 +17,9 @@ export class TabsPage {
   public emailParam: any;
 
   constructor(public navCtrl: NavController, public params: NavParams) {
-    this.emailParam = params.get("email");
-    console.log("Primit in tabs: " + this.emailParam);
+    this.emailParam = params.get("user");
+    console.log("Primit in tabs: ");
+    console.log(this.emailParam);
 
 
     this.tab2Root = RadarPage;

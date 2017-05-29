@@ -121,13 +121,17 @@ public class BackendApplication {
 
        // int id = PlayerController.verifyLogin(email, password);
         Player p =  CacheManager.verifyLogin(email,password);
-        if (p.getId() > 0) {
+        try {
+            if (p.getId() > 0) {
 
-            return ResponseEntity.status(HttpStatus.OK).body(p);
+                return ResponseEntity.status(HttpStatus.OK).body(p);
 
-        } else
-            return ResponseEntity.status(HttpStatus.OK).body(0);
-
+            } else
+                return ResponseEntity.status(HttpStatus.OK).body(new Player());
+        }
+        catch(Exception e){
+            return ResponseEntity.status(HttpStatus.OK).body(new Player());
+        }
 
     }
 

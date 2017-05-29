@@ -9,6 +9,33 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 })
 export class HomePage {
   email: any;
+  item = {
+    amount: 0,
+    attackSpeed: 3,
+    calling: '',
+    chakraRegen: 0,
+    currentDurability: 0,
+    description: '',
+    diamonds: '',
+    durability: 0,
+    extraChakra: 0,
+    extraHealth: 0,
+    fatigueRegen: 0,
+    healthRegen: 0,
+    icon: '',
+    id: 0,
+    level: 0,
+    meleeDefense: 0,
+    name: '',
+    rarity: 0,
+    slots: 0,
+    spellDefense: 0,
+    spirit: 0,
+    strength: 0,
+    type: 0,
+    weight: 0
+
+  };
   userInfo = {
     name: '',
     level: '',
@@ -21,175 +48,29 @@ export class HomePage {
     health: 0,
     chakra: 0,
     influence: 0,
-    weapon: {
-      icon: '',
-      attackSpeed: 3,
-      calling: '',
-      currentDurability: 0,
-      description: '',
-      diamonds: '',
-      durability: 0,
-      level: 0,
-      name: '',
-      rarity: 0,
-      slots: 0,
-      spirit: 0,
-      strength: 0,
-      type: 0,
-      weight: 0
-    },
-    handAccessoriesOne: {
-      icon: '',
-      calling: '',
-      description: '',
-      diamonds: '',
-      level: 0,
-      name: '',
-      rarity: 0,
-      slots: 0,
-      spirit: 0,
-      strength: 0,
-      type: 0,
-      weight: 0
-    },
-    handAccessoriesTwo: {
-      icon: '',
-      calling: '',
-      description: '',
-      diamonds: '',
-      level: 0,
-      name: '',
-      rarity: 0,
-      slots: 0,
-      spirit: 0,
-      strength: 0,
-      type: 0,
-      weight: 0
-    },
-    helmet: {
-      icon: '',
-      calling: '',
-      description: '',
-      diamonds: '',
-      level: 0,
-      name: '',
-      rarity: 0,
-      slots: 0,
-      spirit: 0,
-      strength: 0,
-      type: 0,
-      weight: 0,
-      meleeDefense: 0,
-      spellDefense: 0
-    },
-    neck: {
-      icon: '',
-      calling: '',
-      description: '',
-      diamonds: '',
-      level: 0,
-      name: '',
-      rarity: 0,
-      slots: 0,
-      spirit: 0,
-      strength: 0,
-      type: 0,
-      weight: 0,
-      meleeDefense: 0,
-      spellDefense: 0
-    },
-    chest: {
-      icon: '',
-      calling: '',
-      description: '',
-      diamonds: '',
-      level: 0,
-      name: '',
-      rarity: 0,
-      slots: 0,
-      spirit: 0,
-      strength: 0,
-      type: 0,
-      weight: 0,
-      meleeDefense: 0,
-      spellDefense: 0
-    },
-    feet: {
-      icon: '',
-      calling: '',
-      description: '',
-      diamonds: '',
-      level: 0,
-      name: '',
-      rarity: 0,
-      slots: 0,
-      spirit: 0,
-      strength: 0,
-      type: 0,
-      weight: 0,
-      meleeDefense: 0,
-      spellDefense: 0
-    },
-    pants: {
-      icon: '',
-      calling: '',
-      description: '',
-      diamonds: '',
-      level: 0,
-      name: '',
-      rarity: 0,
-      slots: 0,
-      spirit: 0,
-      strength: 0,
-      type: 0,
-      weight: 0,
-      meleeDefense: 0,
-      spellDefense: 0
-    },
-    shield: {
-      icon: '',
-      calling: '',
-      description: '',
-      diamonds: '',
-      level: 0,
-      name: '',
-      rarity: 0,
-      slots: 0,
-      spirit: 0,
-      strength: 0,
-      type: 0,
-      weight: 0,
-      meleeDefense: 0,
-      spellDefense: 0
-    }
+    weapon: this.item,
+    handAccessoriesOne: this.item,
+    handAccessoriesTwo: this.item,
+    helmet: this.item,
+    neck: this.item,
+    chest: this.item,
+    feet: this.item,
+    pants: this.item,
+    shield: this.item
   };
 
   itemOpen = false;
-  itemPopover = {
-    icon: '',
-    calling: '',
-    description: '',
-    diamonds: '',
-    level: 0,
-    name: '',
-    rarity: 0,
-    slots: 0,
-    spirit: 0,
-    strength: 0,
-    type: 0,
-    weight: 0,
-    meleeDefense: 0,
-    spellDefense: 0
+  itemPopover = this.item;
 
-
-
-  };
+  loggedInUser: any;
 
   itemAttributes: string;
   inventoryItems: string;
+  
   constructor(public navCtrl: NavController, public params: NavParams, private geolocation: Geolocation, public http: Http) {
-    this.email = this.params.data;
-    console.log("Primit in Home: " + this.email);
+    this.loggedInUser = this.params.data;
+    console.log("Primit in Home: ");
+    console.log(this.loggedInUser);
     this.getUserStats();
 
   }
@@ -742,14 +623,14 @@ export class HomePage {
           x++;
         }
 
-for (let a = 0; a < response.player.backpack.handAccessories.length; a++) {
+        for (let a = 0; a < response.player.backpack.handAccessories.length; a++) {
           if (x % 4 == 0 && x > 0) {
             this.inventoryItems += '</div><div class="inventory_row">'
           }
           this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.handAccessories[a].icon + ')"></div>';
           x++;
         }
-  
+
 
 
       }, error => {

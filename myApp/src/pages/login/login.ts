@@ -65,11 +65,11 @@ export class LoginPage {
 
     this.http.post("http://localhost:8080/players/v1/login", data, options)
       .subscribe(data => {
-        console.log(data['_body']);
-        if (data['_body'] == "1")
-          this.navCtrl.push(TabsPage, { email: this.user.email });
-        else
-          this.showAlert();
+       var user = (JSON.parse(data['_body']));
+         if (user.email != null)
+           this.navCtrl.push(TabsPage, { user: user });
+         else
+           this.showAlert();
       }, error => {
         console.log(error);// Error getting the data
       });

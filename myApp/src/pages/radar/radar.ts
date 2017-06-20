@@ -13,17 +13,6 @@ import * as $ from 'jquery'
 })
 export class RadarPage {
 
-  public user = {
-    email: "dada",
-    password: "dada",
-    oras: "dada",
-    numeCaracter: "dada",
-    numarTelefon: "dada",
-    dataNasterii: "dada",
-    missionID: 14
-
-
-  }
 
   public coordinates = {
     lat: 2.4,
@@ -38,6 +27,78 @@ export class RadarPage {
 
   }
 
+  userInfo = {
+    name: '',
+    level: '',
+    calling: '',
+    strength: 0,
+    intelligence: 0,
+    agility: 0,
+    fatigue: 0,
+    spirit: 0,
+    health: 0,
+    chakra: 0,
+    influence: 0,
+    handAccessories: [],
+    playerStats: {
+      agility: 0,
+      chakraRegen: 0,
+      currentChakra: 0,
+      currentHealth: 0,
+      experience: 0,
+      fatigue: 0,
+      fatigueRegen: 0,
+      fatigueUpdateDate: 0,
+      healthRegen: 0,
+      hunger: 0,
+      hungerRegen: 0,
+      id: 0,
+      idPlayer: 0,
+      influence: 0,
+      intelligence: 0,
+      level: 0,
+      maxChakra: 0,
+      maxHealth: 0,
+      spirit: 0,
+      strength: 0
+
+
+
+    },
+    backpack: {
+      currentNumberOfItems: 0,
+      icon: "",
+      id: 0,
+      items: [],
+      name: "",
+      slots: 0
+
+
+    }
+
+  };
+  npc = {
+    description: "",
+    icon: "",
+    id: 0,
+    lat: 0.0,
+    lng: 0.0,
+    missions: []
+
+
+  };
+
+  mission = {
+    classSpecific: "",
+    description: "",
+    id: 0,
+    minLevel: 0,
+    missionType: 0,
+    npcGiver: 0,
+    npcGiverObject: this.npc
+
+
+  };
   public missionList: any;
 
   public npcList: any;
@@ -47,8 +108,8 @@ export class RadarPage {
   public missionListFront: string;
 
   constructor(public navCtrl: NavController, public params: NavParams, private geolocation: Geolocation, public http: Http, private elRef: ElementRef, private alertController: AlertController) {
-    this.user.email = this.params.data;
-    console.log("Primit in Radar: " + this.user.email);
+    this.userInfo = this.params.data;
+    console.log("Primit in Radar: " + this.userInfo);
     this.getNearby();
   }
 
@@ -87,15 +148,25 @@ export class RadarPage {
       .subscribe(data => {
         this.npcList = data['_body'];
         this.npcList = JSON.parse(this.npcList);
+        console.log(this.npcList);
         this.npcCloseFront = "";
-
+         this.missionListFront="";
         for (let i = 0; i < this.npcList.length; i++) {
 
           var marginTop = Math.floor(Math.random() * 3) + 1;
           var marginLeft = Math.floor(Math.random() * 12) + 6;
 
           this.npcCloseFront += '<div id="npc_' + this.npcList[i].id + '" class="npc bounceInDown" style="margin-top:' + marginTop + '%; margin-left:' + marginLeft + 'px;background-image:url(assets/img/npc_mission.png);"></div>';
+          for (let j = 0; j < this.npcList[i].missions.length; j++) {
+            if (this.npcList[i].missions[j].status == 0 || this.npcList[i].missions[j].status == null) {
+              this.missionListFront += '<div class="npcMissionActive" id="mission_' + this.npcList[i].missions[j].id + '">' + this.npcList[i].missions[j].title + '</div>';
+            }
+            else {
 
+              this.missionListFront += '<div class="npcMissionCompleted" id="missionToComplete_' +  this.npcList[i].missions[j].id+ '">' + this.npcList[i].missions[j].title + '</div>';
+
+            }
+          }
         }
 
         if (this.isNpcMissionOpen == 0) {
@@ -108,43 +179,7 @@ export class RadarPage {
 
   }
 
-  getMissionsForNpc(npcID: any) {
 
-    var headers = new Headers();
-    headers.append("Accept", 'application/json');
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    let options = new RequestOptions({ headers: headers });
-
-    var data = 'npc=' + npcID + '&player=' + this.user.email;
-    this.missionListFront = "";
-    this.http.post("http://localhost:8080/missions/v1/getfornpc", data, options)
-      .subscribe(data => {
-
-        this.missionList = data['_body'];
-        this.missionList = JSON.parse(this.missionList);
-
-
-        for (let i = 0; i < this.missionList.length; i++) {
-          if (this.missionList[i].status == 0 || this.missionList[i].status == null) {
-            this.missionListFront += '<div class="npcMissionActive" id="mission_' + this.missionList[i].id + '">' + this.missionList[i].title + '</div>';
-          }
-          else {
-
-            this.missionListFront += '<div class="npcMissionCompleted" id="missionToComplete_' + this.missionList[i].id + '">' + this.missionList[i].title + '</div>';
-
-          }
-        }
-
-        if (this.isNpcMissionOpen == 0) {
-          this.showNPCMissionPopup();
-          this.isNpcMissionOpen = 1;
-        }
-
-      }, error => {
-        console.log(error);// Error getting the data
-      });
-
-  }
   showNPCMissionPopup() {
     document.querySelector('body').addEventListener('click', (event) => {
       if (event.target['id'].split('_')[0] == 'npc') {
@@ -154,7 +189,7 @@ export class RadarPage {
             this.npcInformation.name = this.npcList[i].name;
             this.npcInformation.bio = this.npcList[i].description;
             this.npcInformation.title = this.npcList[i].title;
-            this.getMissionsForNpc(this.npcList[i].id);
+        
           }
         }
         this.missionOpen = true;
@@ -191,7 +226,7 @@ export class RadarPage {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let options = new RequestOptions({ headers: headers });
 
-    var data = 'mission=' + missionID + '&player=' + this.user.email;
+    var data = 'mission=' + missionID + '&player=' + this.userInfo.name;
     this.missionListFront = "";
     this.http.post("http://localhost:8080/missions/v1/acceptmission", data, options)
       .subscribe(data => {
@@ -219,7 +254,7 @@ export class RadarPage {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let options = new RequestOptions({ headers: headers });
 
-    var data = 'mission=' + missionID + '&player=' + this.user.email;
+    var data = 'mission=' + missionID + '&player=' + this.userInfo.name;
     this.missionListFront = "";
     this.http.post("http://localhost:8080/missions/v1/finishmission", data, options)
       .subscribe(data => {

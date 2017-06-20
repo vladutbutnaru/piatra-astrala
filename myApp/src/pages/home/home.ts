@@ -36,6 +36,32 @@ export class HomePage {
     weight: 0
 
   };
+
+
+  npc = {
+    description: "",
+    icon: "",
+    id: 0,
+    lat: 0.0,
+    lng: 0.0,
+    missions: []
+
+
+  };
+
+    mission = {
+    classSpecific: "",
+    description: "",
+    id: 0,
+    minLevel: 0,
+    missionType: 0,
+    npcGiver: 0,
+    npcGiverObject: this.npc
+
+
+  };
+
+
   userInfo = {
     name: '',
     level: '',
@@ -56,7 +82,44 @@ export class HomePage {
     chest: this.item,
     feet: this.item,
     pants: this.item,
-    shield: this.item
+    shield: this.item,
+    handAccessories: [],
+    playerStats: {
+        agility: 0,
+        chakraRegen:0,
+        currentChakra:0,
+        currentHealth:0,
+        experience:0,
+        fatigue:0,
+        fatigueRegen:0,
+        fatigueUpdateDate:0,
+        healthRegen:0,
+        hunger:0,
+        hungerRegen:0,
+        id:0,
+        idPlayer:0,
+        influence:0,
+        intelligence:0,
+        level:0,
+        maxChakra:0,
+        maxHealth:0,
+        spirit:0,
+        strength:0
+
+
+
+    },
+    backpack:{
+      currentNumberOfItems:0,
+      icon:"",
+      id:0,
+      items:[],
+      name:"",
+      slots:0
+
+
+    }
+
   };
 
   itemOpen = false;
@@ -66,79 +129,33 @@ export class HomePage {
 
   itemAttributes: string;
   inventoryItems: string;
-  
+
   constructor(public navCtrl: NavController, public params: NavParams, private geolocation: Geolocation, public http: Http) {
     this.loggedInUser = this.params.data;
-    console.log("Primit in Home: ");
-    console.log(this.loggedInUser);
-    this.getUserStats();
+   // console.log("Primit in Home: ");
+   // console.log(this.loggedInUser);
+    
 
   }
 
   getUserStats() {
 
-    var headers = new Headers();
-    headers.append("Accept", 'application/json');
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    let options = new RequestOptions({ headers: headers });
+     //   var response = JSON.parse(data['_body']);
+       // console.log(response)
+       this.userInfo = this.loggedInUser;
+       console.log(this.userInfo);
 
-    var data = 'email=' + this.email;
 
-    this.http.post("http://localhost:8080/players/v1/getstats", data, options)
-      .subscribe(data => {
+        // //backpack
+         document.getElementById("player-backpack").style.backgroundImage = "url(assets/img/" + this.userInfo.backpack.icon + ")";
 
-        var response = JSON.parse(data['_body']);
-        console.log(response);
-        this.userInfo.name = response.characterName;
-        this.userInfo.calling = response.calling;
-        this.userInfo.level = response.level;
-        this.userInfo.strength = response.strength;
-        this.userInfo.intelligence = response.intelligence;
-        this.userInfo.agility = response.agility;
-        this.userInfo.fatigue = response.fatigue;
-        this.userInfo.spirit = response.spirit;
-        this.userInfo.health = response.currentHealth;
-        this.userInfo.chakra = response.currentChakra;
-        this.userInfo.influence = response.influence;
-        //weapon
-        this.userInfo.weapon = response.player.weapon;
-
-        //hand accessories
-        if (response.player.handAccessories.length > 0) {
-          this.userInfo.handAccessoriesOne = response.player.handAccessories[0];
-        }
-        if (response.player.handAccessories.length > 1) {
-          this.userInfo.handAccessoriesTwo = response.player.handAccessories[1];
-        }
-
-        //helmet
-        this.userInfo.helmet = response.player.helmet;
-
-        //neck
-        this.userInfo.neck = response.player.neck;
-
-        //chest
-        this.userInfo.chest = response.player.chest;
-
-        //feet
-        this.userInfo.feet = response.player.feet;
-
-        //pants
-        this.userInfo.pants = response.player.pants;
-
-        //shield
-        this.userInfo.shield = response.player.shield;
-
-        //backpack
-        document.getElementById("player-backpack").style.backgroundImage = "url(assets/img/" + response.player.backpack.icon + ")";
-
-        document.getElementById("fatigue-bar").style.width = response.fatigue + "%";
-        var healthP = 100 * (response.currentHealth / response.maxHealth);
+         document.getElementById("fatigue-bar").style.width = this.userInfo.playerStats.fatigue + "%";
+         var healthP = 100 * (this.userInfo.playerStats.currentHealth / this.userInfo.playerStats.maxHealth);
 
         document.getElementById("health-bar").style.width = healthP + "%";
 
-        var chakraP = 100 * (response.currentChakra / response.maxChakra);
-        document.getElementById("health-bar").style.width = chakraP + "%";
+        var chakraP = 100 * ( this.userInfo.playerStats.currentChakra /  this.userInfo.playerStats.maxChakra);
+       document.getElementById("health-bar").style.width = chakraP + "%";
 
         if (this.userInfo.calling == "agricultor")
           document.getElementById("player-image").style.backgroundImage = "url(assets/img/farmer.jpg)";
@@ -229,8 +246,8 @@ export class HomePage {
 
 
         //check if has hand accessories
-        if (response.player.handAccessories[0] != null) {
-
+        if (this.userInfo.handAccessories[0] != null) {
+        this.userInfo.handAccessoriesOne = this.userInfo.handAccessories[0];
           //place icon
 
           document.getElementById("player-bracelet-left").style.backgroundImage = "url(assets/img/" + this.userInfo.handAccessoriesOne.icon + ")";
@@ -270,8 +287,8 @@ export class HomePage {
         }
 
         //check if has hand accessories
-        if (response.player.handAccessories[1] != null) {
-
+        if (this.userInfo.handAccessories[1] != null) {
+        this.userInfo.handAccessoriesTwo = this.userInfo.handAccessories[1];
           //place icon
 
           document.getElementById("player-bracelet-right").style.backgroundImage = "url(assets/img/" + this.userInfo.handAccessoriesTwo.icon + ")";
@@ -313,7 +330,7 @@ export class HomePage {
 
 
         //check if has helmet
-        if (response.player.helmet != null) {
+        if (this.userInfo.helmet != null) {
 
           //place icon
 
@@ -354,7 +371,7 @@ export class HomePage {
         }
 
         //check if has neck accessory
-        if (response.player.neck != null) {
+        if (this.userInfo.neck != null) {
 
           //place icon
 
@@ -395,7 +412,7 @@ export class HomePage {
         }
 
         //check if chest
-        if (response.player.chest != null) {
+        if (this.userInfo.chest != null) {
 
           //place icon
 
@@ -436,7 +453,7 @@ export class HomePage {
         }
 
         //check if feet
-        if (response.player.feet != null) {
+        if (this.userInfo.feet != null) {
 
           //place icon
 
@@ -477,7 +494,7 @@ export class HomePage {
         }
 
         //check if pants
-        if (response.player.pants != null) {
+        if (this.userInfo.pants != null) {
 
           //place icon
 
@@ -518,7 +535,7 @@ export class HomePage {
         }
 
         //check if shield
-        if (response.player.shield != null) {
+        if (this.userInfo.shield != null) {
 
           //place icon
 
@@ -563,89 +580,87 @@ export class HomePage {
 
 
 
-        //get inventory items
+        // //get inventory items
         this.inventoryItems = '<div class="inventory_row">';
-        var x = 0;
-        for (let a = 0; a < response.player.backpack.weapons.length; a++) {
+         var x = 0;
+        for (let a = 0; a < this.userInfo.backpack.items.length; a++) {
           if (x % 4 == 0 && x > 0) {
             this.inventoryItems += '</div><div class="inventory_row">'
           }
-          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.weapons[a].icon + ')"></div>';
+          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + this.userInfo.backpack.items[a].icon + ')"></div>';
           x++;
         }
 
-        for (let a = 0; a < response.player.backpack.chestArmors.length; a++) {
-          if (x % 4 == 0 && x > 0) {
-            this.inventoryItems += '</div><div class="inventory_row">'
-          }
-          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.chestArmors[a].icon + ')"></div>';
-          x++;
-        }
+        // for (let a = 0; a < response.player.backpack.chestArmors.length; a++) {
+        //   if (x % 4 == 0 && x > 0) {
+        //     this.inventoryItems += '</div><div class="inventory_row">'
+        //   }
+        //   this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.chestArmors[a].icon + ')"></div>';
+        //   x++;
+        // }
 
-        for (let a = 0; a < response.player.backpack.feetArmors.length; a++) {
-          if (x % 4 == 0 && x > 0) {
-            this.inventoryItems += '</div><div class="inventory_row">'
-          }
-          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.feetArmors[a].icon + ')"></div>';
-          x++;
-        }
+        // for (let a = 0; a < response.player.backpack.feetArmors.length; a++) {
+        //   if (x % 4 == 0 && x > 0) {
+        //     this.inventoryItems += '</div><div class="inventory_row">'
+        //   }
+        //   this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.feetArmors[a].icon + ')"></div>';
+        //   x++;
+        // }
 
-        for (let a = 0; a < response.player.backpack.helmets.length; a++) {
-          if (x % 4 == 0 && x > 0) {
-            this.inventoryItems += '</div><div class="inventory_row">'
-          }
-          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.helmets[a].icon + ')"></div>';
-          x++;
-        }
+        // for (let a = 0; a < response.player.backpack.helmets.length; a++) {
+        //   if (x % 4 == 0 && x > 0) {
+        //     this.inventoryItems += '</div><div class="inventory_row">'
+        //   }
+        //   this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.helmets[a].icon + ')"></div>';
+        //   x++;
+        // }
 
-        for (let a = 0; a < response.player.backpack.neckAccessories.length; a++) {
-          if (x % 4 == 0 && x > 0) {
-            this.inventoryItems += '</div><div class="inventory_row">'
-          }
-          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.neckAccessories[a].icon + ')"></div>';
-          x++;
-        }
+        // for (let a = 0; a < response.player.backpack.neckAccessories.length; a++) {
+        //   if (x % 4 == 0 && x > 0) {
+        //     this.inventoryItems += '</div><div class="inventory_row">'
+        //   }
+        //   this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.neckAccessories[a].icon + ')"></div>';
+        //   x++;
+        // }
 
-        for (let a = 0; a < response.player.backpack.pantsArmors.length; a++) {
-          if (x % 4 == 0 && x > 0) {
-            this.inventoryItems += '</div><div class="inventory_row">'
-          }
-          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.pantsArmors[a].icon + ')"></div>';
-          x++;
-        }
-
-
-        for (let a = 0; a < response.player.backpack.shields.length; a++) {
-          if (x % 4 == 0 && x > 0) {
-            this.inventoryItems += '</div><div class="inventory_row">'
-          }
-          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.shields[a].icon + ')"></div>';
-          x++;
-        }
-
-        for (let a = 0; a < response.player.backpack.handAccessories.length; a++) {
-          if (x % 4 == 0 && x > 0) {
-            this.inventoryItems += '</div><div class="inventory_row">'
-          }
-          this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.handAccessories[a].icon + ')"></div>';
-          x++;
-        }
+        // for (let a = 0; a < response.player.backpack.pantsArmors.length; a++) {
+        //   if (x % 4 == 0 && x > 0) {
+        //     this.inventoryItems += '</div><div class="inventory_row">'
+        //   }
+        //   this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.pantsArmors[a].icon + ')"></div>';
+        //   x++;
+        // }
 
 
+        // for (let a = 0; a < response.player.backpack.shields.length; a++) {
+        //   if (x % 4 == 0 && x > 0) {
+        //     this.inventoryItems += '</div><div class="inventory_row">'
+        //   }
+        //   this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.shields[a].icon + ')"></div>';
+        //   x++;
+        // }
 
-      }, error => {
-        console.log(error);// Error getting the data
-      });
+        // for (let a = 0; a < response.player.backpack.handAccessories.length; a++) {
+        //   if (x % 4 == 0 && x > 0) {
+        //     this.inventoryItems += '</div><div class="inventory_row">'
+        //   }
+        //   this.inventoryItems += ' <div class="inventory_item" style="background-image:url(assets/img/' + response.player.backpack.handAccessories[a].icon + ')"></div>';
+        //   x++;
+        // }
+
+
 
 
   }
 
 
   ionViewDidLoad() {
+    this.getUserStats();
     document.getElementById('itemPopover').style.visibility = 'hidden';
     document.getElementById('inventoryPopover').style.visibility = 'hidden';
     this.addSelectorHandler();
   }
+  
   addSelectorHandler() {
     document.querySelector('#profile-page').addEventListener('click', (event) => {
 

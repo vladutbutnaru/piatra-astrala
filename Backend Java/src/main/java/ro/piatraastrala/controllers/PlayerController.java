@@ -2,7 +2,9 @@ package ro.piatraastrala.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ro.piatraastrala.entities.*;
+import ro.piatraastrala.entities.Item;
+import ro.piatraastrala.entities.Player;
+import ro.piatraastrala.entities.PlayerStats;
 import ro.piatraastrala.utils.DBConnection;
 import ro.piatraastrala.utils.PlayerStatsFactory;
 
@@ -17,7 +19,7 @@ public class PlayerController {
     public static Connection conn = (Connection) DBConnection.getConnection();
 
 
-    public static ArrayList<Player> getAllPlayers(){
+    public static ArrayList<Player> getAllPlayers() {
         ArrayList<Player> players = new ArrayList<Player>();
 
 
@@ -43,7 +45,7 @@ public class PlayerController {
                 p.setMissions(MissionController.getUserMissions(p.getId()));
 
                 players.add(p);
-
+                System.out.println("Found player with id " + p.getId());
 
             }
 
@@ -54,14 +56,12 @@ public class PlayerController {
         }
 
 
-
         return players;
-
 
 
     }
 
-    public static Player getPlayerEquippedItems(Player player){
+    public static Player getPlayerEquippedItems(Player player) {
         try {
             PreparedStatement stmt;
             ResultSet rs;
@@ -77,8 +77,9 @@ public class PlayerController {
                     Item weaponEquipped = ItemController.getById(rs.getInt(3));
                     weaponEquipped.setCurrentDurability(rs.getInt(5));
                     weaponEquipped.setDiamonds(rs.getString(6));
-                  player.setWeapon(weaponEquipped);
-
+                    player.setWeapon(weaponEquipped);
+                    System.out.println("Found weapon " + weaponEquipped.getName());
+                    continue;
                 }
                 //hand accessory
 
@@ -87,6 +88,8 @@ public class PlayerController {
 
                     handAccessoryEquipped.setDiamonds(rs.getString(6));
                     player.getHandAccessories().add(handAccessoryEquipped);
+                    System.out.println("Found hand accessory " + handAccessoryEquipped.getName());
+                    continue;
 
                 }
 
@@ -97,7 +100,7 @@ public class PlayerController {
 
                     helmetEquipped.setDiamonds(rs.getString(6));
                     player.setHelmet(helmetEquipped);
-
+                    continue;
                 }
 
                 //neck
@@ -107,7 +110,7 @@ public class PlayerController {
 
                     neckEquipped.setDiamonds(rs.getString(6));
                     player.setNeck(neckEquipped);
-
+                    continue;
                 }
 
                 //feet
@@ -116,7 +119,7 @@ public class PlayerController {
 
                     feetArmor.setDiamonds(rs.getString(6));
                     player.setFeet(feetArmor);
-
+                    continue;
                 }
 
                 //chest
@@ -125,7 +128,7 @@ public class PlayerController {
 
                     chestArmor.setDiamonds(rs.getString(6));
                     player.setChest(chestArmor);
-
+                    continue;
                 }
 
                 //pants
@@ -134,7 +137,7 @@ public class PlayerController {
 
                     pantsArmor.setDiamonds(rs.getString(6));
                     player.setPants(pantsArmor);
-
+                    continue;
                 }
 
                 //shield
@@ -143,19 +146,18 @@ public class PlayerController {
 
                     shield.setDiamonds(rs.getString(6));
                     player.setShield(shield);
-
+                    continue;
                 }
 
             }
 
             player.setBackpack(BackpackController.getPlayerBackpack(player.getId()));
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             logger.error(e.getMessage());
 
         }
 
-return player;
+        return player;
 
     }
 
@@ -227,7 +229,7 @@ return player;
     }
 
 
-    public static Player getById(int id){
+    public static Player getById(int id) {
         PreparedStatement stmt;
         ResultSet rs;
         Player p = new Player();
@@ -260,8 +262,7 @@ return player;
     }
 
 
-
-    public static PlayerStats getPlayerStats(int playerId){
+    public static PlayerStats getPlayerStats(int playerId) {
         PlayerStats ps = new PlayerStats();
 
         PreparedStatement stmt;
@@ -275,31 +276,29 @@ return player;
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-              ps.setId(rs.getInt(1));
-              ps.setIdPlayer(rs.getInt(2));
-              ps.setStrength(rs.getDouble(3));
-              ps.setIntelligence(rs.getDouble(4));
-              ps.setAgility(rs.getDouble(5));
-              ps.setFatigue(rs.getDouble(6));
-              ps.setFatigueRegen(rs.getDouble(7));
-              ps.setSpirit(rs.getDouble(8));
-              ps.setMaxHealth(rs.getDouble(9));
-              ps.setMaxChakra(rs.getDouble(10));
-              ps.setCurrentHealth(rs.getDouble(11));
-              ps.setCurrentChakra(rs.getDouble(12));
-              ps.setHealthRegen(rs.getDouble(13));
-              ps.setChakraRegen(rs.getDouble(14));
-              ps.setExperience(rs.getInt(15));
-              ps.setLevel(rs.getInt(16));
-              ps.setHunger(rs.getInt(17));
-              ps.setHungerRegen(rs.getInt(18));
-              ps.setInfluence(rs.getInt(19));
+                ps.setId(rs.getInt(1));
+                ps.setIdPlayer(rs.getInt(2));
+                ps.setStrength(rs.getDouble(3));
+                ps.setIntelligence(rs.getDouble(4));
+                ps.setAgility(rs.getDouble(5));
+                ps.setFatigue(rs.getDouble(6));
+                ps.setFatigueRegen(rs.getDouble(7));
+                ps.setSpirit(rs.getDouble(8));
+                ps.setMaxHealth(rs.getDouble(9));
+                ps.setMaxChakra(rs.getDouble(10));
+                ps.setCurrentHealth(rs.getDouble(11));
+                ps.setCurrentChakra(rs.getDouble(12));
+                ps.setHealthRegen(rs.getDouble(13));
+                ps.setChakraRegen(rs.getDouble(14));
+                ps.setExperience(rs.getInt(15));
+                ps.setLevel(rs.getInt(16));
+                ps.setHunger(rs.getInt(17));
+                ps.setHungerRegen(rs.getInt(18));
+                ps.setInfluence(rs.getInt(19));
 
-              ps.setFatigueUpdateDate(rs.getTimestamp(20));
+                ps.setFatigueUpdateDate(rs.getTimestamp(20));
 
             }
-
-
 
 
         } catch (Exception e) {

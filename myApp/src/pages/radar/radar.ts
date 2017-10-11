@@ -100,17 +100,19 @@ export class RadarPage {
 
   };
   public missionList: any;
-
+  public lakeList: any;
   public npcList: any;
   public npcCloseFront: string;
   public isNpcMissionOpen = 0;
   public missionOpen = false;
   public missionListFront: string;
-
+  public lakesCloseFront: string;
+    
   constructor(public navCtrl: NavController, public params: NavParams, private geolocation: Geolocation, public http: Http, private elRef: ElementRef, private alertController: AlertController) {
     this.userInfo = this.params.data;
     console.log("Primit in Radar: " + this.userInfo);
     this.getNearby();
+      
   }
 
 
@@ -131,6 +133,7 @@ export class RadarPage {
       this.coordinates.lng = data.coords.longitude;
 
       this.getNPCCall();
+      this.getLakesCall();
     });
 
 
@@ -178,6 +181,40 @@ export class RadarPage {
       });
 
   }
+    
+    getLakesCall(){
+        
+         var headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    let options = new RequestOptions({ headers: headers });
+
+    var data = 'lat=' + this.coordinates.lat + '&lng=' + this.coordinates.lng + '&meters=10000';
+
+    this.http.post("http://localhost:8080/lakes/v1/get", data, options)
+      .subscribe(data => {
+        this.lakeList = data['_body'];
+        this.lakeList = JSON.parse(this.lakeList);
+        console.log(this.lakeList);
+        this.lakesCloseFront = "";
+       
+        
+        for (let i = 0; i < this.lakeList.length; i++) {
+
+          var marginTop = Math.floor(Math.random() * 3) + 1;
+          var marginLeft = Math.floor(Math.random() * 12) + 6;
+
+          this.lakesCloseFront += '<div id="lake_' + this.lakeList[i].id + '" class="lake bounceInDown" style="margin-top:' + marginTop + '%; margin-left:' + marginLeft + 'px;background-image:url(assets/img/water.png);"></div>';
+       
+        }
+
+      
+      }, error => {
+        console.log(error);// Error getting the data
+      });
+        
+        
+    }
 
 
   showNPCMissionPopup() {

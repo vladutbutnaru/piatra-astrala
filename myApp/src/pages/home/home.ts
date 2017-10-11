@@ -738,7 +738,7 @@ export class HomePage {
       document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.helmet.strength;
       document.getElementById('attack_speed_value').innerHTML = "+ 0";
       document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.helmet.spirit;
-      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('durability_value').innerHTML =  "" +  this.userInfo.helmet.currentDurability;
       document.getElementById('weight_value').innerHTML = "" + this.userInfo.helmet.weight;
       document.getElementById('melee_defence_value').innerHTML = "+ " + this.userInfo.helmet.meleeDefense;
       document.getElementById('spell_defence_value').innerHTML = "+ " + this.userInfo.helmet.spellDefense;
@@ -754,7 +754,7 @@ export class HomePage {
       document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.neck.strength;
       document.getElementById('attack_speed_value').innerHTML = "+ 0";
       document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.neck.spirit;
-      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('durability_value').innerHTML = "" + this.userInfo.neck.currentDurability;
       document.getElementById('weight_value').innerHTML = "" + this.userInfo.neck.weight;
       document.getElementById('melee_defence_value').innerHTML = "+ " + this.userInfo.neck.meleeDefense;
       document.getElementById('spell_defence_value').innerHTML = "+ " + this.userInfo.neck.spellDefense;
@@ -771,7 +771,7 @@ export class HomePage {
       document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.weapon.strength;
       document.getElementById('attack_speed_value').innerHTML = "+ " + this.userInfo.weapon.attackSpeed;
       document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.weapon.spirit;
-      document.getElementById('durability_value').innerHTML = "+ " + this.userInfo.weapon.currentDurability;
+      document.getElementById('durability_value').innerHTML = "" + this.userInfo.weapon.currentDurability;
       document.getElementById('weight_value').innerHTML = "" + this.userInfo.weapon.weight;
       document.getElementById('melee_defence_value').innerHTML = "0";
       document.getElementById('spell_defence_value').innerHTML = "0";
@@ -788,7 +788,7 @@ export class HomePage {
       document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.shield.strength;
       document.getElementById('attack_speed_value').innerHTML = "+ 0";
       document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.shield.spirit;
-      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('durability_value').innerHTML =  "" + this.userInfo.shield.currentDurability;
       document.getElementById('weight_value').innerHTML = "" + this.userInfo.shield.weight;
       document.getElementById('melee_defence_value').innerHTML = "+ " + this.userInfo.shield.meleeDefense;
       document.getElementById('spell_defence_value').innerHTML = "+ " + this.userInfo.shield.spellDefense;
@@ -805,7 +805,7 @@ export class HomePage {
       document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.handAccessoriesOne.strength;
       document.getElementById('attack_speed_value').innerHTML = "+ 0";
       document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.handAccessoriesOne.spirit;
-      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('durability_value').innerHTML = "" + this.userInfo.handAccessoriesOne.currentDurability;
       document.getElementById('weight_value').innerHTML = "" + this.userInfo.handAccessoriesOne.weight;
       document.getElementById('melee_defence_value').innerHTML = "0";
       document.getElementById('spell_defence_value').innerHTML = "0";
@@ -822,7 +822,7 @@ export class HomePage {
       document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.handAccessoriesTwo.strength;
       document.getElementById('attack_speed_value').innerHTML = "+ 0";
       document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.handAccessoriesTwo.spirit;
-      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('durability_value').innerHTML = "" + this.userInfo.handAccessoriesTwo.currentDurability;
       document.getElementById('weight_value').innerHTML = "" + this.userInfo.handAccessoriesTwo.weight;
       document.getElementById('melee_defence_value').innerHTML = "0";
       document.getElementById('spell_defence_value').innerHTML = "0";
@@ -839,7 +839,7 @@ export class HomePage {
       document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.chest.strength;
       document.getElementById('attack_speed_value').innerHTML = "+ 0";
       document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.chest.spirit;
-      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('durability_value').innerHTML = "" + this.userInfo.chest.currentDurability;
       document.getElementById('weight_value').innerHTML = "" + this.userInfo.chest.weight;
       document.getElementById('melee_defence_value').innerHTML = "0";
       document.getElementById('spell_defence_value').innerHTML = "0";
@@ -858,7 +858,7 @@ export class HomePage {
       document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.pants.strength;
       document.getElementById('attack_speed_value').innerHTML = "+ 0";
       document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.pants.spirit;
-      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('durability_value').innerHTML =  "" + this.userInfo.pants.currentDurability;
       document.getElementById('weight_value').innerHTML = "" + this.userInfo.pants.weight;
       document.getElementById('melee_defence_value').innerHTML = "0";
       document.getElementById('spell_defence_value').innerHTML = "0";
@@ -877,7 +877,7 @@ export class HomePage {
       document.getElementById('strength_value').innerHTML = "+ " + this.userInfo.feet.strength;
       document.getElementById('attack_speed_value').innerHTML = "+ 0";
       document.getElementById('spirit_value').innerHTML = "+ " + this.userInfo.feet.spirit;
-      document.getElementById('durability_value').innerHTML = "100";
+      document.getElementById('durability_value').innerHTML = "" + this.userInfo.feet.currentDurability;
       document.getElementById('weight_value').innerHTML = "" + this.userInfo.feet.weight;
       document.getElementById('melee_defence_value').innerHTML = "0";
       document.getElementById('spell_defence_value').innerHTML = "0";

@@ -77,8 +77,8 @@ public class ItemController {
     Item m = new Item();
 
         try{
-        stmt = conn.prepareStatement("SELECT * FROM Items");
-
+            stmt = conn.prepareStatement("SELECT * FROM Items WHERE ID = ?");
+            stmt.setInt(1, id);
         rs = stmt.executeQuery();
 
         if (rs.next()) {

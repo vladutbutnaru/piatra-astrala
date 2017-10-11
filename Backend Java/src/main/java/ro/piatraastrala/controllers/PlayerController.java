@@ -85,7 +85,7 @@ public class PlayerController {
 
                 if (rs.getInt(4) == 2) {
                     Item handAccessoryEquipped = ItemController.getById(rs.getInt(3));
-
+                    handAccessoryEquipped.setCurrentDurability(rs.getInt(5));
                     handAccessoryEquipped.setDiamonds(rs.getString(6));
                     player.getHandAccessories().add(handAccessoryEquipped);
                     System.out.println("Found hand accessory " + handAccessoryEquipped.getName());
@@ -97,9 +97,10 @@ public class PlayerController {
 
                 if (rs.getInt(4) == 3) {
                     Item helmetEquipped = ItemController.getById(rs.getInt(3));
-
+                    helmetEquipped.setCurrentDurability(rs.getInt(5));
                     helmetEquipped.setDiamonds(rs.getString(6));
                     player.setHelmet(helmetEquipped);
+                    System.out.println("Found helmet " + helmetEquipped.getName());
                     continue;
                 }
 
@@ -107,7 +108,7 @@ public class PlayerController {
 
                 if (rs.getInt(4) == 4) {
                     Item neckEquipped = ItemController.getById(rs.getInt(3));
-
+                    neckEquipped.setCurrentDurability(rs.getInt(5));
                     neckEquipped.setDiamonds(rs.getString(6));
                     player.setNeck(neckEquipped);
                     continue;
@@ -116,7 +117,7 @@ public class PlayerController {
                 //feet
                 if (rs.getInt(4) == 5) {
                     Item feetArmor = ItemController.getById(rs.getInt(3));
-
+                    feetArmor.setCurrentDurability(rs.getInt(5));
                     feetArmor.setDiamonds(rs.getString(6));
                     player.setFeet(feetArmor);
                     continue;
@@ -125,7 +126,7 @@ public class PlayerController {
                 //chest
                 if (rs.getInt(4) == 6) {
                     Item chestArmor = ItemController.getById(rs.getInt(3));
-
+                    chestArmor.setCurrentDurability(rs.getInt(5));
                     chestArmor.setDiamonds(rs.getString(6));
                     player.setChest(chestArmor);
                     continue;
@@ -134,7 +135,7 @@ public class PlayerController {
                 //pants
                 if (rs.getInt(4) == 7) {
                     Item pantsArmor = ItemController.getById(rs.getInt(3));
-
+                    pantsArmor.setCurrentDurability(rs.getInt(5));
                     pantsArmor.setDiamonds(rs.getString(6));
                     player.setPants(pantsArmor);
                     continue;
@@ -143,7 +144,7 @@ public class PlayerController {
                 //shield
                 if (rs.getInt(4) == 8) {
                     Item shield = ItemController.getById(rs.getInt(3));
-
+                    shield.setCurrentDurability(rs.getInt(5));
                     shield.setDiamonds(rs.getString(6));
                     player.setShield(shield);
                     continue;

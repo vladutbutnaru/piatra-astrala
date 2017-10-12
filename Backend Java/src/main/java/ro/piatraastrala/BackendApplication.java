@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.piatraastrala.controllers.PlayerController;
 import ro.piatraastrala.entities.Player;
+import ro.piatraastrala.mechanic.BattleMechanic;
 import ro.piatraastrala.utils.CacheManager;
 import ro.piatraastrala.utils.DBSyncJob;
 
@@ -215,6 +216,17 @@ public class BackendApplication {
 
         // MissionController.finishMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
         return ResponseEntity.status(HttpStatus.OK).body("OK");
+
+    }
+
+
+    //BATTLE
+    @RequestMapping(value = "/battle/v1/start", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity getPlayersNearby() {
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(BattleMechanic.prepareBattle());
+
 
     }
 

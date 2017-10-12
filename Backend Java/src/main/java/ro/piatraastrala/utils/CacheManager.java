@@ -184,6 +184,14 @@ public class CacheManager {
     public static void setAllPlayerLocations(ArrayList<PlayerLocation> allPlayerLocations) {
         CacheManager.allPlayerLocations = allPlayerLocations;
     }
+
+    public static ArrayList<BattleTriviaQuestion> getAllTriviaQuestions() {
+        return allTriviaQuestions;
+    }
+
+    public static void setAllTriviaQuestions(ArrayList<BattleTriviaQuestion> allTriviaQuestions) {
+        CacheManager.allTriviaQuestions = allTriviaQuestions;
+    }
 }
 
 

@@ -29,7 +29,7 @@ public class BattleTriviaQuestionController {
         ResultSet rs;
 
         try {
-            stmt = conn.prepareStatement("SELECT * FROM battle_trivia");
+            stmt = conn.prepareStatement("SELECT * FROM battle_trivia WHERE Active = 1");
             rs = stmt.executeQuery();
 
             while (rs.next()) {

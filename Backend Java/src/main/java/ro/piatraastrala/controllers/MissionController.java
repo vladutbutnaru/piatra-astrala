@@ -11,7 +11,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
- * Created by Vlad Butnaru on 5/18/2017.
+ * This class provides SQL support for handling missions
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
  */
 public class MissionController {
 

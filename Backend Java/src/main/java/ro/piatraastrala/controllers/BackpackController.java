@@ -10,8 +10,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * Created by Vlad Butnaru on 5/24/2017.
+ * This class provides SQL support for handling backpack items for a player
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
  */
+
 public class BackpackController {
     public static Logger logger = LoggerFactory.getLogger(PlayerController.class);
     public static Connection conn = (Connection) DBConnection.getConnection();

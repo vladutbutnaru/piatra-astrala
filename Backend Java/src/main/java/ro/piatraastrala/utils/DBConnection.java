@@ -8,7 +8,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Created by Vlad Butnaru on 5/16/2017.
+ * Singleton database connection class.
+ *
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
  */
 public class DBConnection {
     private static Connection conn = null;

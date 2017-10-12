@@ -3,7 +3,10 @@ package ro.piatraastrala.entities;
 import java.sql.Timestamp;
 
 /**
- * Created by Vlad Butnaru on 5/22/2017.
+ * Entity class
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
  */
 public class PlayerStats {
 

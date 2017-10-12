@@ -1,7 +1,10 @@
 package ro.piatraastrala.entities;
 
 /**
- * Created by Vlad Butnaru on 5/18/2017.
+ * Entity class
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
  */
 public class Mission {
     private int id;

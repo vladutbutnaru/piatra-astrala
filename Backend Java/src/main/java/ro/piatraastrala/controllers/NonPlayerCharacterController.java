@@ -14,7 +14,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
- * Created by Vlad Butnaru on 5/17/2017.
+ * This class provides SQL support for handling NPC locations
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
  */
 public class NonPlayerCharacterController {
     public static Logger logger = LoggerFactory.getLogger(PlayerController.class);

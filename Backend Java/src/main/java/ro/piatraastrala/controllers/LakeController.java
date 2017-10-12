@@ -10,6 +10,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+/**
+ * This class provides SQL support for handling lake locations
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
+ */
 
 public class LakeController {
 

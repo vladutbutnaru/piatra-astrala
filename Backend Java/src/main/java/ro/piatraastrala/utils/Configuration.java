@@ -1,7 +1,11 @@
 package ro.piatraastrala.utils;
 
 /**
- * Created by Vlad Butnaru on 5/16/2017.
+ * This class provides configuration data for the SQL connection
+ *
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
  */
 public class Configuration {
     public static final String DATABASE_URL = "localhost";

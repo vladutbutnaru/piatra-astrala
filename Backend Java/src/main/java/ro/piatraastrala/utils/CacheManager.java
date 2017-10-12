@@ -1,5 +1,6 @@
 package ro.piatraastrala.utils;
 
+import com.sun.media.jfxmedia.logging.Logger;
 import ro.piatraastrala.controllers.LakeController;
 import ro.piatraastrala.controllers.NonPlayerCharacterController;
 import ro.piatraastrala.controllers.PlayerController;
@@ -8,7 +9,11 @@ import ro.piatraastrala.entities.*;
 import java.util.ArrayList;
 
 /**
- * Created by Vlad Butnaru on 5/25/2017.
+ * This class provides local access to all persistent data in the Database
+ * along with operations over them.
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
  */
 public class CacheManager {
     private static ArrayList<Mission> allMissions;
@@ -17,16 +22,44 @@ public class CacheManager {
     private static ArrayList<Player> allPlayers;
     private static ArrayList<NonPlayerCharacter> allNPC;
     private static ArrayList<Lake> allLakes;
+    private static ArrayList<PlayerLocation> allPlayerLocations;
 
+    public static ArrayList<NonPlayerCharacter> getAllNPC() {
+        return allNPC;
+    }
+
+    public static void setAllNPC(ArrayList<NonPlayerCharacter> allNPC) {
+        CacheManager.allNPC = allNPC;
+    }
+
+    public static ArrayList<Lake> getAllLakes() {
+        return allLakes;
+    }
+
+    public static void setAllLakes(ArrayList<Lake> allLakes) {
+        CacheManager.allLakes = allLakes;
+    }
+
+    public static ArrayList<PlayerLocation> getAllPlayerLocations() {
+        return allPlayerLocations;
+    }
+
+    public static void setAllPlayerLocations(ArrayList<PlayerLocation> allPlayerLocations) {
+        CacheManager.allPlayerLocations = allPlayerLocations;
+    }
 
     public static void refreshData(){
         allPlayers = PlayerController.getAllPlayers();
         allLakes = LakeController.getAllLakes();
         allNPC = NonPlayerCharacterController.getAll();
-
+        allPlayerLocations = new ArrayList<>();
+        for(Player p : allPlayers){
+            PlayerLocation pl = new PlayerLocation(p.getId());
+            allPlayerLocations.add(pl);
+        }
     }
 
-    public static ArrayList<NonPlayerCharacter> getNPCsNeaby(double lat, double lng, int metersClose) {
+    public static ArrayList<NonPlayerCharacter> getNPCsNeaby(double lat, double lng, int metersClose, int playerId) {
         ArrayList<NonPlayerCharacter> nearby = new ArrayList<>();
         for (NonPlayerCharacter npc : allNPC) {
             if (DistanceUtils.distance(npc.getLat(), npc.getLng(), lat, lng, 'K') < metersClose / 1000.0) {
@@ -34,9 +67,50 @@ public class CacheManager {
             }
 
         }
+        updatePlayerLocation(playerId, lat, lng);
+
         return nearby;
     }
 
+    public static ArrayList<Player> getPlayersNearby(double lat, double lng, int metersClose, int playerId){
+
+        ArrayList<Player> nearby = new ArrayList<>();
+        for (PlayerLocation location : allPlayerLocations) {
+            if (location.getPlayerId() != playerId && DistanceUtils.distance(location.getLat(), location.getLng(), lat, lng, 'K') < metersClose / 1000.0) {
+                nearby.add(getPlayerById(location.getPlayerId()));
+            }
+
+        }
+        updatePlayerLocation(playerId, lat, lng);
+
+        return nearby;
+
+    }
+
+    public static Player getPlayerById(int playerId){
+        for(Player p : allPlayers){
+            if(p.getId() == playerId)
+                return p;
+
+        }
+        return null;
+
+    }
+
+
+    public static void updatePlayerLocation(int playerId, double lat, double lng){
+        System.out.println("Updating location of player with id " + playerId);
+        for(PlayerLocation pl : allPlayerLocations){
+            if(pl.getPlayerId() == playerId){
+                pl.setLat(lat);
+                pl.setLng(lng);
+
+            }
+
+        }
+
+
+    }
     public static ArrayList<Lake> getLakesNearby(double lat, double lng, int metersClose) {
         ArrayList<Lake> nearby = new ArrayList<>();
         for (Lake l : allLakes) {
@@ -93,7 +167,17 @@ public class CacheManager {
 
     }
 
+    public static int getIdByEmail(String email){
+        for(Player p : allPlayers){
+            if(p.getEmail().equals(email))
+                return p.getId();
 
+
+        }
+        return 0;
+
+
+    }
 
 
 

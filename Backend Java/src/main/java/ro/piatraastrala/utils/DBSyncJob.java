@@ -6,7 +6,11 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 /**
- * Created by Vlad Butnaru on 5/26/2017.
+ * This class provides Cron Job implementation of the persistence interval
+ *
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
  */
 public class DBSyncJob implements Job {
     @Override

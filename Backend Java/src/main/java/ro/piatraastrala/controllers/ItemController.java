@@ -11,8 +11,13 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
- * Created by Vlad Butnaru on 5/25/2017.
+ * This class provides SQL support for handling items for a player
+ * including equipped ones.
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
  */
+
 public class ItemController {
     public static Logger logger = LoggerFactory.getLogger(PlayerController.class);
     public static Connection conn = (Connection) DBConnection.getConnection();

@@ -1,5 +1,10 @@
 package ro.piatraastrala.entities;
-
+/**
+ * Entity class
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
+ */
 public class Lake {
 
     private int id;

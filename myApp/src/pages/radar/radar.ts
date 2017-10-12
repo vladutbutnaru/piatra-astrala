@@ -102,12 +102,13 @@ export class RadarPage {
   public missionList: any;
   public lakeList: any;
   public npcList: any;
+    public playersList: any;
   public npcCloseFront: string;
   public isNpcMissionOpen = 0;
   public missionOpen = false;
   public missionListFront: string;
   public lakesCloseFront: string;
-    
+    public playersCloseFront: string;
   constructor(public navCtrl: NavController, public params: NavParams, private geolocation: Geolocation, public http: Http, private elRef: ElementRef, private alertController: AlertController) {
     this.userInfo = this.params.data;
     console.log("Primit in Radar: " + this.userInfo);
@@ -134,6 +135,8 @@ export class RadarPage {
 
       this.getNPCCall();
       this.getLakesCall();
+      this.getPlayersNearbyCall();
+    
     });
 
 
@@ -145,7 +148,7 @@ export class RadarPage {
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let options = new RequestOptions({ headers: headers });
 
-    var data = 'lat=' + this.coordinates.lat + '&lng=' + this.coordinates.lng + '&meters=10000';
+    var data = 'lat=' + this.coordinates.lat + '&lng=' + this.coordinates.lng + '&meters=10000&playerId=' + this.userInfo.playerStats.idPlayer;
 
     this.http.post("http://localhost:8080/npc/v1/get", data, options)
       .subscribe(data => {
@@ -204,7 +207,42 @@ export class RadarPage {
           var marginTop = Math.floor(Math.random() * 3) + 1;
           var marginLeft = Math.floor(Math.random() * 12) + 6;
 
-          this.lakesCloseFront += '<div id="lake_' + this.lakeList[i].id + '" class="lake bounceInDown" style="margin-top:' + marginTop + '%; margin-left:' + marginLeft + 'px;background-image:url(assets/img/water.png);"></div>';
+          this.lakesCloseFront += '<div id="lake_' + this.lakeList[i].id + '" class="lake bounceInDown" style="margin-top:' + marginTop + '%; margin-left:' + marginLeft + 'px;background-image:url(assets/img/explorer.jpg);"></div>';
+       
+        }
+
+      
+      }, error => {
+        console.log(error);// Error getting the data
+      });
+        
+        
+    }
+    
+        
+    getPlayersNearbyCall(){
+        
+         var headers = new Headers();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    let options = new RequestOptions({ headers: headers });
+
+    var data = 'lat=' + this.coordinates.lat + '&lng=' + this.coordinates.lng + '&meters=10000&playerId=' + this.userInfo.playerStats.idPlayer;
+
+    this.http.post("http://localhost:8080/players/v1/getnearby", data, options)
+      .subscribe(data => {
+        this.playersList = data['_body'];
+        this.playersList = JSON.parse(this.playersList);
+        console.log(this.playersList);
+        this.playersCloseFront = "";
+       
+        
+        for (let i = 0; i < this.playersList.length; i++) {
+
+          var marginTop = Math.floor(Math.random() * 3) + 1;
+          var marginLeft = Math.floor(Math.random() * 12) + 6;
+
+          this.playersCloseFront += '<div id="player_' + this.playersList[i].id + '" class="lake bounceInDown" style="margin-top:' + marginTop + '%; margin-left:' + marginLeft + 'px;background-image:url(assets/img/water.png);"></div>';
        
         }
 

@@ -12,7 +12,10 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * Created by Vlad Butnaru on 5/16/2017.
+ * This class provides SQL support for handling players
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
  */
 public class PlayerController {
     public static Logger logger = LoggerFactory.getLogger(PlayerController.class);
@@ -219,7 +222,7 @@ public class PlayerController {
 
         } catch (SQLException ex) {
             // handle any errors
-
+            System.out.println(ex.getMessage());
             logger.error(ex.getMessage());
 
         }

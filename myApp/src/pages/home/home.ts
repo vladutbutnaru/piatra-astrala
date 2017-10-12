@@ -147,6 +147,7 @@ export class HomePage {
 
 
         // //backpack
+        if(this.userInfo.backpack != undefined)
          document.getElementById("player-backpack").style.backgroundImage = "url(assets/img/" + this.userInfo.backpack.icon + ")";
 
          document.getElementById("fatigue-bar").style.width = this.userInfo.playerStats.fatigue + "%";

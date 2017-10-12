@@ -3,7 +3,12 @@ package ro.piatraastrala.utils;
 import ro.piatraastrala.entities.PlayerStats;
 
 /**
- * Created by Vlad Butnaru on 5/22/2017.
+ * This class provides quick preparation of player stats.
+ * On registration, depending on the player class, a PlayerStat
+ * Is prepared and returned *
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
  */
 public class PlayerStatsFactory {
 

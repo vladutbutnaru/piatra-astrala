@@ -10,9 +10,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.piatraastrala.controllers.PlayerController;
 import ro.piatraastrala.entities.Player;
+import ro.piatraastrala.entities.PlayerLocation;
 import ro.piatraastrala.utils.CacheManager;
 import ro.piatraastrala.utils.DBSyncJob;
+import sun.misc.Cache;
 
+import java.util.ArrayList;
+/**
+ * This class provides API endpoints for the game. *
+ *
+ * @version 1.0
+ * @author  Vlad Butnaru
+ */
 @SpringBootApplication
 @RestController
 @CrossOrigin
@@ -81,6 +90,14 @@ public class BackendApplication {
         return "DB Sync Forced.";
     }
 
+    @RequestMapping("/mod/playerlocations/dump")
+    public ResponseEntity dumpLocations(){
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(   CacheManager.getAllPlayerLocations());
+
+    }
+
     //PLAYERS
 
     @RequestMapping(value = "/players/v1/create", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -141,11 +158,12 @@ public class BackendApplication {
     @RequestMapping(value = "/npc/v1/get", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ResponseEntity getNpcNearby(@RequestParam(value = "lat", required = true) double lat,
                                        @RequestParam(value = "lng", required = true) double lng,
-                                       @RequestParam(value = "meters", required = true) int meters
+                                       @RequestParam(value = "meters", required = true) int meters,
+                                       @RequestParam(value = "playerId", required = true) int playerId
     ) {
 
 
-        return ResponseEntity.status(HttpStatus.OK).body(CacheManager.getNPCsNeaby(lat, lng, meters));
+        return ResponseEntity.status(HttpStatus.OK).body(CacheManager.getNPCsNeaby(lat, lng, meters, playerId));
 
 
     }
@@ -165,6 +183,20 @@ public class BackendApplication {
 
     }
 
+    //Players nearby
+
+    @RequestMapping(value = "/players/v1/getnearby", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity getPlayersNearby(@RequestParam(value = "lat", required = true) double lat,
+                                         @RequestParam(value = "lng", required = true) double lng,
+                                         @RequestParam(value = "meters", required = true) int meters,
+                                           @RequestParam(value = "playerId", required = true) int playerId
+    ) {
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(CacheManager.getPlayersNearby(lat, lng, meters, playerId));
+
+
+    }
 
 
 

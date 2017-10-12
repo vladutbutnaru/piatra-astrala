@@ -60,6 +60,22 @@
     margin-left: 10px;
 }
 
+.player{
+        position: relative;
+    float: left;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-size: cover;
+    border: 1px solid lightblue;
+    margin-top: 10%;
+    margin-left: 10px;
+    
+}
+.playersContainer{
+       margin-left: 10%;
+    
+}
 .npcContainer {
     margin-left: 10%;
 }

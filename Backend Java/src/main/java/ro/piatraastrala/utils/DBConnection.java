@@ -10,9 +10,8 @@ import java.sql.SQLException;
 /**
  * Singleton database connection class.
  *
- *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class DBConnection {
     private static Connection conn = null;

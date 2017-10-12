@@ -3,8 +3,8 @@ package ro.piatraastrala.entities;
 /**
  * Entity class
  *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class Mission {
     private int id;
@@ -18,7 +18,7 @@ public class Mission {
     private int status;
     private int playerId;
     private int minLevel;
-private String classSpecific;
+    private String classSpecific;
 
     public String getClassSpecific() {
         return classSpecific;

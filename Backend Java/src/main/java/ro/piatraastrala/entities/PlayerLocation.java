@@ -1,9 +1,10 @@
 package ro.piatraastrala.entities;
+
 /**
  * Entity class
  *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class PlayerLocation {
 
@@ -11,7 +12,7 @@ public class PlayerLocation {
     private double lng;
     private int playerId;
 
-    public PlayerLocation(int playerId){
+    public PlayerLocation(int playerId) {
         this.playerId = playerId;
         lat = 0.0;
         lng = 0.0;

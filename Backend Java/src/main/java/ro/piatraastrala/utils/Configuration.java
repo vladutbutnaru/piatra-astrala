@@ -3,9 +3,8 @@ package ro.piatraastrala.utils;
 /**
  * This class provides configuration data for the SQL connection
  *
- *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class Configuration {
     public static final String DATABASE_URL = "localhost";

@@ -10,23 +10,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.piatraastrala.controllers.PlayerController;
 import ro.piatraastrala.entities.Player;
-import ro.piatraastrala.entities.PlayerLocation;
 import ro.piatraastrala.utils.CacheManager;
 import ro.piatraastrala.utils.DBSyncJob;
-import sun.misc.Cache;
 
-import java.util.ArrayList;
 /**
  * This class provides API endpoints for the game. *
  *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 @SpringBootApplication
 @RestController
 @CrossOrigin
 public class BackendApplication {
     public static boolean jobStarted = false;
+
     public static void main(String[] args) {
         //Create instance of factory
 
@@ -46,19 +44,18 @@ public class BackendApplication {
     }
 
     @RequestMapping("/startDBSync")
-    public String startDBSync(){
-        if(jobStarted){
+    public String startDBSync() {
+        if (jobStarted) {
             return "Job Already Started";
 
-        }
-        else {
+        } else {
             try {
                 Trigger trigger = TriggerBuilder
                         .newTrigger()
                         .withIdentity("DB Sync Trigger", "Sync Group 1")
                         .withSchedule(
                                 SimpleScheduleBuilder.simpleSchedule()
-                                        .withIntervalInSeconds(60*60*12).repeatForever())
+                                        .withIntervalInSeconds(60 * 60 * 12).repeatForever())
                         .build();
                 JobDetail job = JobBuilder.newJob(DBSyncJob.class)
                         .withIdentity("DB Sync Job", "Sync Group 1").build();
@@ -71,7 +68,7 @@ public class BackendApplication {
 
             }
             jobStarted = true;
-        return "DB Sync Started";
+            return "DB Sync Started";
         }
 
 
@@ -91,10 +88,10 @@ public class BackendApplication {
     }
 
     @RequestMapping("/mod/playerlocations/dump")
-    public ResponseEntity dumpLocations(){
+    public ResponseEntity dumpLocations() {
 
 
-        return ResponseEntity.status(HttpStatus.OK).body(   CacheManager.getAllPlayerLocations());
+        return ResponseEntity.status(HttpStatus.OK).body(CacheManager.getAllPlayerLocations());
 
     }
 
@@ -134,8 +131,8 @@ public class BackendApplication {
                                       @RequestParam(value = "password", required = true) String password
     ) {
 
-       // int id = PlayerController.verifyLogin(email, password);
-        Player p =  CacheManager.verifyLogin(email,password);
+        // int id = PlayerController.verifyLogin(email, password);
+        Player p = CacheManager.verifyLogin(email, password);
         try {
             if (p.getId() > 0) {
 
@@ -143,13 +140,11 @@ public class BackendApplication {
 
             } else
                 return ResponseEntity.status(HttpStatus.OK).body(new Player());
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.OK).body(new Player());
         }
 
     }
-
 
 
     //NPCs
@@ -187,8 +182,8 @@ public class BackendApplication {
 
     @RequestMapping(value = "/players/v1/getnearby", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ResponseEntity getPlayersNearby(@RequestParam(value = "lat", required = true) double lat,
-                                         @RequestParam(value = "lng", required = true) double lng,
-                                         @RequestParam(value = "meters", required = true) int meters,
+                                           @RequestParam(value = "lng", required = true) double lng,
+                                           @RequestParam(value = "meters", required = true) int meters,
                                            @RequestParam(value = "playerId", required = true) int playerId
     ) {
 
@@ -199,13 +194,7 @@ public class BackendApplication {
     }
 
 
-
     //Missions
-
-
-
-
-
 
 
     @RequestMapping(value = "/missions/v1/acceptmission", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -213,7 +202,7 @@ public class BackendApplication {
                                         @RequestParam(value = "player", required = true) String playerEmail
     ) {
 
-      //  MissionController.acceptMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
+        //  MissionController.acceptMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
         return ResponseEntity.status(HttpStatus.OK).body("OK");
 
     }
@@ -224,7 +213,7 @@ public class BackendApplication {
                                         @RequestParam(value = "player", required = true) String playerEmail
     ) {
 
-       // MissionController.finishMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
+        // MissionController.finishMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
         return ResponseEntity.status(HttpStatus.OK).body("OK");
 
     }

@@ -13,8 +13,8 @@ import java.util.ArrayList;
 /**
  * This class provides SQL support for handling missions
  *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class MissionController {
 
@@ -54,7 +54,6 @@ public class MissionController {
 
 
     }
-
 
 
     public static ArrayList<Mission> getMissionsForNpc(int npcId, int playerID) {
@@ -105,7 +104,6 @@ public class MissionController {
                     missions.add(m);
 
                 }
-
 
 
             }

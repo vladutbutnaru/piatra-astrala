@@ -7,8 +7,8 @@ import ro.piatraastrala.entities.PlayerStats;
  * On registration, depending on the player class, a PlayerStat
  * Is prepared and returned *
  *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class PlayerStatsFactory {
 

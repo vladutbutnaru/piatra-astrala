@@ -3,8 +3,8 @@ package ro.piatraastrala.entities;
 /**
  * Entity class
  *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class Item {
 
@@ -34,7 +34,6 @@ public class Item {
 
     private int extraHealth;
     private int extraChakra;
-
 
 
     public int getFatigueRegen() {

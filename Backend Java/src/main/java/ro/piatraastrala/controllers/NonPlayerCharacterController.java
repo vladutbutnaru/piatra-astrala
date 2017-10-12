@@ -16,16 +16,12 @@ import java.util.ArrayList;
 /**
  * This class provides SQL support for handling NPC locations
  *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class NonPlayerCharacterController {
     public static Logger logger = LoggerFactory.getLogger(PlayerController.class);
     public static Connection conn = (Connection) DBConnection.getConnection();
-
-
-
-
 
 
     public static ArrayList<NonPlayerCharacter> getNPCsNeaby(double lat, double lng, int metersClose) {
@@ -68,9 +64,6 @@ public class NonPlayerCharacterController {
     }
 
 
-
-
-
     public static NonPlayerCharacter getById(int id) {
         NonPlayerCharacter npc = new NonPlayerCharacter();
 
@@ -109,11 +102,8 @@ public class NonPlayerCharacterController {
     }
 
 
-
-
-    public static ArrayList<NonPlayerCharacter> getAll(){
+    public static ArrayList<NonPlayerCharacter> getAll() {
         ArrayList<NonPlayerCharacter> npcList = new ArrayList<NonPlayerCharacter>();
-
 
 
         PreparedStatement stmt;
@@ -134,7 +124,7 @@ public class NonPlayerCharacterController {
                 npc.setLat(rs.getDouble(5));
                 npc.setLng(rs.getDouble(6));
                 npc.setTitle(rs.getString(7));
-                for(Player p : CacheManager.getAllPlayers()) {
+                for (Player p : CacheManager.getAllPlayers()) {
                     System.out.println("Getting missions for NPC with id " + npc.getId() + " for player with id " + p.getId());
                     npc.setMissions(MissionController.getMissionsForNpc(npc.getId(), p.getId()));
 
@@ -148,8 +138,6 @@ public class NonPlayerCharacterController {
 
 
         }
-
-
 
 
         return npcList;

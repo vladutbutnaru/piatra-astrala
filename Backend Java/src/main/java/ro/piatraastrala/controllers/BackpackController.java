@@ -2,7 +2,8 @@ package ro.piatraastrala.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ro.piatraastrala.entities.*;
+import ro.piatraastrala.entities.Backpack;
+import ro.piatraastrala.entities.Item;
 import ro.piatraastrala.utils.DBConnection;
 
 import java.sql.Connection;
@@ -12,8 +13,8 @@ import java.sql.ResultSet;
 /**
  * This class provides SQL support for handling backpack items for a player
  *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 
 public class BackpackController {
@@ -49,13 +50,13 @@ public class BackpackController {
                     rs = stmt.executeQuery();
 
                     while (rs.next()) {
-                    System.out.println("Adding item to backpack " );
-                           Item  item = ItemController.getById(rs.getInt(5));
+                        System.out.println("Adding item to backpack ");
+                        Item item = ItemController.getById(rs.getInt(5));
                         item.setCurrentDurability(rs.getInt(7));
                         item.setDiamonds(rs.getString(6));
                         item.setAmount(rs.getInt(4));
                         System.out.println("Adding item " + item.getName() + " to backpack ");
-                            b.getItems().add(item);
+                        b.getItems().add(item);
 
 
                     }

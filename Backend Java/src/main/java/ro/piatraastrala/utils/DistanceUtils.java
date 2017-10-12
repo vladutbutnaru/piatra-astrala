@@ -1,10 +1,10 @@
 package ro.piatraastrala.utils;
+
 /**
  * This class provides access to distance calculations
  *
- *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class DistanceUtils {
     public static double distance(double lat1, double lon1, double lat2, double lon2, char unit) {

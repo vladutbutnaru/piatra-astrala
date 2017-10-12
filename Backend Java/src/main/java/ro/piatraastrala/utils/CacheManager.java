@@ -1,6 +1,6 @@
 package ro.piatraastrala.utils;
 
-import com.sun.media.jfxmedia.logging.Logger;
+import ro.piatraastrala.controllers.BattleTriviaQuestionController;
 import ro.piatraastrala.controllers.LakeController;
 import ro.piatraastrala.controllers.NonPlayerCharacterController;
 import ro.piatraastrala.controllers.PlayerController;
@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * This class provides local access to all persistent data in the Database
  * along with operations over them.
  *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class CacheManager {
     private static ArrayList<Mission> allMissions;
@@ -23,37 +23,18 @@ public class CacheManager {
     private static ArrayList<NonPlayerCharacter> allNPC;
     private static ArrayList<Lake> allLakes;
     private static ArrayList<PlayerLocation> allPlayerLocations;
+    private static ArrayList<BattleTriviaQuestion> allTriviaQuestions;
 
-    public static ArrayList<NonPlayerCharacter> getAllNPC() {
-        return allNPC;
-    }
 
-    public static void setAllNPC(ArrayList<NonPlayerCharacter> allNPC) {
-        CacheManager.allNPC = allNPC;
-    }
-
-    public static ArrayList<Lake> getAllLakes() {
-        return allLakes;
-    }
-
-    public static void setAllLakes(ArrayList<Lake> allLakes) {
-        CacheManager.allLakes = allLakes;
-    }
-
-    public static ArrayList<PlayerLocation> getAllPlayerLocations() {
-        return allPlayerLocations;
-    }
-
-    public static void setAllPlayerLocations(ArrayList<PlayerLocation> allPlayerLocations) {
-        CacheManager.allPlayerLocations = allPlayerLocations;
-    }
-
-    public static void refreshData(){
+    public static void refreshData() {
         allPlayers = PlayerController.getAllPlayers();
         allLakes = LakeController.getAllLakes();
         allNPC = NonPlayerCharacterController.getAll();
+
+        allTriviaQuestions = BattleTriviaQuestionController.getAllQuestions();
         allPlayerLocations = new ArrayList<>();
-        for(Player p : allPlayers){
+
+        for (Player p : allPlayers) {
             PlayerLocation pl = new PlayerLocation(p.getId());
             allPlayerLocations.add(pl);
         }
@@ -72,7 +53,7 @@ public class CacheManager {
         return nearby;
     }
 
-    public static ArrayList<Player> getPlayersNearby(double lat, double lng, int metersClose, int playerId){
+    public static ArrayList<Player> getPlayersNearby(double lat, double lng, int metersClose, int playerId) {
 
         ArrayList<Player> nearby = new ArrayList<>();
         for (PlayerLocation location : allPlayerLocations) {
@@ -87,9 +68,9 @@ public class CacheManager {
 
     }
 
-    public static Player getPlayerById(int playerId){
-        for(Player p : allPlayers){
-            if(p.getId() == playerId)
+    public static Player getPlayerById(int playerId) {
+        for (Player p : allPlayers) {
+            if (p.getId() == playerId)
                 return p;
 
         }
@@ -98,10 +79,10 @@ public class CacheManager {
     }
 
 
-    public static void updatePlayerLocation(int playerId, double lat, double lng){
+    public static void updatePlayerLocation(int playerId, double lat, double lng) {
         System.out.println("Updating location of player with id " + playerId);
-        for(PlayerLocation pl : allPlayerLocations){
-            if(pl.getPlayerId() == playerId){
+        for (PlayerLocation pl : allPlayerLocations) {
+            if (pl.getPlayerId() == playerId) {
                 pl.setLat(lat);
                 pl.setLng(lng);
 
@@ -111,6 +92,7 @@ public class CacheManager {
 
 
     }
+
     public static ArrayList<Lake> getLakesNearby(double lat, double lng, int metersClose) {
         ArrayList<Lake> nearby = new ArrayList<>();
         for (Lake l : allLakes) {
@@ -155,10 +137,10 @@ public class CacheManager {
     }
 
 
-    public static Player verifyLogin(String email, String password){
+    public static Player verifyLogin(String email, String password) {
 
-        for(Player p : allPlayers){
-            if(p.getEmail().equals(email) && p.getPassword().equals(password))
+        for (Player p : allPlayers) {
+            if (p.getEmail().equals(email) && p.getPassword().equals(password))
                 return p;
 
 
@@ -167,9 +149,9 @@ public class CacheManager {
 
     }
 
-    public static int getIdByEmail(String email){
-        for(Player p : allPlayers){
-            if(p.getEmail().equals(email))
+    public static int getIdByEmail(String email) {
+        for (Player p : allPlayers) {
+            if (p.getEmail().equals(email))
                 return p.getId();
 
 
@@ -179,9 +161,29 @@ public class CacheManager {
 
     }
 
+    public static ArrayList<NonPlayerCharacter> getAllNPC() {
+        return allNPC;
+    }
 
+    public static void setAllNPC(ArrayList<NonPlayerCharacter> allNPC) {
+        CacheManager.allNPC = allNPC;
+    }
 
+    public static ArrayList<Lake> getAllLakes() {
+        return allLakes;
+    }
 
+    public static void setAllLakes(ArrayList<Lake> allLakes) {
+        CacheManager.allLakes = allLakes;
+    }
+
+    public static ArrayList<PlayerLocation> getAllPlayerLocations() {
+        return allPlayerLocations;
+    }
+
+    public static void setAllPlayerLocations(ArrayList<PlayerLocation> allPlayerLocations) {
+        CacheManager.allPlayerLocations = allPlayerLocations;
+    }
 }
 
 

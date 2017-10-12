@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 /**
  * Entity class
  *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class PlayerStats {
 
@@ -30,10 +30,6 @@ public class PlayerStats {
     private int hungerRegen;
     private int influence;
     private Timestamp fatigueUpdateDate;
-
-
-
-
 
 
     public int getId() {

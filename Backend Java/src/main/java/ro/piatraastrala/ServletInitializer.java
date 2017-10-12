@@ -2,12 +2,12 @@ package ro.piatraastrala;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+
 /**
  * This class provides Servlet initialization functionality.
  *
- *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class ServletInitializer extends SpringBootServletInitializer {
 

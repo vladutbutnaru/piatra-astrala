@@ -14,8 +14,8 @@ import java.util.ArrayList;
 /**
  * This class provides SQL support for handling players
  *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class PlayerController {
     public static Logger logger = LoggerFactory.getLogger(PlayerController.class);

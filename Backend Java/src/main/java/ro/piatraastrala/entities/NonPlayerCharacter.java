@@ -5,8 +5,8 @@ import java.util.ArrayList;
 /**
  * Entity class
  *
+ * @author Vlad Butnaru
  * @version 1.0
- * @author  Vlad Butnaru
  */
 public class NonPlayerCharacter {
 

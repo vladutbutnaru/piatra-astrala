@@ -9,7 +9,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.piatraastrala.controllers.PlayerController;
+import ro.piatraastrala.entities.BattleTrivia;
 import ro.piatraastrala.entities.Player;
+import ro.piatraastrala.mechanic.BattleMechanic;
 import ro.piatraastrala.utils.CacheManager;
 import ro.piatraastrala.utils.DBSyncJob;
 
@@ -95,6 +97,15 @@ public class BackendApplication {
 
     }
 
+    @RequestMapping("/mod/data/dump")
+    public ResponseEntity dumpData() {
+        CacheManager cm = new CacheManager();
+
+        return ResponseEntity.status(HttpStatus.OK).body(cm);
+
+    }
+
+
     //PLAYERS
 
     @RequestMapping(value = "/players/v1/create", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -158,7 +169,7 @@ public class BackendApplication {
     ) {
 
 
-        return ResponseEntity.status(HttpStatus.OK).body(CacheManager.getNPCsNeaby(lat, lng, meters, playerId));
+        return ResponseEntity.status(HttpStatus.OK).body(CacheManager.getNPCsNearby(lat, lng, meters, playerId));
 
 
     }
@@ -215,6 +226,51 @@ public class BackendApplication {
 
         // MissionController.finishMissionForPlayer(mission, PlayerController.getIDByEmail(playerEmail));
         return ResponseEntity.status(HttpStatus.OK).body("OK");
+
+    }
+
+
+    //BATTLE
+    @RequestMapping(value = "/battle/v1/start", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity startBattle(@RequestParam(value = "player1", required = true) int player1,
+                                      @RequestParam(value = "player2", required = true) int player2) {
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(BattleMechanic.acceptBattleBetweenTwoPlayers(player1, player2));
+
+
+    }
+
+    @RequestMapping(value = "/battle/v1/request", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity requestBattle(@RequestParam(value = "player1", required = true) int player1,
+                                        @RequestParam(value = "player2", required = true) int player2
+
+    ) {
+        BattleTrivia bt = new BattleTrivia();
+        bt.setPlayer1(CacheManager.getPlayerById(player1));
+        bt.setPlayer2(CacheManager.getPlayerById(player2));
+        bt.setAccepted(false);
+        bt.setEnded(false);
+        bt.setQuestionSet(BattleMechanic.prepareBattle());
+        CacheManager.getAllBattles().add(bt);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Battle Requested");
+
+
+    }
+
+    @RequestMapping(value = "/battle/v1/answer", method = RequestMethod.POST, produces = "application/json", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity answerTriviaQuestionBattle(@RequestParam(value = "player1", required = true) int player1,
+                                                     @RequestParam(value = "player2", required = true) int player2,
+                                                     @RequestParam(value = "playerThatAnswers", required = true) int playerThatAnswers,
+                                                     @RequestParam(value = "answer", required = true) int answer,
+                                                     @RequestParam(value = "questionNumber", required = true) int question
+
+    ) {
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(BattleMechanic.answerQuestionForBattle(player1, player2, playerThatAnswers, answer, question));
+
 
     }
 

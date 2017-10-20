@@ -17,7 +17,7 @@ public class CacheManagerTest {
     @Test
     public void refreshData() throws Exception {
         CacheManager.refreshData();
-        Assert.assertTrue(CacheManager.getAllPlayers().size() > 0);
+        Assert.assertTrue(CacheManager.getAllPlayers().size() > 0 );
     }
 
     @Test

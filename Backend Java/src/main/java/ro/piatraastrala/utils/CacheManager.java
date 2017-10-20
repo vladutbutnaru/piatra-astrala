@@ -24,6 +24,7 @@ public class CacheManager {
     private static ArrayList<Lake> allLakes;
     private static ArrayList<PlayerLocation> allPlayerLocations;
     private static ArrayList<BattleTriviaQuestion> allTriviaQuestions;
+    private static ArrayList<BattleTrivia> allBattles;
 
 
     public static void refreshData() {
@@ -33,14 +34,14 @@ public class CacheManager {
 
         allTriviaQuestions = BattleTriviaQuestionController.getAllQuestions();
         allPlayerLocations = new ArrayList<>();
-
+        allBattles = new ArrayList<>();
         for (Player p : allPlayers) {
             PlayerLocation pl = new PlayerLocation(p.getId());
             allPlayerLocations.add(pl);
         }
     }
 
-    public static ArrayList<NonPlayerCharacter> getNPCsNeaby(double lat, double lng, int metersClose, int playerId) {
+    public static ArrayList<NonPlayerCharacter> getNPCsNearby(double lat, double lng, int metersClose, int playerId) {
         ArrayList<NonPlayerCharacter> nearby = new ArrayList<>();
         for (NonPlayerCharacter npc : allNPC) {
             if (DistanceUtils.distance(npc.getLat(), npc.getLng(), lat, lng, 'K') < metersClose / 1000.0) {
@@ -161,6 +162,18 @@ public class CacheManager {
 
     }
 
+    public static ArrayList<BattleTrivia> getAllRequestedBattlesForPlayer(int player) {
+        ArrayList<BattleTrivia> battlesForPlayer = new ArrayList<>();
+        for (BattleTrivia bt : allBattles) {
+            if (bt.getPlayer2().getId() == player && !bt.isAccepted() && !bt.isEnded()) {
+                battlesForPlayer.add(bt);
+            }
+
+        }
+        return battlesForPlayer;
+    }
+
+
     public static ArrayList<NonPlayerCharacter> getAllNPC() {
         return allNPC;
     }
@@ -191,6 +204,14 @@ public class CacheManager {
 
     public static void setAllTriviaQuestions(ArrayList<BattleTriviaQuestion> allTriviaQuestions) {
         CacheManager.allTriviaQuestions = allTriviaQuestions;
+    }
+
+    public static ArrayList<BattleTrivia> getAllBattles() {
+        return allBattles;
+    }
+
+    public static void setAllBattles(ArrayList<BattleTrivia> allBattles) {
+        CacheManager.allBattles = allBattles;
     }
 }
 
